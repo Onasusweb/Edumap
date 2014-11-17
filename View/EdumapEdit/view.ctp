@@ -117,30 +117,49 @@
 
 
 						<label style="margin:0% 10%;">生徒数</label>
-						<input type="text" placeholder="一年生男子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.0.number">
+						<div class="form-group" style="margin:0% 10%;">
+							<div class="row">
+								<input type="text" placeholder="一年生男子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.0.number" ng-init="edit.data.EdumapStudent.0.number = <?php echo $edumap_student['EdumapStudent']['0']['number']; ?>">
+								<input type="text" placeholder="一年生女子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.1.number" ng-init="edit.data.EdumapStudent.1.number = <?php echo $edumap_student['EdumapStudent']['1']['number']; ?>">
+							</div>
 
-						<input type="text" placeholder="一年生女子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.1.number">
+							<div class="row">
+								<input type="text" placeholder="二年生男子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.2.number" ng-init="edit.data.EdumapStudent.2.number = <?php echo $edumap_student['EdumapStudent']['2']['number']; ?>">
+								<input type="text" placeholder="二年生女子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.3.number" ng-init="edit.data.EdumapStudent.3.number = <?php echo $edumap_student['EdumapStudent']['3']['number']; ?>">
+							</div>
 
-						<input type="text" placeholder="二年生男子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.2.number">
+							<div class="row">
+								<input type="text" placeholder="三年生男子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.4.number" ng-init="edit.data.EdumapStudent.4.number = <?php echo $edumap_student['EdumapStudent']['4']['number']; ?>">
+								<input type="text" placeholder="三年生女子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.5.number" ng-init="edit.data.EdumapStudent.5.number = <?php echo $edumap_student['EdumapStudent']['5']['number']; ?>">
+							</div>
 
-						<input type="text" placeholder="二年生女子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.3.number">
+							<div class="row">
+								<input type="text" placeholder="四年生男子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.6.number" ng-init="edit.data.EdumapStudent.6.number = <?php echo $edumap_student['EdumapStudent']['6']['number']; ?>">
+								<input type="text" placeholder="四年生女子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.7.number" ng-init="edit.data.EdumapStudent.7.number = <?php echo $edumap_student['EdumapStudent']['7']['number']; ?>">
+							</div>
 
-						<input type="text" placeholder="三年生男子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.4.number">
+							<div class="row">
+								<input type="text" placeholder="五年生男子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.8.number" ng-init="edit.data.EdumapStudent.8.number = <?php echo $edumap_student['EdumapStudent']['8']['number']; ?>">
+								<input type="text" placeholder="五年生女子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.9.number" ng-init="edit.data.EdumapStudent.9.number = <?php echo $edumap_student['EdumapStudent']['9']['number']; ?>">
+							</div>
 
-						<input type="text" placeholder="三年生女子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.5.number">
-
-						<input type="text" placeholder="四年生男子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.6.number">
-
-						<input type="text" placeholder="四年生女子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.7.number">
-
-						<input type="text" placeholder="五年生男子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.8.number">
-
-						<input type="text" placeholder="五年生女子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.9.number">
-
-						<input type="text" placeholder="六年生男子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.10.number">
-
-						<input type="text" placeholder="六年生女子" class="form-control" style="width:30%;margin:0% 10%;" ng-model="edit.data.Edumap_student.11.number">
-
+							<div class="row">
+								<input type="text" placeholder="六年生男子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.10.number" ng-init="edit.data.EdumapStudent.10.number = <?php echo $edumap_student['EdumapStudent']['10']['number']; ?>">
+								<input type="text" placeholder="六年生女子" class="form-control col-lg-5" style="width:30%;margin:1% 1% 1% 1%;"
+										ng-model="edit.data.EdumapStudent.11.number" ng-init="edit.data.EdumapStudent.11.number = <?php echo $edumap_student['EdumapStudent']['11']['number']; ?>">
+							</div>
+						</div>
 
 						<label style="margin:0% 10%;">学校の概要</label>
 						<div class="form-group">

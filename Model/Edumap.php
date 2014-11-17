@@ -63,16 +63,6 @@ class Edumap extends EdumapAppModel {
 			'order' => ''
 		)
 	);
-	
-	//public $hasmany = array(
-		//'EdumapStudent' => array(
-			//'className' => 'EdumapStudent',
-			//'foreignKey' => 'edumap_id',
-			//'conditions' => '',
-			//'fields' => '',
-			//'order' => ''
-		//)
-	//);
 
 	public function getEdumap($blockId, $contentEditable) {
 		$conditions = array(
@@ -81,21 +71,13 @@ class Edumap extends EdumapAppModel {
 
 		if (! $contentEditable) {
 			$conditions['status'] = NetCommonsBlockComponent::STATUS_PUBLISHED;
-			$search_conditions['status'] = NetCommonsBlockComponent::STATUS_PUBLISHED;
-
-			$edumap = $this->find('first', array(
-					'conditions' => $search_conditions,
-					'order' => 'Edumap.id DESC',
-				)
-			);
-		} else {
-			$edumap = $this->find('first', array(
-					'order' => 'Edumap.id DESC',
-				)
-			);
-
 		}
-			
+		$edumap = $this->find('first', array(
+				'conditions' => $conditions,
+				'order' => 'Edumap.id DESC',
+			)
+		);
+
 		if (! $edumap) {
 			$edumap = $this->create();
 			$edumap['Edumap']['content'] = '';
@@ -152,21 +134,29 @@ class Edumap extends EdumapAppModel {
 				throw new ForbiddenException(serialize($this->validationErrors));
 			}
 			
-			//blockとは別方式でのモデル呼び出し
+			//年度を求める
+			if(date("m") < 4) {
+				$fiscal_year = date("Y") -1;
+			} else {
+				$fiscal_year = date("Y");
+			}
+
+			//モデル呼び出し
 			App::import('Model','Edumap.EdumapStudent');
 			$EdumapStudent = new EdumapStudent;
 			//edumapStudentテーブル登録
-			$edumapStudent['EdumapStudent'] = $postData['Edumap_student'];
+			$edumap_student['EdumapStudent'] = $postData['EdumapStudent'];
+			
 			for($i=0 ; $i<12 ; $i++)
 			{
-				$edumapStudent['EdumapStudent'][$i]['edumap_key'] = $postData['Edumap']['key'];
-				$edumapStudent['EdumapStudent'][$i]['year'] = '0000';
-				$edumapStudent['EdumapStudent'][$i]['gendar'] = $i%2;
-				$edumapStudent['EdumapStudent'][$i]['grade'] = floor($i/2+1);
-				$edumapStudent['EdumapStudent'][$i]['created_user'] = CakeSession::read('Auth.User.id');
+				$edumap_student['EdumapStudent'][$i]['edumap_key'] = $postData['Edumap']['key'];
+				$edumap_student['EdumapStudent'][$i]['year'] = $fiscal_year;
+				$edumap_student['EdumapStudent'][$i]['gendar'] = $i%2;
+				$edumap_student['EdumapStudent'][$i]['grade'] = floor($i/2+1);
+				$edumap_student['EdumapStudent'][$i]['created_user'] = CakeSession::read('Auth.User.id');
 			}
-				$edumapStudent = $EdumapStudent->saveAll($edumapStudent['EdumapStudent']);
-			if (! $edumapStudent) {
+				$EdumapStudent = $EdumapStudent->saveAll($edumap_student['EdumapStudent']);
+			if (! $EdumapStudent) {
 				throw new ForbiddenException(serialize($this->validationErrors));
 			}
 

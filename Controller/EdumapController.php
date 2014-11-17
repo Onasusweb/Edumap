@@ -28,6 +28,8 @@ class EdumapController extends EdumapAppController {
  */
 	public $uses = array(
 		'Edumap.Edumap',
+		'Edumap.EdumapStudent',
+		'Edumap.EdumapVisibilityFrameSetting',
 	);
 
 
@@ -75,9 +77,14 @@ class EdumapController extends EdumapAppController {
 				$this->viewVars['blockId'],
 				$this->viewVars['contentEditable']
 			);
-
-		//Edumapデータをviewにセット
+		
+		//Edumap表示方法データを取得
+		$EdumapVisibilityFrameSetting = $this->EdumapVisibilityFrameSetting->getEdumapVisibilityFrameSetting(
+		);
+		
+		//データをviewにセット
 		$this->set('edumap', $Edumap);
+		$this->set('edumap_visibility_frame_setting', $EdumapVisibilityFrameSetting);
 
 		return $this->render('Edumap/view');
 	}

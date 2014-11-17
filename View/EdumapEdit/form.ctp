@@ -2,169 +2,71 @@
 
 echo $this->Form->create(null);
 
-echo $this->Form->input('Edumap.name', array(
+echo $this->element('EdumapEdit/edumap_form');
+
+echo $this->element('EdumapEdit/radio_button_form');
+
+echo $this->Form->input('EdumapStudent.0.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.name_kana', array(
+echo $this->Form->input('EdumapStudent.1.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.handle', array(
+echo $this->Form->input('EdumapStudent.2.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.postal_code', array(
+echo $this->Form->input('EdumapStudent.3.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.prefecture_code', array(
+echo $this->Form->input('EdumapStudent.4.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.location', array(
+echo $this->Form->input('EdumapStudent.5.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.tel', array(
+echo $this->Form->input('EdumapStudent.6.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.fax', array(
+echo $this->Form->input('EdumapStudent.7.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.emergency_email', array(
+echo $this->Form->input('EdumapStudent.8.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.inquiry', array(
+echo $this->Form->input('EdumapStudent.9.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.site_url', array(
+echo $this->Form->input('EdumapStudent.10.number',array(
 			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
-echo $this->Form->input('Edumap.foundation_date', array(
+echo $this->Form->input('EdumapStudent.11.number',array(
 			'type' => 'text',
-			'value' => '',
-		)
-	);
-echo $this->Form->input('Edumap.closed_date', array(
-			'type' => 'text',
-			'value' => '',
-		)
-	);
-echo $this->Form->input('Edumap.rss_url', array(
-			'type' => 'text',
-			'value' => '',
-		)
-	);
-echo $this->Form->input('Edumap.governor_type', array(
-			'type' => 'text',
-			'value' => '',
-		)
-	);
-echo $this->Form->input('Edumap.education_type', array(
-			'type' => 'text',
-			'value' => '',
-		)
-	);
-echo $this->Form->input('Edumap.coeducation_type', array(
-			'type' => 'text',
-			'value' => '',
-		)
-	);
-echo $this->Form->input('Edumap.principal_name', array(
-			'type' => 'text',
-			'value' => '',
-		)
-	);
-echo $this->Form->input('Edumap.principal_email', array(
-			'type' => 'text',
-			'value' => '',
+			'value'=> '',
 		)
 	);
 
-echo $this->Form->input('Edumap_student.0.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.1.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.2.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.3.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.4.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.5.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.6.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.7.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.8.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.9.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.10.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-echo $this->Form->input('Edumap_student.11.number',array(
-			'type' => 'text',
-			'value'=> '',
-		)
-	);
-	
-	echo $this->Form->input('Edumap.description', array(
-			'type' => 'text',
-			'value' => '',
-		)
-	);
-	
 	
 if ($contentPublishable) {
 	$options = array(

@@ -6,7 +6,8 @@ class EdumapEditController extends EdumapAppController {
 
 	public $uses = array(
 		'Edumap.Edumap',
-		'Edumap.Edumap_student',
+		'Edumap.EdumapStudent',
+		'Edumap.EdumapVisibilityFrameSetting',
 	);
 
 	public $components = array(
@@ -29,6 +30,8 @@ class EdumapEditController extends EdumapAppController {
 		if (! $this->viewVars['contentEditable']) {
 			throw new ForbiddenException();
 		}
+		
+		//$this->Security->validatePost = false;
 	}
 
 	public function index($frameId = 0) {
@@ -47,19 +50,39 @@ class EdumapEditController extends EdumapAppController {
 				$this->viewVars['contentEditable']
 			);
 
+		//生徒数を取得
+		$edumap_student = $this->EdumapStudent->getEdumapStudent($edumap['Edumap']['key']);
+
 		$this->set('edumap', $edumap);
+		$this->set('edumap_student', $edumap_student);
 
 		return $this->render('EdumapEdit/view', false);
 	}
 
-	public function radio()	{
-		$radio = array('公開','非公開','edumap上の学校関係のみ表示する');
-		$this->set('radio',$radio);
+	public function view2($frameId = 0) {
+		//Frameのデータをviewにセット
+		if (! $this->NetCommonsFrame->setView($this, $frameId)) {
+			throw new ForbiddenException();
+		}
+		
+		//Edumapデータを取得
+		$edumap = $this->Edumap->getEdumap(
+				$this->viewVars['blockId'],
+				$this->viewVars['contentEditable']
+			);
+		$this->set('edumap', $edumap);
+		
+		return $this->render('EdumapEdit/view2', false);
 	}
 	
 	public function form($frameId = 0) {
 		$this->view($frameId);
 		return $this->render('EdumapEdit/form', false);
+	}
+
+	public function form2($frameId = 0) {
+		$this->view($frameId);
+		return $this->render('EdumapEdit/form2', false);
 	}
 
 	public function edit() {
@@ -96,5 +119,44 @@ class EdumapEditController extends EdumapAppController {
 		$this->set('_serialize', 'result');
 		return $this->render(false);
 	}
+	
+	public function edit2() {
+		if (! $this->request->isPost()) {
+			throw new MethodNotAllowedException();
+		}
+
+		$postData = $this->data;
+		unset($postData['Edumap']['id']);
+		
+		$frameId = (isset($postData['Frame']['id']) ? (int)$postData['Frame']['id'] : 0);
+		//Frameのデータをviewにセット
+		if (! $this->NetCommonsFrame->setView($this, $frameId)) {
+			throw new ForbiddenException();
+		}
+
+		//登録
+		$result = $this->EdumapVisibilityFrameSetting->saveEdumapVisibilityFrameSetting($postData);
+		if (! $result) {
+			throw new ForbiddenException(__d('net_commons', 'Failed to register data.'));
+		}
+
+		$edumap = $this->Edumap->getEdumap(
+				$this->viewVars['blockId'],
+				$this->viewVars['contentEditable']
+			);
+
+		$edumap_visibility_frame_setting = $this->EdumapVisibilityFrameSetting->getEdumapVisibilityFrameSetting();
+
+		$result = array(
+			'name' => __d('net_commons', 'Successfully finished.'),
+			'edumap' => $edumap,
+			'edumap_visibility_frame_setting' => $edumap_visibility_frame_setting,
+		);
+
+		$this->set(compact('result'));
+		$this->set('_serialize', 'result');
+		return $this->render(false);
+	}
+
 }
 ?>
