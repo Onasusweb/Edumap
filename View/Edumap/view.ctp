@@ -3,6 +3,7 @@
 		 ng-controller="Edumap"
 		 ng-init="initialize(<?php echo (int)$frameId; ?>,
 								<?php echo h(json_encode($edumap)); ?>,
+								<?php echo h(json_encode($edumap_social_media)); ?>,
 								<?php echo h(json_encode($edumap_visibility_frame_setting)); ?>)">
 
 		<p class="text-right">

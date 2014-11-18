@@ -1,6 +1,5 @@
 <?php
 
-
 App::uses('EdumapAppModel', 'Edumap.Model');
 
 class EdumapStudent extends EdumapAppModel {
@@ -25,7 +24,6 @@ class EdumapStudent extends EdumapAppModel {
 				$edumap_student['EdumapStudent'][$i]['number'] = 0;
 			}
 		}
-		
 		return $edumap_student;
 	}
 }

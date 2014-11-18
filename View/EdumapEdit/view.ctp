@@ -167,7 +167,12 @@
 							</textarea>
 						</div>
 
-		  
+						<label style="margin:0% 10%;">Twitter name</label>
+						<div class="form-group">
+							<input type="text" class="form-control" style="width:80%;margin:0% 10%;" ng-model="edit.data.EdumapSocialMedium.value">
+						</div>
+
+  
 					<?php echo $this->element('EdumapEdit/common_form'); ?>
 				</form>
 			</p>

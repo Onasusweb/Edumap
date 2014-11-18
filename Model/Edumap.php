@@ -4,6 +4,7 @@
 App::uses('EdumapAppModel', 'Edumap.Model');
 
 class Edumap extends EdumapAppModel {
+	var $useTable ='edumap';
 
 	public $validate = array(
 		'block_id' => array(
@@ -144,6 +145,7 @@ class Edumap extends EdumapAppModel {
 			//モデル呼び出し
 			App::import('Model','Edumap.EdumapStudent');
 			$EdumapStudent = new EdumapStudent;
+			
 			//edumapStudentテーブル登録
 			$edumap_student['EdumapStudent'] = $postData['EdumapStudent'];
 			
@@ -157,6 +159,21 @@ class Edumap extends EdumapAppModel {
 			}
 				$EdumapStudent = $EdumapStudent->saveAll($edumap_student['EdumapStudent']);
 			if (! $EdumapStudent) {
+				throw new ForbiddenException(serialize($this->validationErrors));
+			}
+
+			//モデル呼び出し
+			App::import('Model','Edumap.EdumapSocialMedium');
+			$EdumapSocialMedium = new EdumapSocialMedium;
+			
+			//EdumapSocialMediumテーブル登録
+			$edumap_social_media['EdumapSocialMedium'] = $postData['EdumapSocialMedium'];
+			$edumap_social_media['EdumapSocialMedium']['edumap_key'] = $edumap['Edumap']['key'];
+			$edumap_social_media['EdumapSocialMedium']['type'] = 'twitter';
+			$edumap_social_media['EdumapSocialMedium']['created_user'] = CakeSession::read('Auth.User.id');
+
+			$EdumapSocialMedium = $EdumapSocialMedium->save($edumap_social_media);
+			if (! $EdumapSocialMedium) {
 				throw new ForbiddenException(serialize($this->validationErrors));
 			}
 

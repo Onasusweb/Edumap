@@ -9,11 +9,13 @@ NetCommonsApp.controller('Edumap',
 	$scope.PLUGIN_EDIT_URL = '/edumap/edumap_edit/';
 
 	$scope.edumap = {};
+	$scope.edumap_social_media = {};	
 	$scope.edumap_visibility_frame_setting = {};
 
-	$scope.initialize = function(frameId,edumap,edumap_visibility_frame_setting){
+	$scope.initialize = function(frameId,edumap,edumap_social_media,edumap_visibility_frame_setting){
 	        $scope.frameId = frameId;
 	        $scope.edumap = edumap;
+	        $scope.edumap_social_media = edumap_social_media;
 	        $scope.edumap_visibility_frame_setting = edumap_visibility_frame_setting;
 	};
 
@@ -82,6 +84,9 @@ NetCommonsApp.controller('Edumap.edit',
             principal_name: $scope.edumap.Edumap.principal_name,
             principal_email: $scope.edumap.Edumap.principal_email,
             description: $scope.edumap.Edumap.description,
+          },
+          EdumapSocialMedium: {
+            value: $scope.edumap_social_media.EdumapSocialMedium.value,
           },
           EdumapVisibilityFrameSetting: {
             name: $scope.edumap_visibility_frame_setting.EdumapVisibilityFrameSetting.name,
