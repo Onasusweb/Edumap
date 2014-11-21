@@ -18,7 +18,7 @@
 	</button>
 
 	<ul class="nav nav-pills">
-		<li class="active"><a href="#" ng-click="showManage('view/')">学校情報編集</a></li>
-		<li class="active"><a href="#" ng-click="showManage('view2/')">表示方法変更</a></li>
+		<li class="active"><a href="#" ng-click="showManage('view/')"><?php echo __d('edumap', 'School information edit'); ?></a></li>
+		<li class="active"><a href="#" ng-click="showManage('view2/')"><?php echo __d('edumap', 'Change display method'); ?></a></li>
 	</ul>
 </div>

@@ -1,0 +1,369 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: edumap\n"
+"POT-Creation-Date: 2014-11-21 05:56+0000\n"
+"PO-Revision-Date: 2014-11-21 15:32+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: Controller/EdumapEditController.php:105;140
+msgid "Failed to register data."
+msgstr "データ登録失敗"
+
+#: Controller/EdumapEditController.php:114;151
+msgid "Successfully finished."
+msgstr "正常終了"
+
+#: View/Edumap/view.ctp:12
+msgid "Accept"
+msgstr "公開する"
+
+#: View/Edumap/view.ctp:22
+msgid "Manage"
+msgstr "設定"
+
+#: View/Elements/Edumap/status_label.ctp:16
+msgid "Approving"
+msgstr "公開申請中"
+
+#: View/Elements/Edumap/status_label.ctp:22
+msgid "Disapproving"
+msgstr "差し戻し中"
+
+#: View/Elements/Edumap/status_label.ctp:28
+msgid "Temporary"
+msgstr "下書き中"
+
+#: View/Elements/EdumapEdit/button.ctp:16
+#: View/Elements/EdumapEdit/button2.ctp:4
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: View/Elements/EdumapEdit/button.ctp:24
+msgid "Disapproval"
+msgstr "差し戻し"
+
+#: View/Elements/EdumapEdit/button.ctp:30;35
+msgid "Save temporally"
+msgstr "下書き"
+
+#: View/Elements/EdumapEdit/button.ctp:43;49
+msgid "OK"
+msgstr "公開する"
+
+#: View/Elements/EdumapEdit/tab_header.ctp:15
+msgid "Close"
+msgstr "閉じる"
+
+msgid "School name"
+msgstr "学校名"
+
+msgid "Public"
+msgstr "公開"
+
+msgid "Private"
+msgstr "非公開"
+
+msgid "Display only for school officials"
+msgstr "edumap上で学校関係者のみ表示"
+
+msgid "School name(katakana)"
+msgstr "学校名(カナ)"
+
+msgid "Handle name"
+msgstr "ハンドル"
+
+msgid "Postal code"
+msgstr "郵便番号"
+
+msgid "Prefectures"
+msgstr "都道府県"
+
+msgid "Location"
+msgstr "所在地"
+
+msgid "Phone number"
+msgstr "電話番号"
+
+msgid "Fax number"
+msgstr "Fax番号"
+
+msgid "Emergency contact email"
+msgstr "緊急連絡先eメール"
+
+msgid "Inquiry"
+msgstr "問い合わせ先"
+
+msgid "Website"
+msgstr "ホームページ"
+
+msgid "Opened date"
+msgstr "開校日"
+
+msgid "Closed date"
+msgstr "閉校日"
+
+msgid "RSS URL"
+msgstr "RSS URL"
+
+msgid "Public and Private type"
+msgstr "国公立私立種別"
+
+msgid "Kind of school"
+msgstr "校種"
+
+msgid "Coeducation"
+msgstr "共学・別学"
+
+msgid "Coeducation school"
+msgstr "共学"
+
+msgid "Boys school"
+msgstr "男子校"
+
+msgid "Girls school"
+msgstr "女子校"
+
+msgid "Principal name"
+msgstr "学校長名"
+
+msgid "Principal e-mail"
+msgstr "校長携帯eメール"
+
+msgid "Number of students"
+msgstr "生徒数"
+
+msgid "Summary"
+msgstr "学校の概要"
+
+msgid "Twitter name"
+msgstr "Twitter name"
+
+msgid "1st grade boys"
+msgstr "一年生男子"
+
+msgid "1st grade girls"
+msgstr "一年生女子"
+
+msgid "2nd grade boys"
+msgstr "二年生男子"
+
+msgid "2nd grade girls"
+msgstr "二年生女子"
+
+msgid "3rd grade boys"
+msgstr "三年生男子"
+
+msgid "3rd grade girls"
+msgstr "三年生女子"
+
+msgid "4th grade boys"
+msgstr "四年生男子"
+
+msgid "4th grade girls"
+msgstr "四年生女子"
+
+msgid "5th grade boys"
+msgstr "五年生男子"
+
+msgid "5th grade girls"
+msgstr "五年生女子"
+
+msgid "6th grade boys"
+msgstr "六年生男子"
+
+msgid "6th grade girls"
+msgstr "六年生女子"
+
+msgid "Not set"
+msgstr "未設定"
+
+msgid "Elementary school"
+msgstr "小学校"
+
+msgid "Middle school"
+msgstr "中学校"
+
+msgid "High Schools"
+msgstr "高等教育"
+
+msgid "Middle and high consistency"
+msgstr "中等教育学校"
+
+msgid "Other"
+msgstr "その他"
+
+msgid "Activation"
+msgstr "設定する"
+
+msgid "National"
+msgstr "国立"
+
+msgid "Prefectural"
+msgstr "県立"
+
+msgid "Public school"
+msgstr "公立"
+
+msgid "Municipal"
+msgstr "市立"
+
+msgid "By union"
+msgstr "組合立"
+
+msgid "Private school"
+msgstr "私立"
+
+msgid "School information edit"
+msgstr "学校情報編集"
+
+msgid "Change display method"
+msgstr "表示方法変更"
+
+msgid "Hokkaido"
+msgstr "北海道"
+
+msgid "Aomori"
+msgstr "青森県"
+
+msgid "Iwate"
+msgstr "岩手県"
+
+msgid "Miyagi"
+msgstr "宮城県"
+
+msgid "Akita"
+msgstr "秋田県"
+
+msgid "Yamagata"
+msgstr "山形県"
+
+msgid "Fukushima"
+msgstr "福島県"
+
+msgid "Ibaraki"
+msgstr "茨城県"
+
+msgid "Tochigi"
+msgstr "栃木県"
+
+msgid "Gunma"
+msgstr "群馬県"
+
+msgid "Saitama"
+msgstr "埼玉県"
+
+msgid "Chiba"
+msgstr "千葉県"
+
+msgid "Tokyo"
+msgstr "東京都"
+
+msgid "Kanagawa"
+msgstr "神奈川県"
+
+msgid "Niigata"
+msgstr "新潟県"
+
+msgid "Toyama"
+msgstr "富山県"
+
+msgid "Ishikawa"
+msgstr "石川県"
+
+msgid "Fukui"
+msgstr "福井県"
+
+msgid "Yamanashi"
+msgstr "山梨県"
+
+msgid "Nagano"
+msgstr "長野県"
+
+msgid "Gifu"
+msgstr "岐阜県"
+
+msgid "Shizuoka"
+msgstr "静岡県"
+
+msgid "Aichi"
+msgstr "愛知県"
+
+msgid "Mie"
+msgstr "三重県"
+
+msgid "Shiga"
+msgstr "滋賀県"
+
+msgid "Kyoto"
+msgstr "京都府"
+
+msgid "Osaka"
+msgstr "大阪府"
+
+msgid "Hyogo"
+msgstr "兵庫県"
+
+msgid "Nara"
+msgstr "奈良県"
+
+msgid "Wakayama"
+msgstr "和歌山県"
+
+msgid "Tottori"
+msgstr "鳥取県"
+
+msgid "Shimane"
+msgstr "島根県"
+
+msgid "Okayama"
+msgstr "岡山県"
+
+msgid "Hiroshima"
+msgstr "広島県"
+
+msgid "Yamaguchi"
+msgstr "山口県"
+
+msgid "Tokushima"
+msgstr "徳島県"
+
+msgid "Kagawa"
+msgstr "香川県"
+
+msgid "Ehime"
+msgstr "愛媛県"
+
+msgid "Kochi"
+msgstr "高知県"
+
+msgid "Fukuoka"
+msgstr "福岡県"
+
+msgid "Saga"
+msgstr "佐賀県"
+
+msgid "Nagasaki"
+msgstr "長崎県"
+
+msgid "Kumamoto"
+msgstr "熊本県"
+
+msgid "Oita"
+msgstr "大分県"
+
+msgid "Miyazaki"
+msgstr "宮崎県"
+
+msgid "Kagoshima"
+msgstr "鹿児島県"
+
+msgid "Okinawa"
+msgstr "沖縄県"

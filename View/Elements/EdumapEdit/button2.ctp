@@ -7,13 +7,13 @@
 	<?php if ($contentPublishable) : ?>
 		<button type="button" class="btn btn-primary" ng-disabled="sending"
 				ng-click="save_radio_button('<?php echo NetCommonsBlockComponent::STATUS_PUBLISHED ?>')">
-			設定する
+			<?php echo __d('edumap', 'Activation'); ?>
 		</button>
 
 	<?php else : ?>
 		<button type="button" class="btn btn-primary" ng-disabled="sending"
 				ng-click="save_radio_button('<?php echo NetCommonsBlockComponent::STATUS_APPROVED ?>')">
-			設定する
+			<?php echo __d('edumap', 'Activation'); ?>
 		</button>
 
 	<?php endif; ?>

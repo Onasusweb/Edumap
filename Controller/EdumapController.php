@@ -80,225 +80,233 @@ class EdumapController extends EdumapAppController {
 			);
 
 		//都道府県名を取得
+		if(isset($Edumap['Edumap']['prefecture_code'])) {
 		switch($Edumap['Edumap']['prefecture_code']) {
 			case '1':
-				$Selected['prefecture'] = '北海道';
+				$Selected['prefecture'] = __d('edumap', 'Hokkaido');
 				break;
 			case '2':
-				$Selected['prefecture'] = '青森県';
+				$Selected['prefecture'] = __d('edumap', 'Aomori');
 				break;
 			case '3':
-				$Selected['prefecture'] = '岩手県';
+				$Selected['prefecture'] = __d('edumap', 'Iwate');
 				break;
 			case '4':
-				$Selected['prefecture'] = '宮城県';
+				$Selected['prefecture'] = __d('edumap', 'Miyagi');
 				break;
 			case '5':
-				$Selected['prefecture'] = '秋田県';
+				$Selected['prefecture'] = __d('edumap', 'Akita');
 				break;
 			case '6':
-				$Selected['prefecture'] = '山形県';
+				$Selected['prefecture'] = __d('edumap', 'Yamagata');
 				break;
 			case '7':
-				$Selected['prefecture'] = '福島県';
+				$Selected['prefecture'] = __d('edumap', 'Fukushima');
 				break;
 			case '8':
-				$Selected['prefecture'] = '茨城県';
+				$Selected['prefecture'] = __d('edumap', 'Ibaraki');
 				break;
 			case '9':
-				$Selected['prefecture'] = '栃木県';
+				$Selected['prefecture'] = __d('edumap', 'Tochigi');
 				break;
 			case '10':
-				$Selected['prefecture'] = '群馬県';
+				$Selected['prefecture'] = __d('edumap', 'Gunma');
 				break;
 			case '11':
-				$Selected['prefecture'] = '埼玉県';
+				$Selected['prefecture'] = __d('edumap', 'Saitama');
 				break;
 			case '12':
-				$Selected['prefecture'] = '千葉県';
+				$Selected['prefecture'] = __d('edumap', 'Chiba');
 				break;
 			case '13':
-				$Selected['prefecture'] = '東京都';
+				$Selected['prefecture'] = __d('edumap', 'Tokyo');
 				break;
 			case '14':
-				$Selected['prefecture'] = '神奈川県';
+				$Selected['prefecture'] = __d('edumap', 'Kanagawa');
 				break;
 			case '15':
-				$Selected['prefecture'] = '新潟県';
+				$Selected['prefecture'] = __d('edumap', 'Niigata');
 				break;
 			case '16':
-				$Selected['prefecture'] = '富山県';
+				$Selected['prefecture'] = __d('edumap', 'Toyama');
 				break;
 			case '17':
-				$Selected['prefecture'] = '石川県';
+				$Selected['prefecture'] = __d('edumap', 'Ishikawa');
 				break;
 			case '18':
-				$Selected['prefecture'] = '福井県';
+				$Selected['prefecture'] = __d('edumap', 'Fukui');
 				break;
 			case '19':
-				$Selected['prefecture'] = '山梨県';
+				$Selected['prefecture'] = __d('edumap', 'Yamanashi');
 				break;
 			case '20':
-				$Selected['prefecture'] = '長野県';
+				$Selected['prefecture'] = __d('edumap', 'Nagano');
 				break;
 			case '21':
-				$Selected['prefecture'] = '岐阜県';
+				$Selected['prefecture'] = __d('edumap', 'Gifu');
 				break;
 			case '22':
-				$Selected['prefecture'] = '静岡県';
+				$Selected['prefecture'] = __d('edumap', 'Shizuoka');
 				break;
 			case '23':
-				$Selected['prefecture'] = '愛知県';
+				$Selected['prefecture'] = __d('edumap', 'Aichi');
 				break;
 			case '24':
-				$Selected['prefecture'] = '三重県';
+				$Selected['prefecture'] = __d('edumap', 'Mie');
 				break;
 			case '25':
-				$Selected['prefecture'] = '滋賀県';
+				$Selected['prefecture'] = __d('edumap', 'Shiga');
 				break;
 			case '26':
-				$Selected['prefecture'] = '京都府';
+				$Selected['prefecture'] = __d('edumap', 'Kyoto');
 				break;
 			case '27':
-				$Selected['prefecture'] = '大阪府';
+				$Selected['prefecture'] = __d('edumap', 'Osaka');
 				break;
 			case '28':
-				$Selected['prefecture'] = '兵庫県';
+				$Selected['prefecture'] =__d('edumap', 'Hyogo');
 				break;
 			case '29':
-				$Selected['prefecture'] = '奈良県';
+				$Selected['prefecture'] = __d('edumap', 'Nara');
 				break;
 			case '30':
-				$Selected['prefecture'] = '和歌山県';
+				$Selected['prefecture'] = __d('edumap', 'Wakayama');
 				break;
 			case '31':
-				$Selected['prefecture'] = '鳥取県';
+				$Selected['prefecture'] = __d('edumap', 'Tottori');
 				break;
 			case '32':
-				$Selected['prefecture'] = '島根県';
+				$Selected['prefecture'] = __d('edumap', 'Shimane');
 				break;
 			case '33':
-				$Selected['prefecture'] = '岡山県';
+				$Selected['prefecture'] = __d('edumap', 'Okayama');
 				break;
 			case '34':
-				$Selected['prefecture'] = '広島県';
+				$Selected['prefecture'] = __d('edumap', 'Hiroshima');
 				break;
 			case '35':
-				$Selected['prefecture'] = '山口県';
+				$Selected['prefecture'] = __d('edumap', 'Yamaguchi');
 				break;
 			case '36':
-				$Selected['prefecture'] = '徳島県';
+				$Selected['prefecture'] = __d('edumap', 'Tokushima');
 				break;
 			case '37':
-				$Selected['prefecture'] = '香川県';
+				$Selected['prefecture'] = __d('edumap', 'Kagawa');
 				break;
 			case '38':
-				$Selected['prefecture'] = '愛媛県';
+				$Selected['prefecture'] = __d('edumap', 'Ehime');
 				break;
 			case '39':
-				$Selected['prefecture'] = '高知県';
+				$Selected['prefecture'] = __d('edumap', 'Kochi');
 				break;
 			case '40':
-				$Selected['prefecture'] = '福岡県';
+				$Selected['prefecture'] = __d('edumap', 'Fukuoka');
 				break;
 			case '41':
-				$Selected['prefecture'] = '佐賀県';
+				$Selected['prefecture'] = __d('edumap', 'Saga');
 				break;
 			case '42':
-				$Selected['prefecture'] = '長崎県';
+				$Selected['prefecture'] = __d('edumap', 'Nagasaki');
 				break;
 			case '43':
-				$Selected['prefecture'] = '熊本県';
+				$Selected['prefecture'] = __d('edumap', 'Kumamoto');
 				break;
 			case '44':
-				$Selected['prefecture'] = '大分県';
+				$Selected['prefecture'] = __d('edumap', 'Oita');
 				break;
 			case '45':
-				$Selected['prefecture'] = '宮崎県';
+				$Selected['prefecture'] = __d('edumap', 'Miyazaki');
 				break;
 			case '46':
-				$Selected['prefecture'] = '鹿児島県';
+				$Selected['prefecture'] = __d('edumap', 'Kagoshima');
 				break;
 			case '47':
-				$Selected['prefecture'] = '沖縄県';
+				$Selected['prefecture'] = __d('edumap', 'Okinawa');
 				break;
 			default:
 				$Selected['prefecture'] = '';
 		}
+		}
 
+		if(isset($Edumap['Edumap']['governor_type'])) {
 		//国公立私立区分を取得
 		switch($Edumap['Edumap']['governor_type']) {
 			case '1':
-				$Selected['governor_type'] = '国立';
+				$Selected['governor_type'] = __d('edumap', 'National');;
 				break;
 			case '2':
-				$Selected['governor_type'] = '県立';
+				$Selected['governor_type'] =__d('edumap', 'Prefectural');
 				break;
 			case '3':
-				$Selected['governor_type'] = '公立';
+				$Selected['governor_type'] = __d('edumap', 'Public school');
 				break;
 			case '4':
-				$Selected['governor_type'] = '市立';
+				$Selected['governor_type'] = __d('edumap', 'Municipal');
 				break;
 			case '5':
-				$Selected['governor_type'] = '組合立';
+				$Selected['governor_type'] = __d('edumap', 'By union');
 				break;
 			case '6':
-				$Selected['governor_type'] = '私立';
+				$Selected['governor_type'] = __d('edumap', 'Private school');
 				break;
 			case '9':
-				$Selected['governor_type'] = 'その他';
+				$Selected['governor_type'] = __d('edumap', 'Other');
 				break;
 			case '0':
-				$Selected['governor_type'] = '未設定';
+				$Selected['governor_type'] = __d('edumap', 'Not set');
 				break;
 			default:
 				$Selected['governor_type'] = '';
 				break;
 		}
+		}
 
+		if(isset($Edumap['Edumap']['education_type'])) {
 		//校種を取得
 		switch($Edumap['Edumap']['education_type']) {
 			case '1':
-				$Selected['education_type'] = '小学校';
+				$Selected['education_type'] = __d('edumap', 'Elementary school');
 				break;
 			case '2':
-				$Selected['education_type'] = '中学校';
+				$Selected['education_type'] = __d('edumap', 'Middle school');
 				break;
 			case '3':
-				$Selected['education_type'] = '高等教育';
+				$Selected['education_type'] = __d('edumap', 'High Schools');
 				break;
 			case '4':
-				$Selected['education_type'] = '中等教育学校';
+				$Selected['education_type'] = __d('edumap', 'Middle and high consistency');
 				break;
 			case '9':
-				$Selected['education_type'] = 'その他';
+				$Selected['education_type'] = __d('edumap', 'Other');
 				break;
 			case '0':
-				$Selected['education_type'] = '未設定';
+				$Selected['education_type'] = __d('edumap', 'Not set');
 				break;
 			default:
 				$Selected['education_type'] = '';
 				break;
 		}
+		}
 
+		if(isset($Edumap['Edumap']['coeducation_type'])) {
 		//共学・別学を取得
 		switch($Edumap['Edumap']['coeducation_type']) {
 			case '1':
-				$Selected['coeducation_type'] = '共学';
+				$Selected['coeducation_type'] = __d('edumap', 'Coeducation school');
 				break;
 			case '2':
-				$Selected['coeducation_type'] = '男子校';
+				$Selected['coeducation_type'] = __d('edumap', 'Boys school');
 				break;
 			case '3':
-				$Selected['coeducation_type'] = '女子校';
+				$Selected['coeducation_type'] = __d('edumap', 'Girls school');
 				break;
 			case '0':
-				$Selected['coeducation_type'] = '未設定';
+				$Selected['coeducation_type'] = __d('edumap', 'Not set');
 				break;
 			default:
 				$Selected['coeducation_type'] = '';
 				break;
+		}
 		}
 
 		$EdumapStudent = $this->EdumapStudent->getEdumapStudent(
@@ -316,7 +324,9 @@ class EdumapController extends EdumapAppController {
 		
 		//データをviewにセット
 		$this->set('edumap', $Edumap);
-		$this->set('edumap_selected', $Selected);
+		if(isset( $Selected)) {
+			$this->set('edumap_selected', $Selected);
+		}
 		$this->set('edumap_student', $EdumapStudent);
 		$this->set('edumap_social_media', $EdumapSocialMedium);
 		$this->set('edumap_visibility_frame_setting', $EdumapVisibilityFrameSetting);
@@ -324,11 +334,4 @@ class EdumapController extends EdumapAppController {
 		return $this->render('Edumap/view');
 	}
 
-	public function form($frameId = 0, $languageId = 0) {
-		return $this->render('Edumap/form');
-	}
-
-	public function edit($frameId = 0) {
-		return;
-	}
 }

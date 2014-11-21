@@ -1,0 +1,66 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2014-11-21 05:56+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /Controller/EdumapEditController.php:105;140
+msgid "Failed to register data."
+msgstr ""
+
+#: /Controller/EdumapEditController.php:114;151
+#: /Test/Case/Controller/EdumapEditControllerLoginUserTest.php:286;373
+msgid "Successfully finished."
+msgstr ""
+
+#: /View/Edumap/view.ctp:12
+msgid "Accept"
+msgstr ""
+
+#: /View/Edumap/view.ctp:22
+msgid "Manage"
+msgstr ""
+
+#: /View/Elements/Edumap/status_label.ctp:16
+msgid "Approving"
+msgstr ""
+
+#: /View/Elements/Edumap/status_label.ctp:22
+msgid "Disapproving"
+msgstr ""
+
+#: /View/Elements/Edumap/status_label.ctp:28
+msgid "Temporary"
+msgstr ""
+
+#: /View/Elements/EdumapEdit/button.ctp:16
+#: /View/Elements/EdumapEdit/button2.ctp:4
+msgid "Cancel"
+msgstr ""
+
+#: /View/Elements/EdumapEdit/button.ctp:24
+msgid "Disapproval"
+msgstr ""
+
+#: /View/Elements/EdumapEdit/button.ctp:30;35
+msgid "Save temporally"
+msgstr ""
+
+#: /View/Elements/EdumapEdit/button.ctp:43;49
+msgid "OK"
+msgstr ""
+
+#: /View/Elements/EdumapEdit/tab_header.ctp:15
+msgid "Close"
+msgstr ""
+

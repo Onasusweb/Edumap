@@ -12,9 +12,9 @@ class Edumap extends EdumapAppModel {
 				'rule' => array('numeric'),
 				'message' => 'Invalid request.',
 				'allowEmpty' => false,
-				//'required' => false,
+				'required' => false,
 				//'last' => false, // Stop validation after this rule
-				'on' => 'create', // Limit validation to 'create' or 'update' operations
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'key' => array(
@@ -22,17 +22,17 @@ class Edumap extends EdumapAppModel {
 				'rule' => array('notEmpty'),
 				'message' => 'Invalid request.',
 				//'allowEmpty' => false,
-				//'required' => false,
-				'last' => true, // Stop validation after this rule
-				'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'required' => true,
+				//'last' => true, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'status' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'Invalid request.',
-				//'allowEmpty' => false,
-				//'required' => false,
+				'allowEmpty' => false,
+				'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -50,6 +50,55 @@ class Edumap extends EdumapAppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+		),
+		'name' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Invalid request.',
+				'required' => true,
+			)
+		),
+		'handle' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Invalid request.',
+				'required' => true,
+			)
+		),
+		'postal_code' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Invalid request.',
+				'required' => true,
+			)
+		),
+		'prefecture_code' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Invalid request.',
+				'required' => true,
+			)
+		),
+		'location' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Invalid request.',
+				'required' => true,
+			)
+		),
+		'tel' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Invalid request.',
+				'required' => true,
+			)
+		),
+		'emergency_email' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Invalid request.',
+				'required' => true,
+			)
 		),
 	);
 

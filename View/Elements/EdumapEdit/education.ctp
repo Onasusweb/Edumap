@@ -1,6 +1,6 @@
-<option value="0">未設定
-<option value="1">小学校
-<option value="2">中学校
-<option value="3">高等教育
-<option value="4">中等教育学校
-<option value="9">その他
+<option value="0"><?php echo __d('edumap', 'Not set'); ?>
+<option value="1"><?php echo __d('edumap', 'Elementary school'); ?>
+<option value="2"><?php echo __d('edumap', 'Middle school'); ?>
+<option value="3"><?php echo __d('edumap', 'High Schools'); ?>
+<option value="4"><?php echo __d('edumap', 'Middle and high consistency'); ?>
+<option value="9"><?php echo __d('edumap', 'Other'); ?>

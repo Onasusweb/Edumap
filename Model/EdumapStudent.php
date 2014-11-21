@@ -4,6 +4,8 @@ App::uses('EdumapAppModel', 'Edumap.Model');
 
 class EdumapStudent extends EdumapAppModel {
 	var $name = 'EdumapStudent';
+
+
 	
 	public function getEdumapStudent($edumap_key) {
 		for( $i=0 ; $i<12 ; $i++) {
