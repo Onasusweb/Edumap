@@ -323,7 +323,7 @@ class Edumap extends EdumapAppModel {
 			$this->data['Edumap']['block_id'] = (int)$block['Block']['id'];
 			$this->data['Edumap']['language_id'] = (int)$block['Block']['language_id'];
 
-			//TODO: ブロック名の登録
+			//ブロック名の登録
 			$block['Block']['name'] = $data['Edumap']['name'];
 			if (! $this->Block->save($block)) {
 				// @codeCoverageIgnoreStart
