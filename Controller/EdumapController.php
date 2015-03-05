@@ -257,7 +257,10 @@ class EdumapController extends EdumapAppController {
 		//アバター
 		$deleteFile = isset($this->data['File']['delete']) ? (int)$this->data['File']['delete'] : null;
 		$data['File'] = $this->FileUpload->upload($this);
-		$data['deleteFile'] = $deleteFile;
+		if ($data['File']) {
+			$deleteFile = 1;
+		}
+		$data['DeleteFile'] = $deleteFile;
 		//開校日
 		if ($matches = preg_grep('/^\d+$/', array_values($this->data['Edumap']['foundation_date']))) {
 			$data['Edumap']['foundation_date'] = implode(Edumap::DATE_SEPARATOR, $matches);

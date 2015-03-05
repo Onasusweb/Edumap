@@ -309,7 +309,7 @@ class Edumap extends EdumapAppModel {
 			$this->data['Edumap']['closed_date'] = str_replace(Edumap::DATE_SEPARATOR, '', $this->data['Edumap']['closed_date']);
 
 			//アバターのvalidate
-			if (! $this->validateEdumapAvatar($data)) {
+			if (! $data = $this->validateEdumapAvatar($data)) {
 				return false;
 			}
 
@@ -379,15 +379,17 @@ class Edumap extends EdumapAppModel {
  * validateEdumapAvatar method
  *
  * @param array $data received post data
- * @return bool True on success, false on error
+ * @return mixed Array on success, false on error
  */
 	public function validateEdumapAvatar($data) {
 		//アバター削除のvalidate
-		if (isset($data['deleteFile']) && $data['deleteFile'] === 1) {
-			if (! $this->FileModel->validateDeletedFiles($data['Edumap']['file_id'])) {
+		if (isset($data['DeleteFile'])) {
+			if (! $deleteFile = $this->FileModel->validateDeletedFiles($data['Edumap']['file_id'])) {
 				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
+				CakeLog::debug('validateEdumapAvatar=' . print_r($this->validationErrors, true));
 				return false;
 			}
+			$data['DeleteFile'] = $deleteFile;
 		}
 		//アバターデータのvalidate
 		if ($data['File']) {
@@ -401,7 +403,7 @@ class Edumap extends EdumapAppModel {
 			}
 		}
 
-		return true;
+		return $data;
 	}
 
 /**
@@ -442,13 +444,17 @@ class Edumap extends EdumapAppModel {
  */
 	public function saveEdumapAvatar($data) {
 		//アバターの削除
-		if (isset($data['deleteFile']) && $data['deleteFile'] === 1) {
-			if (! $this->FileModel->delete($data['Edumap']['file_id'], true)) {
+		if (isset($data['DeleteFile'])) {
+			//データ削除
+			if (! $this->FileModel->deleteAll([$this->FileModel->alias . '.id' => $data['Edumap']['file_id']], true, false)) {
 				return false;
 			}
 			if (! $this->FileModel->deleteFileAssociated($data['Edumap']['file_id'])) {
 				return false;
 			}
+			$folder = new Folder();
+			$folder->delete($data['DeleteFile'][0]['File']['path']);
+
 			$this->data['Edumap']['file_id'] = 0;
 		}
 
