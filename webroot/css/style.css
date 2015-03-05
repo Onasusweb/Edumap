@@ -1,0 +1,17 @@
+/**
+ * files/css/style.css
+ *
+ * @author   Takako Miyagawa <nekoget@gmail.com>
+ * @link     http://www.netcommons.org NetCommons Project
+ * @license  http://www.netcommons.org/license.txt NetCommons License
+ */
+
+.edumap-input-group-middel {
+	border-left: 0;
+	border-right: 0;
+}
+
+.edumap_radio_separator {
+	width: 30px;
+	display: inline-block;
+}

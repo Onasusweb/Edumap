@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-11-21 05:56+0000\n"
+"POT-Creation-Date: 2015-03-02 14:29+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,7 +14,472 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /View/Elements/Edumap/edumap_private.ctp:3
+#: Edumap/Model/Edumap.php:152
+#: Edumap/View/Elements/Edumap/edit_form.ctp:76
+#: Edumap/View/Elements/Edumap/view_contents.ctp:25
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:31
 msgid "School name"
+msgstr ""
+
+#: Edumap/Model/Edumap.php:159
+#: Edumap/View/Elements/Edumap/edit_form.ctp:98
+#: Edumap/View/Elements/Edumap/view_contents.ctp:29
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:46
+msgid "Handle name"
+msgstr ""
+
+#: Edumap/Model/Edumap.php:166
+#: Edumap/View/Elements/Edumap/edit_form.ctp:109
+#: Edumap/View/Elements/Edumap/view_contents.ctp:31
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:48
+msgid "Postal code"
+msgstr ""
+
+#: Edumap/Model/Edumap.php:173
+#: Edumap/View/Elements/Edumap/edit_form.ctp:122
+#: Edumap/View/Elements/Edumap/view_contents.ctp:33
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:50
+msgid "Prefecture"
+msgstr ""
+
+#: Edumap/Model/Edumap.php:180
+#: Edumap/View/Elements/Edumap/edit_form.ctp:139
+#: Edumap/View/Elements/Edumap/view_contents.ctp:35
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:52
+msgid "Location"
+msgstr ""
+
+#: Edumap/Model/Edumap.php:187
+#: Edumap/View/Elements/Edumap/edit_form.ctp:150
+#: Edumap/View/Elements/Edumap/view_contents.ctp:37
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:54
+msgid "Phone number"
+msgstr ""
+
+#: Edumap/Model/Edumap.php:194
+#: Edumap/View/Elements/Edumap/edit_form.ctp:179
+#: Edumap/View/Elements/Edumap/view_contents.ctp:41
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:58
+msgid "Emergency contact email"
+msgstr ""
+
+#: Edumap/View/Edumap/edit.ctp:24
+#: Edumap/View/EdumapVisibilitySettings/edit.ctp:19
+msgid "Plugin name"
+msgstr ""
+
+#: Edumap/View/Edumap/edit.ctp:30
+msgid "Edumap edit"
+msgstr ""
+
+#: Edumap/View/EdumapVisibilitySettings/edit.ctp:25
+msgid "Edumap visibilty settings"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:25
+msgid "Avatar"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:37
+msgid "Delete file."
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:87
+#: Edumap/View/Elements/Edumap/view_contents.ctp:27
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:44
+msgid "School name(kana)"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:165
+#: Edumap/View/Elements/Edumap/view_contents.ctp:39
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:56
+msgid "Fax number"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:193
+#: Edumap/View/Elements/Edumap/view_contents.ctp:43
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:60
+msgid "Inquiry"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:204
+#: Edumap/View/Elements/Edumap/view_contents.ctp:45
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:62
+msgid "Site URL"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:215
+#: Edumap/View/Elements/Edumap/view_contents.ctp:47
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:64
+msgid "Foundation date"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:226
+#: Edumap/View/Elements/Edumap/view_contents.ctp:49
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:66
+msgid "Closed date"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:237
+#: Edumap/View/Elements/Edumap/view_contents.ctp:51
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:68
+msgid "RSS URL"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:249
+#: Edumap/View/Elements/Edumap/view_contents.ctp:53
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:70
+msgid "Governing body type"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:265
+#: Edumap/View/Elements/Edumap/view_contents.ctp:55
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:72
+msgid "Education type"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:281
+#: Edumap/View/Elements/Edumap/view_contents.ctp:57
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:74
+msgid "Coeducation"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:301
+#: Edumap/View/Elements/Edumap/view_contents.ctp:59
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:76
+msgid "Principal name"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:312
+#: Edumap/View/Elements/Edumap/view_contents.ctp:61
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:78
+msgid "Principal email"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:332
+#: Edumap/View/Elements/Edumap/view_contents.ctp:99
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:86
+msgid "Description"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_social_media.ctp:15
+#: Edumap/View/Elements/Edumap/view_contents.ctp:84
+msgid "Twitter name"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_students.ctp:15
+#: Edumap/View/Elements/Edumap/view_contents.ctp:70
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:81
+msgid "Number of students"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_students.ctp:22
+#: Edumap/View/Elements/Edumap/view_contents.ctp:17
+msgid "1 grader"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_students.ctp:22
+#: Edumap/View/Elements/Edumap/view_contents.ctp:17
+msgid "2 grader"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_students.ctp:22
+#: Edumap/View/Elements/Edumap/view_contents.ctp:17
+msgid "3 grader"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_students.ctp:22
+#: Edumap/View/Elements/Edumap/view_contents.ctp:17
+msgid "4 grader"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_students.ctp:22
+#: Edumap/View/Elements/Edumap/view_contents.ctp:17
+msgid "5 grader"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_students.ctp:22
+#: Edumap/View/Elements/Edumap/view_contents.ctp:17
+msgid "6 grader"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_students.ctp:36
+msgid "Male students"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/input_students.ctp:54
+msgid "Female students"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/view_students.ctp:22
+msgid "Male: %d students"
+msgstr ""
+
+#: Edumap/View/Elements/Edumap/view_students.ctp:28
+msgid "Female: %d students"
+msgstr ""
+
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:84
+msgid "Social media"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:37;116;158;196
+msgid "Not set"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:56
+msgid "Hokkaido"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:57
+msgid "Aomori"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:58
+msgid "Iwate"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:59
+msgid "Miyagi"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:60
+msgid "Akita"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:61
+msgid "Yamagata"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:62
+msgid "Fukushima"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:63
+msgid "Ibaraki"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:64
+msgid "Tochigi"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:65
+msgid "Gunma"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:66
+msgid "Saitama"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:67
+msgid "Chiba"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:68
+msgid "Tokyo"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:69
+msgid "Kanagawa"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:70
+msgid "Niigata"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:71
+msgid "Toyama"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:72
+msgid "Ishikawa"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:73
+msgid "Fukui"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:74
+msgid "Yamanashi"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:75
+msgid "Nagano"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:76
+msgid "Gifu"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:77
+msgid "Shizuoka"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:78
+msgid "Aichi"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:79
+msgid "Mie"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:80
+msgid "Shiga"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:81
+msgid "Kyoto"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:82
+msgid "Osaka"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:83
+msgid "Hyogo"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:84
+msgid "Nara"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:85
+msgid "Wakayama"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:86
+msgid "Tottori"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:87
+msgid "Shimane"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:88
+msgid "Okayama"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:89
+msgid "Hiroshima"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:90
+msgid "Yamaguchi"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:91
+msgid "Tokushima"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:92
+msgid "Kagawa"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:93
+msgid "Ehime"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:94
+msgid "Kochi"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:95
+msgid "Fukuoka"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:96
+msgid "Saga"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:97
+msgid "Nagasaki"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:98
+msgid "Kumamoto"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:99
+msgid "Oita"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:100
+msgid "Miyazaki"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:101
+msgid "Kagoshima"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:102
+msgid "Okinawa"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:138
+msgid "National"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:139
+msgid "Prefectural"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:140
+msgid "Public school"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:141
+msgid "Municipal"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:142
+msgid "By union"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:143
+msgid "Private school"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:144;182
+msgid "Other"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:178
+msgid "Elementary school"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:179
+msgid "Middle school"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:180
+msgid "High school"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:181
+msgid "Middle and high consistency"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:214
+msgid "Coeducation school"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:215
+msgid "Boy's school"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:216
+msgid "Girl's school"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:247
+msgid "No display"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:248
+msgid "Display"
+msgstr ""
+
+#: Edumap/View/Helper/EdumapHelper.php:249
+msgid "Display only school officials in edumap on"
 msgstr ""
 

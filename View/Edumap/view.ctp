@@ -1,46 +1,15 @@
-<?php if ($contentEditable) : ?>
-	<div id="nc-edumap-<?php echo (int)$frameId; ?>"
-		 ng-controller="Edumap"
-		 ng-init="initialize(<?php echo (int)$frameId; ?>,
-								<?php echo h(json_encode($edumap)); ?>,
-								<?php echo h(json_encode($edumap_social_media)); ?>,
-								<?php echo h(json_encode($edumap_visibility_frame_setting)); ?>)">
+<?php
+/**
+ * edumap view template
+ *
+ * @author Noriko Arai <arai@nii.ac.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
+ */
+?>
 
-		<p class="text-right">
-			<?php if ($contentPublishable) : ?>
-				<button type="button" class="btn btn-warning"
-						tooltip="<?php echo __d('net_commons', 'Accept'); ?>"
-						ng-controller="Edumap.edit"
-						ng-hide="(edumap.Edumap.name !== '<?php echo NetCommonsBlockComponent::STATUS_APPROVED ?>')"
-						ng-click="initialize(); save('<?php echo NetCommonsBlockComponent::STATUS_PUBLISHED ?>')">
-
-					<span class="glyphicon glyphicon-ok"></span>
-				</button>
-			<?php endif; ?>
-
-			<button class="btn btn-primary"
-					tooltip="<?php echo __d('net_commons', 'Manage'); ?>"
-					ng-click="showManage('view/')">
-
-				<span class="glyphicon glyphicon-cog"> </span>
-			</button>
-		</p>
-
-		<?php if ($edumap['Edumap']['id'] != '0') : ?>
-			<?php echo $this->element('Edumap/edumap_private'); ?>
-		<?php endif; ?>
-		
-		<p class="text-left">
-			<?php echo $this->element('Edumap/status_label'); ?>
-		</p>
-
-	</div>
-
-
-<?php else : ?>
-
-	<?php if ($edumap_visibility_frame_setting['EdumapVisibilityFrameSetting']['id'] != '0') : ?>
-		<?php echo $this->element('Edumap/edumap_public'); ?>
-	<?php endif; ?>
-<?php endif; ?>
-
+<div>
+	<?php echo $this->element('Edumap/view_contents'); ?>
+</div>

@@ -1,109 +1,75 @@
 <?php
-
+/**
+ * Edumap Model
+ *
+ * @property Block $Block
+ *
+ * @author Noriko Arai <arai@nii.ac.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
+ */
 
 App::uses('EdumapAppModel', 'Edumap.Model');
+App::uses('UploadBehavior', 'Upload.Model/Behavior');
+App::uses('Folder', 'Utility');
+App::uses('JpValidation', 'Localized.Validation');
+App::uses('CakeTime', 'Utility');
 
+/**
+ * Edumap Model
+ *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @package NetCommons\Edumap\Model
+ */
 class Edumap extends EdumapAppModel {
-	var $useTable ='edumap';
 
-	public $validate = array(
-		'block_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				'message' => 'Invalid request.',
-				'allowEmpty' => false,
-				'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'key' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'Invalid request.',
-				//'allowEmpty' => false,
-				'required' => true,
-				//'last' => true, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'status' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				'message' => 'Invalid request.',
-				'allowEmpty' => false,
-				'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'range' => array(
-				'rule' => array('range', 0, 5),
-				'message' => 'Invalid request.',
-			),
-		),
-		'is_auto_translated' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
-				'message' => 'Invalid request.',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'Invalid request.',
-				'required' => true,
-			)
-		),
-		'handle' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'Invalid request.',
-				'required' => true,
-			)
-		),
-		'postal_code' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'Invalid request.',
-				'required' => true,
-			)
-		),
-		'prefecture_code' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'Invalid request.',
-				'required' => true,
-			)
-		),
-		'location' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'Invalid request.',
-				'required' => true,
-			)
-		),
-		'tel' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'Invalid request.',
-				'required' => true,
-			)
-		),
-		'emergency_email' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'Invalid request.',
-				'required' => true,
-			)
-		),
+/**
+ * Gendar Female
+ *
+ * @var string
+ */
+	const COUNTRY_CODE = 'jp';
+
+/**
+ * Gendar Female
+ *
+ * @var string
+ */
+	const DATE_SEPARATOR = '/';
+
+/**
+ * Custom database table name
+ *
+ * @var string
+ */
+	public $useTable = 'edumap';
+
+/**
+ * use behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		'NetCommons.Publishable',
+		'Containable',
 	);
+
+/**
+ * Validation rules
+ *
+ * @var array
+ */
+	public $validate = array();
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
 	public $belongsTo = array(
 		'Block' => array(
 			'className' => 'Block',
@@ -111,158 +77,431 @@ class Edumap extends EdumapAppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+		'File' => array(
+			'className' => 'Files.FileModel',
+			'foreignKey' => 'file_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'EdumapVisibilitySetting' => array(
+			'className' => 'Edumap.EdumapVisibilitySetting',
+			'foreignKey' => false,
+			'conditions' => array('EdumapVisibilitySetting.edumap_key = Edumap.key'),
+			'fields' => '',
+			'order' => ''
+		),
 	);
 
-	public function getEdumap($blockId, $contentEditable) {
-		$conditions = array(
-			'block_id' => $blockId,
-		);
+/**
+ * Called during validation operations, before validation. Please note that custom
+ * validation rules can be defined in $validate.
+ *
+ * @param array $options Options passed from Model::save().
+ * @return bool True if validate operation should continue, false to abort
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate
+ * @see Model::save()
+ * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+ */
+	public function beforeValidate($options = array()) {
+		$this->validate = Hash::merge($this->validate, array(
+			'block_id' => array(
+				'numeric' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'allowEmpty' => false,
+					'required' => true,
+				)
+			),
+			'file_id' => array(
+				'numeric' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'allowEmpty' => true
+				)
+			),
+			'key' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'allowEmpty' => false,
+					'required' => true,
+				)
+			),
 
+			//status to set in PublishableBehavior.
+
+			'is_auto_translated' => array(
+				'boolean' => array(
+					'rule' => array('boolean'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				)
+			),
+			'name' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'School name')),
+					'required' => true,
+				)
+			),
+			'handle' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Handle name')),
+					'required' => true,
+				)
+			),
+			'postal_code' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Postal code')),
+					'required' => true,
+				),
+				'postal' => array(
+					'rule' => array('postal', null, self::COUNTRY_CODE),
+					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Postal code'), '999-9999')
+				),
+			),
+			'prefecture_code' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Prefecture')),
+					'required' => true,
+				),
+				'prefectureCode' => array(
+					'rule' => '/^(0[1-9]|[1-3][0-9]|4[0-7])$/i',
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+			),
+			'location' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Location')),
+					'required' => true,
+				)
+			),
+			'tel' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Phone number')),
+					'required' => true,
+				),
+				'phone' => array(
+					'rule' => array('phone', null, self::COUNTRY_CODE),
+					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Phone number'), __d('edumap', 'Phone number')),
+				)
+			),
+			'fax' => array(
+				'phone' => array(
+					'rule' => array('phone', null, self::COUNTRY_CODE),
+					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Fax number'), __d('edumap', 'Fax number')),
+					'allowEmpty' => true
+				)
+			),
+			'emergency_email' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Emergency contact email')),
+					'required' => true,
+				),
+				'email' => array(
+					'rule' => array('email'),
+					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Emergency contact email'), __d('edumap', 'E-mail'))
+				)
+			),
+			'site_url' => array(
+				'url' => array(
+					'rule' => array('url'),
+					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Site URL'), __d('edumap', 'URL')),
+					'allowEmpty' => true
+				)
+			),
+			'rss_url' => array(
+				'url' => array(
+					'rule' => array('url'),
+					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'RSS URL'), __d('edumap', 'URL')),
+					'allowEmpty' => true
+				)
+			),
+			'foundation_date' => array(
+				'date' => array(
+					'rule' => array('date', 'ym'),
+					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Foundation date'), __d('edumap', 'Date')),
+					'allowEmpty' => true
+				),
+			),
+			'closed_date' => array(
+				'date' => array(
+					'rule' => array('date', 'ym'),
+					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Closed date'), __d('edumap', 'Date')),
+					'allowEmpty' => true
+				)
+			),
+			'principal_email' => array(
+				'email' => array(
+					'rule' => array('email'),
+					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Principal email'), __d('edumap', 'E-mail')),
+					'allowEmpty' => true
+				)
+			),
+		));
+
+		return parent::beforeValidate($options);
+	}
+
+/**
+ * get dumap
+ *
+ * @param int $frameId frames.id
+ * @param int $blockId blocks.id
+ * @param bool $contentEditable true can edit the content, false not can edit the content.
+ * @return array
+ */
+	public function getEdumap($frameId, $blockId, $contentEditable) {
+		$conditions = array(
+			$this->alias . '.block_id' => $blockId,
+		);
 		if (! $contentEditable) {
-			$conditions['status'] = NetCommonsBlockComponent::STATUS_PUBLISHED;
+			$conditions[$this->alias . '.status'] = NetCommonsBlockComponent::STATUS_PUBLISHED;
 		}
+
 		$edumap = $this->find('first', array(
+				'recursive' => -1,
 				'conditions' => $conditions,
-				'order' => 'Edumap.id DESC',
+				'order' => $this->alias . '.id DESC'
 			)
 		);
 
-		if (! $edumap) {
-			$edumap = $this->create();
-			$edumap['Edumap']['content'] = '';
-			$edumap['Edumap']['status'] = '0';
-			$edumap['Edumap']['block_id'] = '0';
-			$edumap['Edumap']['key'] = '';
-			$edumap['Edumap']['id'] = '0';
-		}
 		return $edumap;
 	}
 
 /**
  * save edumap
  *
- * @param array $postData received post data
- * @return bool true success, false error
- * @throws ForbiddenException
+ * @param array $data received post data
+ * @return bool true on success, false on error
+ * @throws InternalErrorException
  */
-	public function saveEdumap($postData) {
-		$models = array(
-			'Frame' => 'Frames.Frame',
+	public function saveEdumap($data) {
+		$this->loadModels([
+			'Edumap' => 'Edumap.Edumap',
+			'EdumapSocialMedium' => 'Edumap.EdumapSocialMedium',
+			'EdumapStudent' => 'Edumap.EdumapStudent',
+			'EdumapVisibilitySetting' => 'Edumap.EdumapVisibilitySetting',
 			'Block' => 'Blocks.Block',
+			'Comment' => 'Comments.Comment',
+			'FileModel' => 'Files.FileModel',
+			'FilesPlugin' => 'Files.FilesPlugin',
+			'FilesRoom' => 'Files.FilesRoom',
+			'FilesUser' => 'Files.FilesUser',
+		]);
 
-		);
-		foreach ($models as $model => $class) {
-			$this->$model = ClassRegistry::init($class);
-			$this->$model->setDataSource('master');
-		}
-
-		//frame関連のセット
-		$frame = $this->Frame->findById($postData['Frame']['id']);
-		if (! $frame) {
-			return false;
-		}
-		if (! isset($frame['Frame']['block_id']) ||
-				$frame['Frame']['block_id'] === '0') {
-			//edumapsテーブルのkey生成
-			$postData['Edumap']['key'] = hash('sha256', 'edumap_' . microtime());
-		}
-
-		//DBへの登録
 		$dataSource = $this->getDataSource();
 		$dataSource->begin();
+
 		try {
-			$blockId = $this->__saveBlock($frame);
-
-			//edumapsテーブル登録
-			$edumap['Edumap'] = $postData['Edumap'];
-			$edumap['Edumap']['block_id'] = $blockId;
-			$edumap['Edumap']['created_user'] = CakeSession::read('Auth.User.id');
-
-			$edumap = $this->save($edumap);
-			if (! $edumap) {
-				throw new ForbiddenException(serialize($this->validationErrors));
+			//edumapデータのvalidate
+			if (! $this->validateEdumap($data)) {
+				return false;
 			}
-			
-			//年度を求める
-			if(date("m") < 4) {
-				$fiscal_year = date("Y") -1;
-			} else {
-				$fiscal_year = date("Y");
+			$this->data['Edumap']['foundation_date'] = str_replace(Edumap::DATE_SEPARATOR, '', $this->data['Edumap']['foundation_date']);
+			$this->data['Edumap']['closed_date'] = str_replace(Edumap::DATE_SEPARATOR, '', $this->data['Edumap']['closed_date']);
+
+			//アバターのvalidate
+			if (! $this->validateEdumapAvatar($data)) {
+				return false;
 			}
 
-			//モデル呼び出し
-			App::import('Model','Edumap.EdumapStudent');
-			$EdumapStudent = new EdumapStudent;
-			
-			//edumapStudentテーブル登録
-			$edumap_student['EdumapStudent'] = $postData['EdumapStudent'];
-			
-			for($i=0 ; $i<12 ; $i++)
-			{
-				$edumap_student['EdumapStudent'][$i]['edumap_key'] = $postData['Edumap']['key'];
-				$edumap_student['EdumapStudent'][$i]['year'] = $fiscal_year;
-				$edumap_student['EdumapStudent'][$i]['gendar'] = $i%2;
-				$edumap_student['EdumapStudent'][$i]['grade'] = floor($i/2+1);
-				$edumap_student['EdumapStudent'][$i]['created_user'] = CakeSession::read('Auth.User.id');
-			}
-				$EdumapStudent = $EdumapStudent->saveAll($edumap_student['EdumapStudent']);
-			if (! $EdumapStudent) {
-				throw new ForbiddenException(serialize($this->validationErrors));
+			//Associatedのvalidate
+			if (! $this->validateEdumapAssociated($data)) {
+				return false;
 			}
 
-			//モデル呼び出し
-			App::import('Model','Edumap.EdumapSocialMedium');
-			$EdumapSocialMedium = new EdumapSocialMedium;
-			
-			//EdumapSocialMediumテーブル登録
-			$edumap_social_media['EdumapSocialMedium'] = $postData['EdumapSocialMedium'];
-			$edumap_social_media['EdumapSocialMedium']['edumap_key'] = $edumap['Edumap']['key'];
-			$edumap_social_media['EdumapSocialMedium']['type'] = 'twitter';
-			$edumap_social_media['EdumapSocialMedium']['created_user'] = CakeSession::read('Auth.User.id');
+			//ブロックの登録
+			$block = $this->Block->saveByFrameId($data['Frame']['id'], false);
+			$this->data['Edumap']['block_id'] = (int)$block['Block']['id'];
+			$this->data['Edumap']['language_id'] = (int)$block['Block']['language_id'];
 
-			$EdumapSocialMedium = $EdumapSocialMedium->save($edumap_social_media);
-			if (! $EdumapSocialMedium) {
-				throw new ForbiddenException(serialize($this->validationErrors));
+			//TODO: ブロック名の登録
+			$block['Block']['name'] = $data['Edumap']['name'];
+			if (! $this->Block->save($block)) {
+				// @codeCoverageIgnoreStart
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+				// @codeCoverageIgnoreEnd
+			}
+
+			//アバターの登録
+			if (! $this->saveEdumapAvatar($data)) {
+				// @codeCoverageIgnoreStart
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+				// @codeCoverageIgnoreEnd
+			}
+
+			//Edumapの登録
+			if (! $edumap = $this->save(null, false)) {
+				// @codeCoverageIgnoreStart
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+				// @codeCoverageIgnoreEnd
+			}
+
+			//Associatedの登録
+			if (! $this->saveEdumapAssociated($edumap)) {
+				// @codeCoverageIgnoreStart
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+				// @codeCoverageIgnoreEnd
 			}
 
 			$dataSource->commit();
-			return $edumap;
-			
+
 		} catch (Exception $ex) {
-			CakeLog::error($ex->getTraceAsString());
 			$dataSource->rollback();
-			return false;
+			CakeLog::error($ex);
+			throw $ex;
 		}
+
+		return $edumap;
 	}
 
 /**
- * save block
+ * validate edumap
  *
- * @param array $frame frame data
- * @return int blocks.id
- * @throws ForbiddenException
+ * @param array $data received post data
+ * @return bool True on success, false on error
  */
-	private function __saveBlock($frame) {
-		if (! isset($frame['Frame']['block_id']) ||
-				$frame['Frame']['block_id'] === '0') {
-			//blocksテーブル登録
-			$block = array();
-			$block['Block']['room_id'] = $frame['Frame']['room_id'];
-			$block['Block']['language_id'] = $frame['Frame']['language_id'];
-			$block = $this->Block->save($block);
-			if (! $block) {
-				throw new ForbiddenException(serialize($this->Block->validationErrors));
-			}
-			$blockId = (int)$block['Block']['id'];
+	public function validateEdumap($data) {
+		$this->set($data);
+		$this->validates();
+		return $this->validationErrors ? false : true;
+	}
 
-			//framesテーブル更新
-			$frame['Frame']['block_id'] = $blockId;
-			if (! $this->Frame->save($frame)) {
-				throw new ForbiddenException(serialize($this->Frame->validationErrors));
+/**
+ * validateEdumapAvatar method
+ *
+ * @param array $data received post data
+ * @return bool True on success, false on error
+ */
+	public function validateEdumapAvatar($data) {
+		//アバター削除のvalidate
+		if (isset($data['deleteFile']) && $data['deleteFile'] === 1) {
+			if (! $this->FileModel->validateDeletedFiles($data['Edumap']['file_id'])) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
+				return false;
+			}
+		}
+		//アバターデータのvalidate
+		if ($data['File']) {
+			if (! $this->FileModel->validateFile($data)) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
+				return false;
+			}
+			if (! $this->FileModel->validateFileAssociated($data)) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
+				return false;
 			}
 		}
 
-		return (int)$frame['Frame']['block_id'];
+		return true;
 	}
+
+/**
+ * validateEdumapAssociated
+ *
+ * @param array $data received post data
+ * @return bool True on success, false on error
+ */
+	public function validateEdumapAssociated($data) {
+		//edumap生徒数データのvalidate
+		if ($data['EdumapStudent']) {
+			if (! $this->EdumapStudent->validateEdumapStudents($data['EdumapStudent'])) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->EdumapStudent->validationErrors);
+				return false;
+			}
+		}
+		//edumapSNSデータのvalidate
+		if ($data['EdumapSocialMedium']) {
+			if (! $this->EdumapSocialMedium->validateEdumapSocialMedia($data['EdumapSocialMedium'])) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->EdumapSocialMedium->validationErrors);
+				return false;
+			}
+		}
+		//コメントのvalidate
+		if (! $this->Comment->validateByStatus($data, array('caller' => $this->alias))) {
+			$this->validationErrors = Hash::merge($this->validationErrors, $this->Comment->validationErrors);
+			return false;
+		}
+
+		return true;
+	}
+
+/**
+ * saveEdumapAvatar
+ *
+ * @param array $data received post data
+ * @return bool true on success, false on error
+ */
+	public function saveEdumapAvatar($data) {
+		//アバターの削除
+		if (isset($data['deleteFile']) && $data['deleteFile'] === 1) {
+			if (! $this->FileModel->delete($data['Edumap']['file_id'], true)) {
+				return false;
+			}
+			if (! $this->FileModel->deleteFileAssociated($data['Edumap']['file_id'])) {
+				return false;
+			}
+			$this->data['Edumap']['file_id'] = 0;
+		}
+
+		//アバターの登録
+		if ($data['File']) {
+			if (! $file = $this->FileModel->save(null, false)) {
+				return false;
+			}
+			if (! $this->FileModel->saveFileAssociated($file)) {
+				return false;
+			}
+			$this->data['Edumap']['file_id'] = (int)$file['File']['id'];
+		}
+
+		return true;
+	}
+
+/**
+ * saveEdumapAssociated
+ *
+ * @param array $data received post data
+ * @return bool true on success, false on error
+ */
+	public function saveEdumapAssociated($data) {
+		//Edumap生徒数の登録
+		if ($data['EdumapStudent']) {
+			$data['EdumapStudent'] = Hash::insert($data['EdumapStudent'], '{n}.edumap_id', $data[$this->alias]['id']);
+			if (! $this->EdumapStudent->saveMany($data['EdumapStudent'], ['validate' => false])) {
+				return false;
+			}
+		}
+		//EdumapSNSデータの登録
+		if ($data['EdumapSocialMedium']) {
+			$data['EdumapSocialMedium'] = Hash::insert($data['EdumapSocialMedium'], '{s}.edumap_id', $data[$this->alias]['id']);
+			if (! $this->EdumapSocialMedium->saveMany($data['EdumapSocialMedium'], ['validate' => false])) {
+				return false;
+			}
+		}
+		//コメントの登録
+		if ($this->Comment->data) {
+			$this->Comment->data['Comment']['plugin_key'] = 'edumap';
+			if (! $this->Comment->save(null, false)) {
+				return false;
+			}
+		}
+		//表示方法変更(デフォルト値)の登録
+		if (isset($this->data['EdumapVisibilitySetting'])) {
+			if (! $this->EdumapVisibilitySetting->save($this->data['EdumapVisibilitySetting'], false)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

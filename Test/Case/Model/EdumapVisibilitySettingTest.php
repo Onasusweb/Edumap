@@ -1,8 +1,8 @@
 <?php
 /**
- * EdumapSocialMedium Model Test Case
+ * EdumapVisibilitySetting Model Test Case
  *
- * @property EdumapSocialMedium $EdumapSocialMedium
+ * @property EdumapVisibilitySetting $EdumapVisibilitySetting
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -12,15 +12,15 @@
  */
 
 App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
-App::uses('EdumapSocialMedium', 'Edumap.Model');
+App::uses('EdumapVisibilitySetting', 'Edumap.Model');
 
 /**
- * EdumapSocialMedium Model Test Case
+ * EdumapVisibilitySetting Model Test Case
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapSocialMediumTest extends EdumapModelTestBase {
+class EdumapVisibilitySettingTest extends EdumapModelTestBase {
 
 /**
  * setUp method
@@ -29,7 +29,7 @@ class EdumapSocialMediumTest extends EdumapModelTestBase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->EdumapSocialMedium = ClassRegistry::init('Edumap.EdumapSocialMedium');
+		$this->EdumapVisibilitySetting = ClassRegistry::init('Edumap.EdumapVisibilitySetting');
 	}
 
 /**
@@ -38,7 +38,7 @@ class EdumapSocialMediumTest extends EdumapModelTestBase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->EdumapSocialMedium);
+		unset($this->EdumapVisibilitySetting);
 		parent::tearDown();
 	}
 

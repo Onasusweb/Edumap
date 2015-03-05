@@ -11,7 +11,6 @@
 
 App::uses('EdumapAppController', 'Edumap.Controller');
 
-
 /**
  * Edumap Controller
  *
@@ -19,7 +18,6 @@ App::uses('EdumapAppController', 'Edumap.Controller');
  * @package NetCommons\Edumap\Controller
  */
 class EdumapController extends EdumapAppController {
-
 
 /**
  * use model
@@ -30,308 +28,281 @@ class EdumapController extends EdumapAppController {
 		'Edumap.Edumap',
 		'Edumap.EdumapStudent',
 		'Edumap.EdumapSocialMedium',
-		'Edumap.EdumapVisibilityFrameSetting',
+		'Edumap.EdumapVisibilitySetting',
+		'Comments.Comment',
+		'Files.FileModel',
 	);
-
 
 /**
  * use component
  *
  * @var array
  */
-	//public $components = array();
 	public $components = array(
-		'NetCommons.NetCommonsBlock', //use Announcement model or view
+		'NetCommons.NetCommonsBlock',
 		'NetCommons.NetCommonsFrame',
-		'NetCommons.NetCommonsRoomRole',
+		'NetCommons.NetCommonsRoomRole' => array(
+			//コンテンツの権限設定
+			'allowedActions' => array(
+				'contentEditable' => array('edit')
+			),
+		),
+		'Files.FileUpload',
 	);
 
+/**
+ * use helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'Edumap.Edumap'
+	);
 
 /**
- * beforeFilter
+ * index method
  *
  * @return void
  */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->allow();
-
-		$frameId = (isset($this->params['pass'][0]) ? (int)$this->params['pass'][0] : 0);
-		//Frameのデータをviewにセット
-		if (! $this->NetCommonsFrame->setView($this, $frameId)) {
-			throw new ForbiddenException('NetCommonsFrame');
-		}
-		//Roleのデータをviewにセット
-		if (! $this->NetCommonsRoomRole->setView($this)) {
-			throw new ForbiddenException('NetCommonsRoomRole');
-		}
-
+	public function index() {
+		$this->view = 'Edumap/view';
+		$this->view();
 	}
 
-	public function index($frameId = 0) {
-		return $this->view($frameId);
-	}
-
-	public function view($frameId = 0, $lang = '') {
+/**
+ * view method
+ *
+ * @return void
+ */
+	public function view() {
 		//Edumapデータを取得
-		$Edumap = $this->Edumap->getEdumap(
-				$this->viewVars['blockId'],
-				$this->viewVars['contentEditable']
+		$this->__initEdumap();
+
+		if ($this->request->is('ajax')) {
+			$tokenFields = Hash::flatten($this->request->data);
+			$hiddenFields = array(
+				'Edumap.block_id',
+				'Edumap.key'
+			);
+			$this->set('tokenFields', $tokenFields);
+			$this->set('hiddenFields', $hiddenFields);
+			$this->renderJson();
+		} else {
+			if ($this->viewVars['contentEditable']) {
+				$this->view = 'Edumap/viewForEditor';
+			}
+		}
+	}
+
+/**
+ * edit method
+ *
+ * @throws BadRequestException
+ * @return void
+ */
+	public function edit() {
+		$this->__initEdumap();
+		$this->set('userId', $this->Auth->user('id'));
+
+		if ($this->request->isGet()) {
+			CakeSession::write('backUrl', $this->request->referer());
+		}
+
+		if ($this->request->isPost()) {
+			if (!$status = $this->__parseStatus()) {
+				return;
+			}
+
+			$data = Hash::merge(
+				$this->__parseRequestData(),
+				['Edumap' => ['status' => $status]]
 			);
 
-		//都道府県名を取得
-		if(isset($Edumap['Edumap']['prefecture_code'])) {
-		switch($Edumap['Edumap']['prefecture_code']) {
-			case '1':
-				$Selected['prefecture'] = __d('edumap', 'Hokkaido');
-				break;
-			case '2':
-				$Selected['prefecture'] = __d('edumap', 'Aomori');
-				break;
-			case '3':
-				$Selected['prefecture'] = __d('edumap', 'Iwate');
-				break;
-			case '4':
-				$Selected['prefecture'] = __d('edumap', 'Miyagi');
-				break;
-			case '5':
-				$Selected['prefecture'] = __d('edumap', 'Akita');
-				break;
-			case '6':
-				$Selected['prefecture'] = __d('edumap', 'Yamagata');
-				break;
-			case '7':
-				$Selected['prefecture'] = __d('edumap', 'Fukushima');
-				break;
-			case '8':
-				$Selected['prefecture'] = __d('edumap', 'Ibaraki');
-				break;
-			case '9':
-				$Selected['prefecture'] = __d('edumap', 'Tochigi');
-				break;
-			case '10':
-				$Selected['prefecture'] = __d('edumap', 'Gunma');
-				break;
-			case '11':
-				$Selected['prefecture'] = __d('edumap', 'Saitama');
-				break;
-			case '12':
-				$Selected['prefecture'] = __d('edumap', 'Chiba');
-				break;
-			case '13':
-				$Selected['prefecture'] = __d('edumap', 'Tokyo');
-				break;
-			case '14':
-				$Selected['prefecture'] = __d('edumap', 'Kanagawa');
-				break;
-			case '15':
-				$Selected['prefecture'] = __d('edumap', 'Niigata');
-				break;
-			case '16':
-				$Selected['prefecture'] = __d('edumap', 'Toyama');
-				break;
-			case '17':
-				$Selected['prefecture'] = __d('edumap', 'Ishikawa');
-				break;
-			case '18':
-				$Selected['prefecture'] = __d('edumap', 'Fukui');
-				break;
-			case '19':
-				$Selected['prefecture'] = __d('edumap', 'Yamanashi');
-				break;
-			case '20':
-				$Selected['prefecture'] = __d('edumap', 'Nagano');
-				break;
-			case '21':
-				$Selected['prefecture'] = __d('edumap', 'Gifu');
-				break;
-			case '22':
-				$Selected['prefecture'] = __d('edumap', 'Shizuoka');
-				break;
-			case '23':
-				$Selected['prefecture'] = __d('edumap', 'Aichi');
-				break;
-			case '24':
-				$Selected['prefecture'] = __d('edumap', 'Mie');
-				break;
-			case '25':
-				$Selected['prefecture'] = __d('edumap', 'Shiga');
-				break;
-			case '26':
-				$Selected['prefecture'] = __d('edumap', 'Kyoto');
-				break;
-			case '27':
-				$Selected['prefecture'] = __d('edumap', 'Osaka');
-				break;
-			case '28':
-				$Selected['prefecture'] =__d('edumap', 'Hyogo');
-				break;
-			case '29':
-				$Selected['prefecture'] = __d('edumap', 'Nara');
-				break;
-			case '30':
-				$Selected['prefecture'] = __d('edumap', 'Wakayama');
-				break;
-			case '31':
-				$Selected['prefecture'] = __d('edumap', 'Tottori');
-				break;
-			case '32':
-				$Selected['prefecture'] = __d('edumap', 'Shimane');
-				break;
-			case '33':
-				$Selected['prefecture'] = __d('edumap', 'Okayama');
-				break;
-			case '34':
-				$Selected['prefecture'] = __d('edumap', 'Hiroshima');
-				break;
-			case '35':
-				$Selected['prefecture'] = __d('edumap', 'Yamaguchi');
-				break;
-			case '36':
-				$Selected['prefecture'] = __d('edumap', 'Tokushima');
-				break;
-			case '37':
-				$Selected['prefecture'] = __d('edumap', 'Kagawa');
-				break;
-			case '38':
-				$Selected['prefecture'] = __d('edumap', 'Ehime');
-				break;
-			case '39':
-				$Selected['prefecture'] = __d('edumap', 'Kochi');
-				break;
-			case '40':
-				$Selected['prefecture'] = __d('edumap', 'Fukuoka');
-				break;
-			case '41':
-				$Selected['prefecture'] = __d('edumap', 'Saga');
-				break;
-			case '42':
-				$Selected['prefecture'] = __d('edumap', 'Nagasaki');
-				break;
-			case '43':
-				$Selected['prefecture'] = __d('edumap', 'Kumamoto');
-				break;
-			case '44':
-				$Selected['prefecture'] = __d('edumap', 'Oita');
-				break;
-			case '45':
-				$Selected['prefecture'] = __d('edumap', 'Miyazaki');
-				break;
-			case '46':
-				$Selected['prefecture'] = __d('edumap', 'Kagoshima');
-				break;
-			case '47':
-				$Selected['prefecture'] = __d('edumap', 'Okinawa');
-				break;
-			default:
-				$Selected['prefecture'] = '';
-		}
-		}
+			//最新データ取得
+			if (! $edumap = $this->Edumap->getEdumap(
+				(int)$data['Frame']['id'],
+				isset($data['Block']['id']) ? (int)$data['Block']['id'] : null,
+				true
+			)) {
+				$edumap = $this->Edumap->create(['key' => Security::hash($this->Edumap->name . mt_rand() . microtime(), 'md5')]);
 
-		if(isset($Edumap['Edumap']['governor_type'])) {
-		//国公立私立区分を取得
-		switch($Edumap['Edumap']['governor_type']) {
-			case '1':
-				$Selected['governor_type'] = __d('edumap', 'National');;
-				break;
-			case '2':
-				$Selected['governor_type'] =__d('edumap', 'Prefectural');
-				break;
-			case '3':
-				$Selected['governor_type'] = __d('edumap', 'Public school');
-				break;
-			case '4':
-				$Selected['governor_type'] = __d('edumap', 'Municipal');
-				break;
-			case '5':
-				$Selected['governor_type'] = __d('edumap', 'By union');
-				break;
-			case '6':
-				$Selected['governor_type'] = __d('edumap', 'Private school');
-				break;
-			case '9':
-				$Selected['governor_type'] = __d('edumap', 'Other');
-				break;
-			case '0':
-				$Selected['governor_type'] = __d('edumap', 'Not set');
-				break;
-			default:
-				$Selected['governor_type'] = '';
-				break;
-		}
-		}
+				$visibilitySetting = $this->EdumapVisibilitySetting->create(['edumap_key' => $edumap['Edumap']['key']]);
+				$data = Hash::merge($data, $visibilitySetting);
+			}
+			$data = Hash::merge($edumap, $data);
 
-		if(isset($Edumap['Edumap']['education_type'])) {
-		//校種を取得
-		switch($Edumap['Edumap']['education_type']) {
-			case '1':
-				$Selected['education_type'] = __d('edumap', 'Elementary school');
-				break;
-			case '2':
-				$Selected['education_type'] = __d('edumap', 'Middle school');
-				break;
-			case '3':
-				$Selected['education_type'] = __d('edumap', 'High Schools');
-				break;
-			case '4':
-				$Selected['education_type'] = __d('edumap', 'Middle and high consistency');
-				break;
-			case '9':
-				$Selected['education_type'] = __d('edumap', 'Other');
-				break;
-			case '0':
-				$Selected['education_type'] = __d('edumap', 'Not set');
-				break;
-			default:
-				$Selected['education_type'] = '';
-				break;
-		}
-		}
+			//登録処理
+			$edumap = $this->Edumap->saveEdumap($data);
 
-		if(isset($Edumap['Edumap']['coeducation_type'])) {
-		//共学・別学を取得
-		switch($Edumap['Edumap']['coeducation_type']) {
-			case '1':
-				$Selected['coeducation_type'] = __d('edumap', 'Coeducation school');
-				break;
-			case '2':
-				$Selected['coeducation_type'] = __d('edumap', 'Boys school');
-				break;
-			case '3':
-				$Selected['coeducation_type'] = __d('edumap', 'Girls school');
-				break;
-			case '0':
-				$Selected['coeducation_type'] = __d('edumap', 'Not set');
-				break;
-			default:
-				$Selected['coeducation_type'] = '';
-				break;
-		}
-		}
+			//エラーチェック＆出力
+			if (! $this->__handleValidationError($this->Edumap->validationErrors)) {
+				$data['Edumap']['foundation_date'] = $this->data['Edumap']['foundation_date'];
+				$data['Edumap']['closed_date'] = $this->data['Edumap']['closed_date'];
+				$results = $this->camelizeKeyRecursive($data);
+				$this->set($results);
+				return;
+			}
+			$this->set('blockId', $edumap['Edumap']['block_id']);
 
-		$EdumapStudent = $this->EdumapStudent->getEdumapStudent(
-				$Edumap['Edumap']['key']
-			);
-		
-		//edumap_social_mediaデータを取得
-		$EdumapSocialMedium = $this->EdumapSocialMedium->getEdumapSocialMedium(
-				$Edumap['Edumap']['key']
+			if (! $this->request->is('ajax')) {
+				$backUrl = CakeSession::read('backUrl');
+				CakeSession::delete('backUrl');
+				$this->redirect($backUrl);
+			}
+			return;
+		}
+	}
+
+/**
+ * __initEdumap method
+ *
+ * @return void
+ */
+	private function __initEdumap() {
+		//edumapデータ基本情報
+		if (! $edumap = $this->Edumap->getEdumap(
+			$this->viewVars['frameId'],
+			$this->viewVars['blockId'],
+			$this->viewVars['contentEditable']
+		)) {
+			$edumap = $this->Edumap->create(['id' => null, 'key' => null, 'file_id' => null]);
+		}
+		//公開設定
+		if (! $visibilitySetting = $this->EdumapVisibilitySetting->find('first', array(
+			'recursive' => -1,
+			'conditions' => array(
+				'edumap_key' => $edumap['Edumap']['key']
+			)
+		))) {
+			$visibilitySetting = $this->EdumapVisibilitySetting->create();
+		}
+		//アバター取得
+		$file = $this->FileModel->find('first', array(
+			'recursive' => -1,
+			'conditions' => array(
+				$this->FileModel->alias . '.id' => $edumap['Edumap']['file_id']
+			)
+		));
+		//生徒数取得
+		$edumapStudents = $this->EdumapStudent->find('list', array(
+			'fields' => array('gendar', 'number', 'grade'),
+			'recursive' => -1,
+			'conditions' => array(
+				'edumap_id' => $edumap['Edumap']['id']
+			)
+		));
+		//SNS取得
+		$edumapSocialMedia = $this->EdumapSocialMedium->find('list', array(
+			'fields' => array('type', 'value'),
+			'recursive' => -1,
+			'conditions' => array(
+				'edumap_id' => $edumap['Edumap']['id']
+			)
+		));
+		//コメント
+		$comments = $this->Comment->getComments(
+			array(
+				'plugin_key' => 'edumap',
+				'content_key' => $edumap['Edumap']['key']
+			)
 		);
 
-		//Edumap表示方法データを取得
-		$EdumapVisibilityFrameSetting = $this->EdumapVisibilityFrameSetting->getEdumapVisibilityFrameSetting(
+		$results = Hash::merge(
+			$edumap,
+			$visibilitySetting,
+			$file,
+			array(
+				'edumapStudents' => $edumapStudents,
+				'edumapSocialMedium' => $edumapSocialMedia,
+				'comments' => $comments,
+				'contentStatus' => $edumap['Edumap']['status']
+			)
 		);
-		
-		//データをviewにセット
-		$this->set('edumap', $Edumap);
-		if(isset( $Selected)) {
-			$this->set('edumap_selected', $Selected);
-		}
-		$this->set('edumap_student', $EdumapStudent);
-		$this->set('edumap_social_media', $EdumapSocialMedium);
-		$this->set('edumap_visibility_frame_setting', $EdumapVisibilityFrameSetting);
+		$results = $this->camelizeKeyRecursive($results);
+		$this->set($results);
+	}
 
-		return $this->render('Edumap/view');
+/**
+ * Parse content status from request
+ *
+ * @return mixed status on success, false on error
+ * @throws BadRequestException
+ */
+	private function __parseStatus() {
+		if ($matches = preg_grep('/^save_\d/', array_keys($this->data))) {
+			list(, $status) = explode('_', array_shift($matches));
+		} else {
+			if ($this->request->is('ajax')) {
+				$this->renderJson(
+					['error' => ['validationErrors' => ['status' => __d('net_commons', 'Invalid request.')]]],
+					__d('net_commons', 'Bad Request'), 400
+				);
+			} else {
+				throw new BadRequestException(__d('net_commons', 'Bad Request'));
+			}
+			return false;
+		}
+
+		return $status;
+	}
+
+/**
+ * Parse data from request
+ *
+ * @return array
+ */
+	private function __parseRequestData() {
+		$data = $this->data;
+
+		//アバター
+		$deleteFile = isset($this->data['File']['delete']) ? (int)$this->data['File']['delete'] : null;
+		$data['File'] = $this->FileUpload->upload($this);
+		$data['deleteFile'] = $deleteFile;
+		//開校日
+		if ($matches = preg_grep('/^\d+$/', array_values($this->data['Edumap']['foundation_date']))) {
+			$data['Edumap']['foundation_date'] = implode(Edumap::DATE_SEPARATOR, $matches);
+		} else {
+			$data['Edumap']['foundation_date'] = '';
+		}
+		//閉校日
+		if ($matches = preg_grep('/^\d+$/', array_values($this->data['Edumap']['closed_date']))) {
+			$data['Edumap']['closed_date'] = implode(Edumap::DATE_SEPARATOR, $matches);
+		} else {
+			$data['Edumap']['closed_date'] = '';
+		}
+		//生徒数
+		foreach ($data['EdumapStudent'] as $i => $student) {
+			if (! is_numeric($student['number'])) {
+				unset($data['EdumapStudent'][$i]);
+			}
+		}
+		//SNS
+		foreach ($data['EdumapSocialMedium'] as $i => $sns) {
+			if (! $sns['value']) {
+				unset($data['EdumapSocialMedium'][$i]);
+			}
+		}
+
+		return $data;
+	}
+
+/**
+ * Handle validation error
+ *
+ * @param array $errors validation errors
+ * @return bool true on success, false on error
+ */
+	private function __handleValidationError($errors) {
+		if ($errors) {
+			$this->validationErrors = $errors;
+			if ($this->request->is('ajax')) {
+				$results = ['error' => ['validationErrors' => $errors]];
+				$this->renderJson($results, __d('net_commons', 'Bad Request'), 400);
+			}
+			return false;
+		}
+
+		return true;
 	}
 
 }
