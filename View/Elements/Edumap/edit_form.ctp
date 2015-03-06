@@ -22,7 +22,7 @@
 
 <div class="row form-group">
 	<div class="col-xs-12">
-		<?php echo $this->Form->label('File.' . FileModel::INPUT_NAME, __d('edumap', 'Avatar')); ?>
+		<?php echo $this->Form->label('Edumap.' . Edumap::INPUT_NAME . '.File', __d('edumap', 'Avatar')); ?>
 
 			<?php if (isset($file['urlThumbnail'])) :?>
 				<div class="form-group">
@@ -31,44 +31,99 @@
 						'class' => 'img-responsive img-thumbnail',
 					)); ?>
 
-					<?php echo $this->Form->checkbox('File.delete', array(
+					<?php echo $this->Form->checkbox('DeleteFile.id', array(
 						'value' => 1,
 						//'ng-model' => 'deleteFile'
 					)); ?>
-					<?php echo $this->Form->label('File.delete', __d('edumap', 'Delete file.')); ?>
+					<?php echo $this->Form->label('DeleteFile.id', __d('edumap', 'Delete file.')); ?>
 				</div>
 			<?php endif; ?>
 
-		<?php echo $this->Form->file('File.' . FileModel::INPUT_NAME, array(
+		<?php echo $this->Form->file('Edumap.' . Edumap::INPUT_NAME, array(
 			'accept' => 'image/*',
 			//'ng-disabled' => 'deleteFile'
 		)); ?>
 
-		<?php echo $this->Form->hidden('File.status', array(
+		<?php echo $this->Form->hidden(Edumap::INPUT_NAME . '.File.status', array(
 			'value' => 1
 		)); ?>
-		<?php echo $this->Form->hidden('File.role_type', array(
+		<?php echo $this->Form->hidden(Edumap::INPUT_NAME . '.File.role_type', array(
 			'value' => 'room_file_role'
 		)); ?>
-		<?php echo $this->Form->hidden('File.path', array(
+		<?php echo $this->Form->hidden(Edumap::INPUT_NAME . '.File.path', array(
 			'value' => '{ROOT}edumap{DS}' . $roomId . '{DS}'
 		)); ?>
-		<?php echo $this->Form->hidden('FilesPlugin.plugin_key', array(
+		<?php echo $this->Form->hidden(Edumap::INPUT_NAME . '.FilesPlugin.plugin_key', array(
 			'value' => 'edumap'
 		)); ?>
-		<?php echo $this->Form->hidden('FilesRoom.room_id', array(
+		<?php echo $this->Form->hidden(Edumap::INPUT_NAME . '.FilesRoom.room_id', array(
 			'value' => $roomId
 		)); ?>
-		<?php echo $this->Form->hidden('FilesUser.user_id', array(
+		<?php echo $this->Form->hidden(Edumap::INPUT_NAME . '.FilesUser.user_id', array(
 			'value' => $userId
 		)); ?>
 	</div>
 
 	<?php echo $this->element('error', array(
 		'model' => 'Edumap',
-		'field' => FileModel::INPUT_NAME
+		'field' => Edumap::INPUT_NAME
 	)); ?>
 </div>
+
+
+<div class="row form-group">
+	<div class="col-xs-12">
+		<?php echo $this->Form->label('Edumap.' . Edumap::AVATAR_INPUT_NAME . '.File', __d('edumap', 'Avatar')); ?>
+
+			<?php if (isset($file['urlThumbnail'])) :?>
+				<div class="form-group">
+					<?php echo $this->Html->image(h($file['urlThumbnail']), array(
+						'alt' => h($file['name']),
+						'class' => 'img-responsive img-thumbnail',
+					)); ?>
+
+					<?php echo $this->Form->checkbox('DeleteFile.id', array(
+						'value' => 1,
+						//'ng-model' => 'deleteFile'
+					)); ?>
+					<?php echo $this->Form->label('DeleteFile.id', __d('edumap', 'Delete file.')); ?>
+				</div>
+			<?php endif; ?>
+
+		<?php echo $this->Form->file('Edumap.' . Edumap::AVATAR_INPUT_NAME, array(
+			'accept' => 'image/*',
+			//'ng-disabled' => 'deleteFile'
+		)); ?>
+
+		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT_NAME . '.File.status', array(
+			'value' => 1
+		)); ?>
+		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT_NAME . '.File.role_type', array(
+			'value' => 'room_file_role'
+		)); ?>
+		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT_NAME . '.File.path', array(
+			'value' => '{ROOT}edumap{DS}' . $roomId . '{DS}'
+		)); ?>
+		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT_NAME . '.FilesPlugin.plugin_key', array(
+			'value' => 'edumap'
+		)); ?>
+		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT_NAME . '.FilesRoom.room_id', array(
+			'value' => $roomId
+		)); ?>
+		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT_NAME . '.FilesUser.user_id', array(
+			'value' => $userId
+		)); ?>
+	</div>
+
+	<?php echo $this->element('error', array(
+		'model' => 'Edumap',
+		'field' => Edumap::AVATAR_INPUT_NAME
+	)); ?>
+</div>
+
+
+
+
 
 <?php echo $this->element('Edumap/input_field', array(
 			'model' => 'Edumap',

@@ -40,6 +40,20 @@ class Edumap extends EdumapAppModel {
 	const DATE_SEPARATOR = '/';
 
 /**
+ * input name
+ *
+ * @var string
+ */
+	const INPUT_NAME = 'upload';
+
+/**
+ * input name
+ *
+ * @var string
+ */
+	const AVATAR_INPUT_NAME = 'avatar';
+
+/**
  * Custom database table name
  *
  * @var string
@@ -54,6 +68,12 @@ class Edumap extends EdumapAppModel {
 	public $actsAs = array(
 		'NetCommons.Publishable',
 		'Containable',
+		'Files.YAUpload' => array(
+			self::INPUT_NAME => array(
+				//UploadBefavior settings
+			),
+			self::AVATAR_INPUT_NAME => array()
+		),
 	);
 
 /**
@@ -383,21 +403,21 @@ class Edumap extends EdumapAppModel {
  */
 	public function validateEdumapAvatar($data) {
 		//アバター削除のvalidate
-		if (isset($data['DeleteFile'])) {
-			if (! $deleteFile = $this->FileModel->validateDeletedFiles($data['Edumap']['file_id'])) {
-				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
-				CakeLog::debug('validateEdumapAvatar=' . print_r($this->validationErrors, true));
-				return false;
-			}
-			$data['DeleteFile'] = $deleteFile;
-		}
+		//if (isset($data['DeleteFile'])) {
+		//	if (! $deleteFile = $this->FileModel->validateDeletedFiles($data['Edumap']['file_id'])) {
+		//		$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
+		//		CakeLog::debug('validateEdumapAvatar=' . print_r($this->validationErrors, true));
+		//		return false;
+		//	}
+		//	$data['DeleteFile'] = $deleteFile;
+		//}
 		//アバターデータのvalidate
-		if ($data['File']) {
-			if (! $this->FileModel->validateFile($data)) {
+		if ($data['Edumap'][self::INPUT_NAME]) {
+			if (! $this->FileModel->validateFile($data[self::INPUT_NAME])) {
 				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
 				return false;
 			}
-			if (! $this->FileModel->validateFileAssociated($data)) {
+			if (! $this->FileModel->validateFileAssociated($data[self::INPUT_NAME])) {
 				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
 				return false;
 			}
@@ -444,29 +464,58 @@ class Edumap extends EdumapAppModel {
  */
 	public function saveEdumapAvatar($data) {
 		//アバターの削除
-		if (isset($data['DeleteFile'])) {
-			//データ削除
-			if (! $this->FileModel->deleteAll([$this->FileModel->alias . '.id' => $data['Edumap']['file_id']], true, false)) {
-				return false;
-			}
-			if (! $this->FileModel->deleteFileAssociated($data['Edumap']['file_id'])) {
-				return false;
-			}
-			$folder = new Folder();
-			$folder->delete($data['DeleteFile'][0]['File']['path']);
-
-			$this->data['Edumap']['file_id'] = 0;
-		}
+		//if (isset($data['DeleteFile'])) {
+		//	//データ削除
+		//	if (! $this->FileModel->deleteAll([$this->FileModel->alias . '.id' => $data['Edumap']['file_id']], true, false)) {
+		//		return false;
+		//	}
+		//	if (! $this->FileModel->deleteFileAssociated($data['Edumap']['file_id'])) {
+		//		return false;
+		//	}
+		//	$folder = new Folder();
+		//	$folder->delete($data['DeleteFile'][0]['File']['path']);
+		//
+		//	$this->data['Edumap']['file_id'] = 0;
+		//}
 
 		//アバターの登録
-		if ($data['File']) {
-			if (! $file = $this->FileModel->save(null, false)) {
+		if ($data['Edumap'][self::INPUT_NAME]) {
+//			$this->FileModel->set($data[self::INPUT_NAME]);
+			CakeLog::debug('Edumap::saveEdumapAvatar() $data 1=' . print_r($data[self::INPUT_NAME], true));
+			if (! $file = $this->FileModel->save(
+					$data[self::INPUT_NAME],
+//					null,
+					//false
+					array('validate' => false, 'callbacks' => 'before')
+			)) {
 				return false;
 			}
+			CakeLog::debug('Edumap::saveEdumapAvatar() $file 1=' . print_r($file, true));
 			if (! $this->FileModel->saveFileAssociated($file)) {
 				return false;
 			}
+			//$this->data['Edumap'][self::INPUT_NAME] = (int)$file['File']['id'];
 			$this->data['Edumap']['file_id'] = (int)$file['File']['id'];
+		}
+
+		if ($data['Edumap'][self::AVATAR_INPUT_NAME]) {
+			CakeLog::debug('Edumap::saveEdumapAvatar() $data 2=' . print_r($data[self::AVATAR_INPUT_NAME], true));
+			$this->FileModel->create();
+			$this->FileModel->set($data[self::AVATAR_INPUT_NAME]);
+			if (! $file = $this->FileModel->save(
+					$data[self::AVATAR_INPUT_NAME],
+//					null,
+//					false
+					array('validate' => false, 'callbacks' => 'before')
+			)) {
+				return false;
+			}
+			CakeLog::debug('Edumap::saveEdumapAvatar() $file 2=' . print_r($file, true));
+			if (! $this->FileModel->saveFileAssociated($file)) {
+				return false;
+			}
+			//$this->data['Edumap'][self::AVATAR_INPUT_NAME] = (int)$file['File']['id'];
+			$this->data['Edumap']['description'] = (int)$file['File']['id'];
 		}
 
 		return true;
@@ -480,14 +529,14 @@ class Edumap extends EdumapAppModel {
  */
 	public function saveEdumapAssociated($data) {
 		//Edumap生徒数の登録
-		if ($data['EdumapStudent']) {
+		if (isset($data['EdumapStudent']) && $data['EdumapStudent']) {
 			$data['EdumapStudent'] = Hash::insert($data['EdumapStudent'], '{n}.edumap_id', $data[$this->alias]['id']);
 			if (! $this->EdumapStudent->saveMany($data['EdumapStudent'], ['validate' => false])) {
 				return false;
 			}
 		}
 		//EdumapSNSデータの登録
-		if ($data['EdumapSocialMedium']) {
+		if (isset($data['EdumapSocialMedium']) && $data['EdumapSocialMedium']) {
 			$data['EdumapSocialMedium'] = Hash::insert($data['EdumapSocialMedium'], '{s}.edumap_id', $data[$this->alias]['id']);
 			if (! $this->EdumapSocialMedium->saveMany($data['EdumapSocialMedium'], ['validate' => false])) {
 				return false;
