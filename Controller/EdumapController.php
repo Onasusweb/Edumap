@@ -255,21 +255,10 @@ class EdumapController extends EdumapAppController {
 		$data = $this->data;
 
 		//アバター
-		//$deleteFile = isset($this->data['File']['delete']) ? (int)$this->data['File']['delete'] : null;
-		$data[Edumap::INPUT_NAME] = Hash::merge(
-			$data[Edumap::INPUT_NAME],
-			$this->FileUpload->upload($this, $this->Edumap->alias, Edumap::INPUT_NAME)
-		);
-		$data[Edumap::AVATAR_INPUT_NAME] = Hash::merge(
-			$data[Edumap::AVATAR_INPUT_NAME],
-			$this->FileUpload->upload($this, $this->Edumap->alias, Edumap::AVATAR_INPUT_NAME)
-		);
-
-		//if ($data['File']) {
-		//	$deleteFile = 1;
-		//}
-		//$data['DeleteFile'] = $deleteFile;
-		//$data[Edumap::INPUT_NAME]['Edumap'][Edumap::INPUT_NAME] = $data['Edumap'][Edumap::INPUT_NAME];
+		$data[Edumap::AVATAR_INPUT]['File'] = $this->FileUpload->upload($this, $this->Edumap->alias, Edumap::AVATAR_INPUT);
+		if (! $data[Edumap::AVATAR_INPUT]['File']) {
+			unset($data[Edumap::AVATAR_INPUT]);
+		}
 
 		//開校日
 		if ($matches = preg_grep('/^\d+$/', array_values($this->data['Edumap']['foundation_date']))) {
@@ -295,8 +284,6 @@ class EdumapController extends EdumapAppController {
 				unset($data['EdumapSocialMedium'][$i]);
 			}
 		}
-
-		CakeLog::debug('EdumapController::__parseRequestData() $data=' . print_r($data, true));
 
 		return $data;
 	}
