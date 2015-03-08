@@ -14,6 +14,7 @@ App::uses('NetCommonsBlockComponent', 'NetCommons.Controller/Component');
 App::uses('NetCommonsRoomRoleComponent', 'NetCommons.Controller/Component');
 App::uses('YAControllerTestCase', 'NetCommons.TestSuite');
 App::uses('RolesControllerTest', 'Roles.Test/Case/Controller');
+App::uses('AuthGeneralControllerTest', 'AuthGeneral.Test/Case/Controller');
 
 /**
  * EdumapController Test Case
@@ -95,20 +96,6 @@ class EdumapControllerTestBase extends YAControllerTestCase {
 		$params = array_merge_recursive($mocks, $addMocks);
 
 		$this->generate($controllerName, $params);
-	}
-
-/**
- * _logout method
- *
- * @return void
- */
-	protected function _logout() {
-		//ログアウト処理
-		$this->testAction('/auth/logout', array(
-			'data' => array(
-			),
-		));
-		$this->assertFalse(CakeSession::read('Auth.User'), '_logout()');
 	}
 
 /**

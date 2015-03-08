@@ -123,7 +123,7 @@ class Edumap extends EdumapAppModel {
 					'rule' => array('numeric'),
 					'message' => __d('net_commons', 'Invalid request.'),
 					'allowEmpty' => false,
-					'required' => true,
+					//'required' => true,
 				)
 			),
 			'file_id' => array(
@@ -402,7 +402,7 @@ class Edumap extends EdumapAppModel {
 		}
 
 		//アバター削除のvalidate
-		if ($data['DeleteFile'][0]['File']['id'] > 0) {
+		if (isset($data['DeleteFile']) && $data['DeleteFile'][0]['File']['id'] > 0) {
 			if (! $deleteFile = $this->FileModel->validateDeletedFiles($data['DeleteFile'][0]['File']['id'])) {
 				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
 				return false;
@@ -463,13 +463,17 @@ class Edumap extends EdumapAppModel {
  */
 	public function saveEdumapAvatar($data) {
 		//アバターの削除
-		if ($data['DeleteFile'][0]['File']['id'] > 0) {
+		if (isset($data['DeleteFile']) && $data['DeleteFile'][0]['File']['id'] > 0) {
 			//データ削除
 			if (! $this->FileModel->deleteAll(['id' => $data['DeleteFile'][0]['File']['id']], true, false)) {
+				// @codeCoverageIgnoreStart
 				return false;
+				// @codeCoverageIgnoreEnd
 			}
 			if (! $this->FileModel->deleteFileAssociated($data['DeleteFile'][0]['File']['id'])) {
+				// @codeCoverageIgnoreStart
 				return false;
+				// @codeCoverageIgnoreEnd
 			}
 			$folder = new Folder();
 			$folder->delete($data['DeleteFile'][0]['File']['path']);
@@ -483,10 +487,14 @@ class Edumap extends EdumapAppModel {
 					$data[self::AVATAR_INPUT],
 					array('validate' => false, 'callbacks' => 'before')
 			)) {
+				// @codeCoverageIgnoreStart
 				return false;
+				// @codeCoverageIgnoreEnd
 			}
 			if (! $this->FileModel->saveFileAssociated($file)) {
+				// @codeCoverageIgnoreStart
 				return false;
+				// @codeCoverageIgnoreEnd
 			}
 			$this->data[self::AVATAR_INPUT] = Hash::insert(
 				$data[self::AVATAR_INPUT], '{s}.id', (int)$file[$this->FileModel->alias]['id']
@@ -508,27 +516,35 @@ class Edumap extends EdumapAppModel {
 		if (isset($data['EdumapStudent'])) {
 			$data['EdumapStudent'] = Hash::insert($data['EdumapStudent'], '{n}.edumap_id', $data[$this->alias]['id']);
 			if (! $this->EdumapStudent->saveMany($data['EdumapStudent'], ['validate' => false])) {
+				// @codeCoverageIgnoreStart
 				return false;
+				// @codeCoverageIgnoreEnd
 			}
 		}
 		//EdumapSNSデータの登録
 		if (isset($data['EdumapSocialMedium'])) {
 			$data['EdumapSocialMedium'] = Hash::insert($data['EdumapSocialMedium'], '{s}.edumap_id', $data[$this->alias]['id']);
 			if (! $this->EdumapSocialMedium->saveMany($data['EdumapSocialMedium'], ['validate' => false])) {
+				// @codeCoverageIgnoreStart
 				return false;
+				// @codeCoverageIgnoreEnd
 			}
 		}
 		//コメントの登録
 		if ($this->Comment->data) {
 			$this->Comment->data['Comment']['plugin_key'] = 'edumap';
 			if (! $this->Comment->save(null, false)) {
+				// @codeCoverageIgnoreStart
 				return false;
+				// @codeCoverageIgnoreEnd
 			}
 		}
 		//表示方法変更(デフォルト値)の登録
-		if (isset($this->data['EdumapVisibilitySetting'])) {
-			if (! $this->EdumapVisibilitySetting->save($this->data['EdumapVisibilitySetting'], false)) {
+		if (isset($data['EdumapVisibilitySetting'])) {
+			if (! $this->EdumapVisibilitySetting->save($data['EdumapVisibilitySetting'], false)) {
+				// @codeCoverageIgnoreStart
 				return false;
+				// @codeCoverageIgnoreEnd
 			}
 		}
 

@@ -10,6 +10,7 @@
  */
 
 $underscoreField = Inflector::underscore($field);
+$attributes = isset($attributes) ? $attributes : array();
 ?>
 
 <div class="row form-group">
@@ -17,11 +18,24 @@ $underscoreField = Inflector::underscore($field);
 		<?php echo $this->Form->label('EdumapVisibilitySetting.' . $underscoreField, $label); ?>
 
 		<div class="edumap_radio">
-			<?php echo $this->Edumap->inputVisibilitySetting('EdumapVisibilitySetting.' . $underscoreField, array(
-				'value' => isset($edumapVisibilitySetting[$field]) ? $edumapVisibilitySetting[$field] : '0',
-				'legend' => false,
-				'separator' => '<span class="edumap_radio_separator"> </span>'
-			)); ?>
+			<?php
+				echo $this->Form->radio(
+					'EdumapVisibilitySetting.' . $underscoreField,
+					array(
+						'0' => $this->Edumap->getVisibilitySettingText('0'),
+						'1' => $this->Edumap->getVisibilitySettingText('1'),
+						'2' => $this->Edumap->getVisibilitySettingText('2'),
+					),
+					Hash::merge(
+						array(
+							'value' => isset($edumapVisibilitySetting[$field]) ? $edumapVisibilitySetting[$field] : '0',
+							'legend' => false,
+							'separator' => '<span class="edumap_radio_separator"> </span>'
+						),
+						$attributes
+					)
+				);
+			?>
 		</div>
 	</div>
 </div>

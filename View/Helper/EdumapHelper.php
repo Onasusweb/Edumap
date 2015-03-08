@@ -1,29 +1,22 @@
 <?php
 /**
- * TokenHelper
+ * EdumapHelper
  *
- * @copyright Copyright 2014, NetCommons Project
- * @author Kohei Teraguchi <kteraguchi@commonsnet.org>
+ * @author Noriko Arai <arai@nii.ac.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
  */
 
 App::uses('AppHelper', 'View/Helper');
 
 /**
  * EdumapHelper
+ * 
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class EdumapHelper extends AppHelper {
-
-/**
- * List of helpers used by this helper
- *
- * @var array
- */
-	public $helpers = array(
-		'Form'
-	);
 
 /**
  * Get prefecture name
@@ -208,23 +201,6 @@ class EdumapHelper extends AppHelper {
 	}
 
 /**
- * visibility setting radio
- *
- * @param string $fieldName Name attribute of the RADIO
- * @param array $attributes The HTML attributes of the select element.
- * @return string Formatted RADIO element
- */
-	public function inputVisibilitySetting($fieldName, $attributes = array()) {
-		$options = [
-			'0' => $this->getVisibilitySettingText('0'),
-			'1' => $this->getVisibilitySettingText('1'),
-			'2' => $this->getVisibilitySettingText('2'),
-		];
-
-		return $this->Form->radio($fieldName, $options, $attributes);
-	}
-
-/**
  * Get coeducation type name
  *
  * @param string $value Coeducation type
@@ -233,11 +209,11 @@ class EdumapHelper extends AppHelper {
 	public function getVisibilitySettingText($value) {
 		//公開・非公開・edumap上の学校関係者のみ公開を取得
 		switch($value) {
-			case '0':
+			case EdumapVisibilitySetting::PRIVATE_VISIBILITY:
 				return __d('edumap', 'No display');
-			case '1':
+			case EdumapVisibilitySetting::PUBLIC_VISIBILITY:
 				return __d('edumap', 'Display');
-			case '2':
+			case EdumapVisibilitySetting::PUBLIC_ON_EDUMAP_VISIBILITY:
 				return __d('edumap', 'Display only school officials in edumap on');
 			default:
 				return '';

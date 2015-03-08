@@ -22,6 +22,27 @@ App::uses('EdumapAppModel', 'Edumap.Model');
 class EdumapVisibilitySetting extends EdumapAppModel {
 
 /**
+ * Public visibility
+ *
+ * @var string
+ */
+	const PRIVATE_VISIBILITY = 0;
+
+/**
+ * Public visibility
+ *
+ * @var string
+ */
+	const PUBLIC_VISIBILITY = 1;
+
+/**
+ * Public on Edumap visibility
+ *
+ * @var string
+ */
+	const PUBLIC_ON_EDUMAP_VISIBILITY = 2;
+
+/**
  * belongsTo associations
  *
  * @var array

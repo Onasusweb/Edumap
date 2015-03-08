@@ -102,7 +102,6 @@ class EdumapController extends EdumapAppController {
  */
 	public function edit() {
 		$this->__initEdumap();
-		$this->set('userId', $this->Auth->user('id'));
 
 		if ($this->request->isGet()) {
 			CakeSession::write('backUrl', $this->request->referer());
@@ -177,7 +176,7 @@ class EdumapController extends EdumapAppController {
 			$visibilitySetting = $this->EdumapVisibilitySetting->create();
 		}
 		//アバター取得
-		$file = $this->FileModel->find('first', array(
+		$avatar = $this->FileModel->find('first', array(
 			'recursive' => -1,
 			'conditions' => array(
 				$this->FileModel->alias . '.id' => $edumap['Edumap']['file_id']
@@ -210,7 +209,7 @@ class EdumapController extends EdumapAppController {
 		$results = Hash::merge(
 			$edumap,
 			$visibilitySetting,
-			$file,
+			$avatar,
 			array(
 				'edumapStudents' => $edumapStudents,
 				'edumapSocialMedium' => $edumapSocialMedia,

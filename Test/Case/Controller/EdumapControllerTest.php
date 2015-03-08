@@ -21,118 +21,185 @@ App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
 class EdumapControllerTest extends EdumapControllerTestBase {
 
 /**
+ * default value
+ *
+ * @var array
+ */
+	private $__saveDefault = array(
+		'Edumap' => array(
+			'name' => 'Edit name',
+			'name_kana' => 'Edit name_kana',
+			'handle' => 'Edit handle',
+			'postal_code' => '123-4567',
+			'prefecture_code' => '01',
+			'location' => 'Edit location',
+			'tel' => '01-2345-6789',
+			'fax' => '09-8765-4321',
+			'emergency_email' => 'emergency@example.com',
+			'inquiry' => 'Edit inquiry',
+			'site_url' => 'http://site.example.com',
+			'rss_url' => 'http://rss.example.com',
+			'foundation_date' => array('year' => '1945', 'month' => '12'),
+			'closed_date' => array('year' => '2015', 'month' => '04'),
+			'governor_type' => '3',
+			'education_type' => '4',
+			'coeducation_type' => '2',
+			'principal_name' => 'Edit principal_name',
+			'principal_email' => 'principal@example.com',
+			'description' => 'Edit description',
+		),
+		'EdumapSocialMedium' => array(
+			EdumapSocialMedium::SOCIAL_TYPE_TWITTER => array(
+				'value' => 'EditTwitterValue',
+				'type' => EdumapSocialMedium::SOCIAL_TYPE_TWITTER
+			)
+		),
+		'EdumapStudent' => array(
+				array('grade' => '1', 'gendar' => false, 'number' => ''),
+				array('grade' => '1', 'gendar' => true, 'number' => ''),
+				array('grade' => '2', 'gendar' => false, 'number' => '123'),
+				array('grade' => '2', 'gendar' => true, 'number' => '456'),
+				array('grade' => '3', 'gendar' => false, 'number' => '789'),
+				array('grade' => '3', 'gendar' => true, 'number' => ''),
+				array('grade' => '4', 'gendar' => false, 'number' => ''),
+				array('grade' => '4', 'gendar' => true, 'number' => '654'),
+				array('grade' => '5', 'gendar' => false, 'number' => ''),
+				array('grade' => '5', 'gendar' => true, 'number' => ''),
+				array('grade' => '6', 'gendar' => false, 'number' => ''),
+				array('grade' => '6', 'gendar' => true, 'number' => ''),
+		),
+		'Comment' => array(
+			'comment' => 'Edit comment'
+		),
+		Edumap::AVATAR_INPUT => array(
+			'FilesPlugin' => array(
+				'plugin_key' => 'edumap'
+			),
+			'FilesRoom' => array(
+				'room_id' => 1
+			),
+			'FilesUser' => array(
+				'user_id' => 1
+			),
+		),
+		'DeleteFile' => array(array('File' => array('id' => '0')))
+
+	);
+
+/**
  * Expect visitor can access index action
  *
  * @return void
  */
-	//public function testIndex() {
-	//	$this->testAction(
-	//		'/announcements/announcements/index/1',
-	//		array(
-	//			'method' => 'get',
-	//			'return' => 'view',
-	//		)
-	//	);
-	//	$this->assertTextEquals('Edumap/view', $this->controller->view);
-	//}
+	public function testIndex() {
+		$this->testAction(
+			'/edumap/edumap/index/1',
+			array(
+				'method' => 'get',
+				'return' => 'view',
+			)
+		);
+
+		$this->assertTextEquals('Edumap/view', $this->controller->view);
+	}
 
 /**
  * Expect visitor can access view action
  *
  * @return void
  */
-	//public function testView() {
-	//	$this->testAction(
-	//		'/announcements/announcements/view/1',
-	//		array(
-	//			'method' => 'get',
-	//			'return' => 'view',
-	//		)
-	//	);
-	//	$this->assertTextEquals('view', $this->controller->view);
-	//}
+	public function testView() {
+		$this->testAction(
+			'/edumap/edumap/view/1',
+			array(
+				'method' => 'get',
+				'return' => 'view',
+			)
+		);
+		$this->assertTextEquals('view', $this->controller->view);
+	}
 
 /**
  * Expect visitor can access view action by json
  *
  * @return void
  */
-	//public function testViewJson() {
-	//	$ret = $this->testAction(
-	//		'/announcements/announcements/view/1.json',
-	//		array(
-	//			'method' => 'get',
-	//			'type' => 'json',
-	//			'return' => 'contents',
-	//		)
-	//	);
-	//	$result = json_decode($ret, true);
-	//
-	//	$this->assertTextEquals('view', $this->controller->view);
-	//	$this->assertArrayHasKey('code', $result, print_r($result, true));
-	//	$this->assertEquals(200, $result['code'], print_r($result, true));
-	//}
+	public function testViewJson() {
+		$ret = $this->testAction(
+			'/edumap/edumap/view/1.json',
+			array(
+				'method' => 'get',
+				'type' => 'json',
+				'return' => 'contents',
+			)
+		);
+		$result = json_decode($ret, true);
+
+		$this->assertTextEquals('view', $this->controller->view);
+		$this->assertArrayHasKey('code', $result, print_r($result, true));
+		$this->assertEquals(200, $result['code'], print_r($result, true));
+	}
 
 /**
  * Expect admin user can access view action
  *
  * @return void
  */
-	//public function testViewByAdmin() {
-	//	$this->_generateController('Edumap.Edumap');
-	//	RolesControllerTest::login();
-	//
-	//	$view = $this->testAction(
-	//		'/announcements/announcements/view/1',
-	//		array(
-	//			'method' => 'get',
-	//			'return' => 'view',
-	//		)
-	//	);
-	//
-	//	$this->assertTextContains('nc-announcements-1', $view, print_r($view, true));
-	//	$this->assertTextContains('ng-controller="Edumap"', $view, print_r($view, true));
-	//
-	//	$this->_logout();
-	//}
+	public function testViewByAdmin() {
+		$this->_generateController('Edumap.Edumap');
+		RolesControllerTest::login($this);
+
+		$view = $this->testAction(
+			'/edumap/edumap/view/1',
+			array(
+				'method' => 'get',
+				'return' => 'view',
+			)
+		);
+
+		$this->assertTextEquals('Edumap/viewForEditor', $this->controller->view);
+		$this->assertTextContains('nc-edumap-1', $view, print_r($view, true));
+		$this->assertTextContains('/edumap/edumap/edit/1', $view, print_r($view, true));
+
+		AuthGeneralControllerTest::logout($this);
+	}
 
 /**
  * Expect user cannot access view action with unknown frame id
  *
  * @return void
  */
-	//public function testViewByUnkownFrameId() {
-	//	$this->setExpectedException('InternalErrorException');
-	//	$this->testAction(
-	//		'/announcements/announcements/view/999',
-	//		array(
-	//			'method' => 'get',
-	//			'return' => 'view',
-	//		)
-	//	);
-	//}
+	public function testViewByUnkownFrameId() {
+		$this->setExpectedException('InternalErrorException');
+		$this->testAction(
+			'/edumap/edumap/view/999',
+			array(
+				'method' => 'get',
+				'return' => 'view',
+			)
+		);
+	}
 
 /**
  * Expect admin user can access edit action
  *
  * @return void
  */
-	//public function testEditGet() {
-	//	$this->_generateController('Edumap.Edumap');
-	//	RolesControllerTest::login();
-	//
-	//	$this->testAction(
-	//		'/announcements/announcements/edit/1',
-	//		array(
-	//			'method' => 'get',
-	//			'return' => 'contents'
-	//		)
-	//	);
-	//
-	//	$this->assertTextEquals('edit', $this->controller->view);
-	//
-	//	$this->_logout();
-	//}
+	public function testEditGet() {
+		$this->_generateController('Edumap.Edumap');
+		RolesControllerTest::login($this);
+
+		$this->testAction(
+			'/edumap/edumap/edit/1',
+			array(
+				'method' => 'get',
+				'return' => 'contents'
+			)
+		);
+		$this->assertTextEquals('edit', $this->controller->view);
+
+		AuthGeneralControllerTest::logout($this);
+	}
 
 /**
  * Expect view action to be successfully handled w/ null frame.block_id
@@ -140,50 +207,167 @@ class EdumapControllerTest extends EdumapControllerTestBase {
  *
  * @return void
  */
-	//public function testAddFrameWithoutBlock() {
-	//	$this->testAction(
-	//		'/announcements/announcements/view/3',
-	//		array(
-	//			'method' => 'get',
-	//			'return' => 'contents'
-	//		)
-	//	);
-	//	$this->assertTextEquals('view', $this->controller->view);
-	//}
+	public function testAddFrameWithoutBlock() {
+		$this->testAction(
+			'/edumap/edumap/view/3',
+			array(
+				'method' => 'get',
+				'return' => 'contents'
+			)
+		);
+		$this->assertTextEquals('view', $this->controller->view);
+	}
 
 /**
- * Expect admin user can publish announcements
+ * Expect admin user can publish edumap
  *
  * @return void
  */
-	//public function testEditPost() {
-	//	$this->_generateController('Edumap.Edumap');
-	//	RolesControllerTest::login();
-	//
-	//	$data = array(
-	//		'Announcement' => array(
-	//			'block_id' => '1',
-	//			'key' => 'announcement_1',
-	//			'content' => 'edit content',
-	//		),
-	//		'Frame' => array(
-	//			'id' => '1'
-	//		),
-	//		'Comment' => array(
-	//			'comment' => 'edit comment',
-	//		),
-	//		sprintf('save_%s', NetCommonsBlockComponent::STATUS_PUBLISHED) => '',
-	//	);
-	//
-	//	$this->testAction(
-	//		'/announcements/announcements/edit/1',
-	//		array(
-	//			'method' => 'post',
-	//			'data' => $data,
-	//			'return' => 'contents'
-	//		)
-	//	);
-	//	$this->assertTextEquals('edit', $this->controller->view);
-	//}
+	public function testEditPost() {
+		$this->_generateController('Edumap.Edumap');
+		RolesControllerTest::login($this);
+
+		//データ生成
+		$frameId = 1;
+		$blockId = 1;
+
+		//登録処理実行
+		$data = Hash::merge(
+			$this->__saveDefault,
+			array(
+				'Frame' => array('id' => $frameId),
+				'Block' => array('id' => $blockId),
+				'Edumap' => array(
+					'id' => '',
+					'key' => 'edumap_1',
+				),
+				sprintf('save_%s', NetCommonsBlockComponent::STATUS_PUBLISHED) => ''
+			)
+		);
+
+		$this->testAction(
+			'/edumap/edumap/edit/' . $frameId,
+			array(
+				'method' => 'post',
+				'data' => $data,
+				'return' => 'contents'
+			)
+		);
+		$this->assertTextEquals('edit', $this->controller->view);
+
+		AuthGeneralControllerTest::logout($this);
+	}
+
+/**
+ * Expect admin user can publish edumap
+ *
+ * @return void
+ */
+	public function testEditPostWithoutBlock() {
+		$this->_generateController('Edumap.Edumap');
+		RolesControllerTest::login($this);
+
+		//データ生成
+		$frameId = 3;
+		$blockId = '';
+
+		//登録処理実行
+		$data = Hash::merge(
+			$this->__saveDefault,
+			array(
+				'Frame' => array('id' => $frameId),
+				'Block' => array('id' => $blockId),
+				'Edumap' => array(
+					'id' => '',
+					'key' => 'edumap_3',
+				),
+				sprintf('save_%s', NetCommonsBlockComponent::STATUS_PUBLISHED) => ''
+			)
+		);
+
+		$this->testAction(
+			'/edumap/edumap/edit/' . $frameId,
+			array(
+				'method' => 'post',
+				'data' => $data,
+				'return' => 'contents'
+			)
+		);
+		$this->assertTextEquals('edit', $this->controller->view);
+
+		AuthGeneralControllerTest::logout($this);
+	}
+
+/**
+ * Expect admin user can publish edumap
+ *
+ * @return void
+ */
+	public function testEditPostUnknownInputs() {
+		$this->_generateController('Edumap.Edumap');
+		RolesControllerTest::login($this);
+
+		//データ生成
+		$frameId = 1;
+		$blockId = 1;
+
+		//登録処理実行
+		$data = Hash::merge(
+			$this->__saveDefault,
+			array(
+				'Frame' => array('id' => $frameId),
+				'Block' => array('id' => $blockId),
+				'Edumap' => array(
+					'id' => '',
+					'key' => 'edumap_1',
+					'name_kana' => '',
+					'fax' => '',
+					'inquiry' => '',
+					'site_url' => '',
+					'rss_url' => '',
+					'foundation_date' => array('year' => '', 'month' => ''),
+					'closed_date' => array('year' => '', 'month' => ''),
+					'governor_type' => '0',
+					'education_type' => '0',
+					'coeducation_type' => '0',
+					'principal_name' => '',
+					'principal_email' => '',
+					'description' => '',
+				),
+				'EdumapSocialMedium' => array(
+					EdumapSocialMedium::SOCIAL_TYPE_TWITTER => array(
+						'value' => '',
+					)
+				),
+				'EdumapStudent' => array(
+					array('grade' => '1', 'gendar' => false, 'number' => ''),
+					array('grade' => '1', 'gendar' => true, 'number' => ''),
+					array('grade' => '2', 'gendar' => false, 'number' => ''),
+					array('grade' => '2', 'gendar' => true, 'number' => ''),
+					array('grade' => '3', 'gendar' => false, 'number' => ''),
+					array('grade' => '3', 'gendar' => true, 'number' => ''),
+					array('grade' => '4', 'gendar' => false, 'number' => ''),
+					array('grade' => '4', 'gendar' => true, 'number' => ''),
+					array('grade' => '5', 'gendar' => false, 'number' => ''),
+					array('grade' => '5', 'gendar' => true, 'number' => ''),
+					array('grade' => '6', 'gendar' => false, 'number' => ''),
+					array('grade' => '6', 'gendar' => true, 'number' => ''),
+				),
+				sprintf('save_%s', NetCommonsBlockComponent::STATUS_PUBLISHED) => ''
+			)
+		);
+
+		$this->testAction(
+			'/edumap/edumap/edit/' . $frameId,
+			array(
+				'method' => 'post',
+				'data' => $data,
+				'return' => 'contents'
+			)
+		);
+		$this->assertTextEquals('edit', $this->controller->view);
+
+		AuthGeneralControllerTest::logout($this);
+	}
 
 }

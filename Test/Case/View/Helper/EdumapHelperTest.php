@@ -1,8 +1,6 @@
 <?php
 /**
- * EdumapStudent Model Test Case
- *
- * @property EdumapStudent $EdumapStudent
+ * EdumapHelper Test Case
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -11,16 +9,13 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
-App::uses('EdumapStudent', 'Edumap.Model');
+App::uses('View', 'View');
+App::uses('EdumapHelper', 'Edumap.View/Helper');
 
 /**
- * EdumapStudent Model Test Case
- *
- * @author Shohei Nakajima <nakajimashouhei@gmail.com>
- * @package NetCommons\Edumap\Test\Case\Model
+ * Summary for EdumapHelper Test Case
  */
-class EdumapStudentTest extends EdumapModelTestBase {
+class EdumapHelperTest extends CakeTestCase {
 
 /**
  * setUp method
@@ -29,7 +24,9 @@ class EdumapStudentTest extends EdumapModelTestBase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->EdumapStudent = ClassRegistry::init('Edumap.EdumapStudent');
+
+		$view = new View();
+		$this->Edumap = new EdumapHelper($view);
 	}
 
 /**
@@ -38,8 +35,16 @@ class EdumapStudentTest extends EdumapModelTestBase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->EdumapStudent);
+		unset($this->Edumap);
 		parent::tearDown();
 	}
 
+/**
+ * testIndex method
+ *
+ * @return void
+ */
+	public function testIndex() {
+		$this->assertTrue(true);
+	}
 }

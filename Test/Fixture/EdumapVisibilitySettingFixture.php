@@ -63,7 +63,7 @@ class EdumapVisibilitySettingFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'edumap_key' => 'Lorem ipsum dolor sit amet',
+			'edumap_key' => 'edumap_1',
 			'file' => 1,
 			'name' => 1,
 			'name_kana' => 1,

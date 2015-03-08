@@ -67,7 +67,7 @@ class EdumapSocialMedium extends EdumapAppModel {
 				),
 				'alphaNumeric' => array(
 					'rule' => '/^[0-9a-z]+$/i',
-					'message' => __d('edumap', 'Only alphabets and numbers are allowed.'),
+					'message' => __d('net_commons', 'Only alphabets and numbers are allowed.'),
 					'allowEmpty' => false,
 				)
 			),

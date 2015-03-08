@@ -10,7 +10,7 @@
  */
 ?>
 
-<div id="nc-edumap<?php echo (int)$frameId; ?>">
+<div id="nc-edumap-<?php echo (int)$frameId; ?>">
 	<div class="row">
 		<div class="col-xs-6">
 			<?php echo $this->element('NetCommons.status_label',

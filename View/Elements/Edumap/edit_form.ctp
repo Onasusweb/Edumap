@@ -60,7 +60,7 @@
 			'value' => $roomId
 		)); ?>
 		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT . '.FilesUser.user_id', array(
-			'value' => $userId
+			'value' => (int)AuthComponent::user('id')
 		)); ?>
 	</div>
 

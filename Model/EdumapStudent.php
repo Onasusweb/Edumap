@@ -50,7 +50,7 @@ class EdumapStudent extends EdumapAppModel {
 				'boolean' => array(
 					'rule' => array('boolean'),
 					'message' => __d('net_commons', 'Invalid request.'),
-					'allowEmpty' => false,
+					//'allowEmpty' => false,
 					'required' => true,
 				)
 			),
@@ -82,7 +82,6 @@ class EdumapStudent extends EdumapAppModel {
  * @return bool True on success, false on error
  */
 	public function validateEdumapStudents($data) {
-		//$this->set($data);
 		$this->validateMany($data);
 		return $this->validationErrors ? false : true;
 	}
