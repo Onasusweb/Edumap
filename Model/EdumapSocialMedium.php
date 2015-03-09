@@ -56,6 +56,10 @@ class EdumapSocialMedium extends EdumapAppModel {
 					'message' => __d('net_commons', 'Invalid request.'),
 					'allowEmpty' => false,
 					'required' => true,
+				),
+				'inList' => array(
+					'rule' => array('inList', array(self::SOCIAL_TYPE_TWITTER)),
+					'message' => __d('net_commons', 'Invalid request.'),
 				)
 			),
 			'value' => array(

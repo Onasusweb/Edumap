@@ -14,7 +14,6 @@
 App::uses('EdumapAppModel', 'Edumap.Model');
 App::uses('UploadBehavior', 'Upload.Model/Behavior');
 App::uses('Folder', 'Utility');
-App::uses('JpValidation', 'Localized.Validation');
 App::uses('CakeTime', 'Utility');
 
 /**
@@ -24,13 +23,6 @@ App::uses('CakeTime', 'Utility');
  * @package NetCommons\Edumap\Model
  */
 class Edumap extends EdumapAppModel {
-
-/**
- * Gendar Female
- *
- * @var string
- */
-	const COUNTRY_CODE = 'jp';
 
 /**
  * Gendar Female
@@ -171,7 +163,7 @@ class Edumap extends EdumapAppModel {
 					'required' => true,
 				),
 				'postal' => array(
-					'rule' => array('postal', null, self::COUNTRY_CODE),
+					'rule' => '/^\d{3}-\d{4}$/',
 					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Postal code'), '999-9999')
 				),
 			),
@@ -182,7 +174,7 @@ class Edumap extends EdumapAppModel {
 					'required' => true,
 				),
 				'prefectureCode' => array(
-					'rule' => '/^(0[1-9]|[1-3][0-9]|4[0-7])$/i',
+					'rule' => '/^0[1-9]|[1-3]\d|4[0-7]$/i',
 					'message' => __d('net_commons', 'Invalid request.'),
 				),
 			),
@@ -200,13 +192,13 @@ class Edumap extends EdumapAppModel {
 					'required' => true,
 				),
 				'phone' => array(
-					'rule' => array('phone', null, self::COUNTRY_CODE),
+					'rule' => '/^0\d{1,4}-\d{1,4}-\d{1,4}$/',
 					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Phone number'), __d('edumap', 'Phone number')),
 				)
 			),
 			'fax' => array(
 				'phone' => array(
-					'rule' => array('phone', null, self::COUNTRY_CODE),
+					'rule' => '/^0\d{1,4}-\d{1,4}-\d{1,4}$/',
 					'message' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Fax number'), __d('edumap', 'Fax number')),
 					'allowEmpty' => true
 				)
@@ -344,11 +336,7 @@ class Edumap extends EdumapAppModel {
 			}
 
 			//アバターの登録
-			if (! $this->saveEdumapAvatar($data)) {
-				// @codeCoverageIgnoreStart
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
-			}
+			$this->saveEdumapAvatar($data);
 
 			//Edumapの登録
 			if (! $edumap = $this->save(null, false)) {
@@ -358,11 +346,7 @@ class Edumap extends EdumapAppModel {
 			}
 
 			//Associatedの登録
-			if (! $this->saveEdumapAssociated($edumap)) {
-				// @codeCoverageIgnoreStart
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
-			}
+			$this->saveEdumapAssociated($edumap);
 
 			$dataSource->commit();
 
@@ -459,7 +443,8 @@ class Edumap extends EdumapAppModel {
  * saveEdumapAvatar
  *
  * @param array $data received post data
- * @return bool true on success, false on error
+ * @return bool true on success, exception on error
+ * @throws InternalErrorException
  */
 	public function saveEdumapAvatar($data) {
 		//アバターの削除
@@ -467,12 +452,12 @@ class Edumap extends EdumapAppModel {
 			//データ削除
 			if (! $this->FileModel->deleteAll(['id' => $data['DeleteFile'][0]['File']['id']], true, false)) {
 				// @codeCoverageIgnoreStart
-				return false;
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				// @codeCoverageIgnoreEnd
 			}
 			if (! $this->FileModel->deleteFileAssociated($data['DeleteFile'][0]['File']['id'])) {
 				// @codeCoverageIgnoreStart
-				return false;
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				// @codeCoverageIgnoreEnd
 			}
 			$folder = new Folder();
@@ -488,12 +473,12 @@ class Edumap extends EdumapAppModel {
 					array('validate' => false, 'callbacks' => 'before')
 			)) {
 				// @codeCoverageIgnoreStart
-				return false;
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				// @codeCoverageIgnoreEnd
 			}
 			if (! $this->FileModel->saveFileAssociated($file)) {
 				// @codeCoverageIgnoreStart
-				return false;
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				// @codeCoverageIgnoreEnd
 			}
 			$this->data[self::AVATAR_INPUT] = Hash::insert(
@@ -509,7 +494,8 @@ class Edumap extends EdumapAppModel {
  * saveEdumapAssociated
  *
  * @param array $data received post data
- * @return bool true on success, false on error
+ * @return bool true on success, exception on error
+ * @throws InternalErrorException
  */
 	public function saveEdumapAssociated($data) {
 		//Edumap生徒数の登録
@@ -526,7 +512,7 @@ class Edumap extends EdumapAppModel {
 			$data['EdumapSocialMedium'] = Hash::insert($data['EdumapSocialMedium'], '{s}.edumap_id', $data[$this->alias]['id']);
 			if (! $this->EdumapSocialMedium->saveMany($data['EdumapSocialMedium'], ['validate' => false])) {
 				// @codeCoverageIgnoreStart
-				return false;
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				// @codeCoverageIgnoreEnd
 			}
 		}
@@ -535,7 +521,7 @@ class Edumap extends EdumapAppModel {
 			$this->Comment->data['Comment']['plugin_key'] = 'edumap';
 			if (! $this->Comment->save(null, false)) {
 				// @codeCoverageIgnoreStart
-				return false;
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				// @codeCoverageIgnoreEnd
 			}
 		}
@@ -543,7 +529,7 @@ class Edumap extends EdumapAppModel {
 		if (isset($data['EdumapVisibilitySetting'])) {
 			if (! $this->EdumapVisibilitySetting->save($data['EdumapVisibilitySetting'], false)) {
 				// @codeCoverageIgnoreStart
-				return false;
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				// @codeCoverageIgnoreEnd
 			}
 		}

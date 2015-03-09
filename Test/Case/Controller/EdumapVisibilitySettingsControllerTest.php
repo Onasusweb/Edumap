@@ -1,8 +1,6 @@
 <?php
 /**
- * EdumapVisibilitySetting Model Test Case
- *
- * @property EdumapVisibilitySetting $EdumapVisibilitySetting
+ * EdumapController Test Case
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -11,15 +9,16 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
+App::uses('EdumapVisibilitySettingsController', 'Edumap.Controller');
+App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
 
 /**
- * EdumapVisibilitySetting Model Test Case
+ * EdumapController Test Case
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
- * @package NetCommons\Edumap\Test\Case\Model
+ * @package NetCommons\Edumap\Test\Case\Controller
  */
-class EdumapVisibilitySettingValidateErrorTest extends EdumapModelTestBase {
+class EdumapVisibilitySettingsControllerTest extends EdumapControllerTestBase {
 
 /**
  * default value
@@ -51,83 +50,129 @@ class EdumapVisibilitySettingValidateErrorTest extends EdumapModelTestBase {
 			'student_number' => EdumapVisibilitySetting::PUBLIC_ON_EDUMAP_VISIBILITY,
 			'social_media' => EdumapVisibilitySetting::PUBLIC_ON_EDUMAP_VISIBILITY,
 			'description' => EdumapVisibilitySetting::PUBLIC_ON_EDUMAP_VISIBILITY,
-		)
+		),
+		'save' => ''
 	);
 
 /**
- * testSaveEdumapVisibilitySetting
+ * Expect admin user can access edit action
  *
  * @return void
  */
-	public function testSaveEdumapVisibilitySetting() {
-		$frameId = 1;
-		$blockId = 1;
-		$edumapKey = 'edumap_1';
+	public function testEditGet() {
+		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		RolesControllerTest::login($this);
 
-		//データ生成
-		$data = Hash::merge(
-			$this->__saveDefault,
+		$this->testAction(
+			'/edumap/edumapVisibilitySettings/edit/1',
 			array(
-				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId),
-				'EdumapVisibilitySetting' => array(
-					'id' => 1,
-					'edumap_key' => $edumapKey,
-				)
+				'method' => 'get',
+				'return' => 'contents'
 			)
 		);
+		$this->assertTextEquals('edit', $this->controller->view);
 
-		//登録処理実行
-		$this->EdumapVisibilitySetting->saveEdumapVisibilitySetting($data);
-
-		//期待値の生成
-		$expected = $data;
-
-		//テスト実施
-		$result = $this->EdumapVisibilitySetting->find('first', array(
-			'recursive' => -1,
-			'conditions' => array(
-				'edumap_key' => $edumapKey
-			)
-		));
-
-		//チェック
-		$this->_assertArray(
-			null,
-			$expected['EdumapVisibilitySetting'],
-			$result['EdumapVisibilitySetting']
-		);
+		AuthGeneralControllerTest::logout($this);
 	}
 
 /**
- * Expect EdumapVisibilitySetting->saveEdumapVisibilitySetting()
- *  to validate edumap_visibility_setting.edumap_key and return false on validation error
+ * Expect view action to be successfully handled w/ null frame.block_id
+ * This situation typically occur after placing new plugin into page
  *
  * @return void
  */
-	public function testSaveEdumapVisibilitySettingValidateError() {
-		$frameId = 1;
-		$blockId = 1;
-		$edumapKey = '';
+	public function testAddFrameWithoutBlock() {
+		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		RolesControllerTest::login($this);
+
+		$this->testAction(
+			'/edumap/edumapVisibilitySettings/edit/2',
+			array(
+				'method' => 'get',
+				'return' => 'contents'
+			)
+		);
+		$this->assertTextEquals('edit', $this->controller->view);
+
+		AuthGeneralControllerTest::logout($this);
+	}
+
+/**
+ * Expect admin user can publish edumap
+ *
+ * @return void
+ */
+	public function testEditPost() {
+		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		RolesControllerTest::login($this);
 
 		//データ生成
+		$frameId = 1;
+		$blockId = 1;
+
+		//登録処理実行
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
 				'Block' => array('id' => $blockId),
 				'EdumapVisibilitySetting' => array(
-					'id' => 1,
-					'edumap_key' => $edumapKey,
-				)
+					'id' => '1',
+					'edumap_key' => 'edumap_1',
+				),
 			)
 		);
 
-		//登録処理実行
-		$result = $this->EdumapVisibilitySetting->saveEdumapVisibilitySetting($data);
+		$this->testAction(
+			'/edumap/edumapVisibilitySettings/edit/' . $frameId,
+			array(
+				'method' => 'post',
+				'data' => $data,
+				'return' => 'contents'
+			)
+		);
+		$this->assertTextEquals('edit', $this->controller->view);
 
-		//チェック
-		$this->assertFalse($result, 'testSaveEdumapVisibilitySettingValidateError = ' . print_r($data, true));
+		AuthGeneralControllerTest::logout($this);
+	}
+
+/**
+ * Expect admin user can publish edumap
+ *
+ * @return void
+ */
+	public function testEditPostWithoutBlock() {
+		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		RolesControllerTest::login($this);
+
+		//データ生成
+		$frameId = 2;
+		$blockId = 2;
+
+		//登録処理実行
+		$data = Hash::merge(
+			$this->__saveDefault,
+			array(
+				'Frame' => array('id' => $frameId),
+				'Block' => array('id' => $blockId),
+				'EdumapVisibilitySetting' => array(
+					'id' => '',
+					'edumap_key' => 'edumap_2',
+				),
+			)
+		);
+
+		$this->testAction(
+			'/edumap/edumap/edit/' . $frameId,
+			array(
+				'method' => 'post',
+				'data' => $data,
+				'return' => 'contents'
+			)
+		);
+		$this->assertTextEquals('edit', $this->controller->view);
+
+		AuthGeneralControllerTest::logout($this);
 	}
 
 }

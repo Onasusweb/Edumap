@@ -25,8 +25,8 @@ class EdumapHelperTest extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$view = new View();
-		$this->Edumap = new EdumapHelper($view);
+		$View = new View();
+		$this->Edumap = new EdumapHelper($View);
 	}
 
 /**

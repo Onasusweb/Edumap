@@ -97,13 +97,13 @@ class EdumapVisibilitySetting extends EdumapAppModel {
 		$dataSource->begin();
 
 		try {
+			//validate処理
 			if (! $this->validateEdumapVisibilitySetting($data)) {
 				return false;
 			}
 
-			//Edumapの登録
-			$edumap = $this->save(null, false);
-			if (! $edumap) {
+			//登録処理
+			if (! $this->save(null, false)) {
 				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				// @codeCoverageIgnoreEnd
@@ -111,12 +111,14 @@ class EdumapVisibilitySetting extends EdumapAppModel {
 
 			$dataSource->commit();
 		} catch (Exception $ex) {
+			// @codeCoverageIgnoreStart
 			$dataSource->rollback();
 			CakeLog::error($ex);
 			throw $ex;
+			// @codeCoverageIgnoreEnd
 		}
 
-		return $edumap;
+		return true;
 	}
 
 /**

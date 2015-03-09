@@ -10,7 +10,6 @@
     "require": {
         "cakephp/cakephp":              "~2.4",
         "cakephp/debug_kit":            "~2.2",
-        "cakephp/localized":            "~2.4",
         "cakedc/migrations":            "~2.2",
         "components/jquery":            "~2.1",
 		"josegonzalez/cakephp-upload":  "~1.1",

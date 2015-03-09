@@ -67,7 +67,7 @@
 						__d('net_commons', 'OK'),
 						array(
 							'class' => 'btn btn-primary',
-							'name' => 'save_' . NetCommonsBlockComponent::STATUS_PUBLISHED,
+							'name' => 'save',
 						)); ?>
 				</div>
 			</div>

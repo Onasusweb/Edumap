@@ -231,7 +231,6 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 		$frameId = 1;
 		$blockId = 1;
 
-		//登録処理実行
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
@@ -245,6 +244,7 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 			)
 		);
 
+		//テスト実行
 		$this->testAction(
 			'/edumap/edumap/edit/' . $frameId,
 			array(
@@ -271,7 +271,6 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 		$frameId = 3;
 		$blockId = '';
 
-		//登録処理実行
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
@@ -285,6 +284,7 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 			)
 		);
 
+		//テスト実行
 		$this->testAction(
 			'/edumap/edumap/edit/' . $frameId,
 			array(
@@ -311,7 +311,6 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 		$frameId = 1;
 		$blockId = 1;
 
-		//登録処理実行
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
@@ -357,6 +356,7 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 			)
 		);
 
+		//テスト実行
 		$this->testAction(
 			'/edumap/edumap/edit/' . $frameId,
 			array(

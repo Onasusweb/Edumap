@@ -96,6 +96,7 @@ class EdumapVisibilitySettingsController extends EdumapAppController {
 					['error' => ['validationErrors' => ['id' => __d('net_commons', 'Invalid request.')]]],
 					__d('net_commons', 'Bad Request'), 400
 				);
+				return;
 			} else {
 				throw new BadRequestException(__d('net_commons', 'Bad Request'));
 			}
