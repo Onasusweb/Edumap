@@ -17,7 +17,7 @@ App::uses('EdumapAppController', 'Edumap.Controller');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Controller
  */
-class EdumapVisibilitySettingsController extends EdumapAppController {
+class VisibilitySettingsController extends EdumapAppController {
 
 /**
  * use model

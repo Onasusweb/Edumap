@@ -182,6 +182,7 @@ class EdumapController extends EdumapAppController {
 				$this->FileModel->alias . '.id' => $edumap['Edumap']['file_id']
 			)
 		));
+
 		//生徒数取得
 		$edumapStudents = $this->EdumapStudent->find('list', array(
 			'fields' => array('gendar', 'number', 'grade'),

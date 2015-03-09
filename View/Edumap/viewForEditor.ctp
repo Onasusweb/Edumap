@@ -23,7 +23,7 @@
 				</a>
 			</span>
 			<span>
-				<a href="<?php echo $this->Html->url('/edumap/edumapVisibilitySettings/edit/' . $frameId) ?>" class="btn btn-default">
+				<a href="<?php echo $this->Html->url('/edumap/visibilitySettings/edit/' . $frameId) ?>" class="btn btn-default">
 					<span class="glyphicon glyphicon-cog"> </span>
 				</a>
 			</span>

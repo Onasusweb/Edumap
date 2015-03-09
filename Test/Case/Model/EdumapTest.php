@@ -130,9 +130,9 @@ class EdumapTest extends EdumapModelTestBase {
 
 		//アップロードファイル
 		$file = new File(
-				APP . 'Plugin' . DS . 'Files' . DS . 'Test' . DS . 'Fixture' . DS . 'logo.gif'
-			);
-		$file->copy(TESTS . 'logo.gif');
+			APP . 'Plugin' . DS . 'Files' . DS . 'Test' . DS . 'Fixture' . DS . 'logo.gif'
+		);
+		$file->copy(TMP . 'tests' . DS . 'logo.gif');
 		$file->close();
 
 		//データ生成
@@ -149,7 +149,7 @@ class EdumapTest extends EdumapModelTestBase {
 					Edumap::AVATAR_INPUT => array(
 						'name' => 'logo.gif',
 						'type' => 'image/gif',
-						'tmp_name' => TESTS . 'logo.gif',
+						'tmp_name' => TMP . 'tests' . DS . 'logo.gif',
 						'error' => 0,
 						'size' => 5873,
 					),

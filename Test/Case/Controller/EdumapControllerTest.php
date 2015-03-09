@@ -116,6 +116,7 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 				'return' => 'view',
 			)
 		);
+
 		$this->assertTextEquals('view', $this->controller->view);
 	}
 
@@ -149,6 +150,18 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
+		$folder = new Folder();
+		$folder->create(TMP . 'tests' . DS . 'test' . DS . '1');
+		$file = new File(
+			APP . 'Plugin' . DS . 'Files' . DS . 'Test' . DS . 'Fixture' . DS . 'logo.gif'
+		);
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash.gif');
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash_big.gif');
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash_medium.gif');
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash_small.gif');
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash_thumbnail.gif');
+		$file->close();
+
 		$view = $this->testAction(
 			'/edumap/edumap/view/1',
 			array(
@@ -161,6 +174,7 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 		$this->assertTextContains('nc-edumap-1', $view, print_r($view, true));
 		$this->assertTextContains('/edumap/edumap/edit/1', $view, print_r($view, true));
 
+		$folder->delete(TMP . 'tests' . DS . 'test');
 		AuthGeneralControllerTest::logout($this);
 	}
 
@@ -189,6 +203,18 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
+		$folder = new Folder();
+		$folder->create(TMP . 'tests' . DS . 'test' . DS . '1');
+		$file = new File(
+			APP . 'Plugin' . DS . 'Files' . DS . 'Test' . DS . 'Fixture' . DS . 'logo.gif'
+		);
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash.gif');
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash_big.gif');
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash_medium.gif');
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash_small.gif');
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . '1' . DS . 'logo_hash_thumbnail.gif');
+		$file->close();
+
 		$this->testAction(
 			'/edumap/edumap/edit/1',
 			array(
@@ -198,6 +224,7 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 		);
 		$this->assertTextEquals('edit', $this->controller->view);
 
+		$folder->delete(TMP . 'tests' . DS . 'test');
 		AuthGeneralControllerTest::logout($this);
 	}
 

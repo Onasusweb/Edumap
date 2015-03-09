@@ -47,14 +47,14 @@
 			<div class="tab-content" ng-init="tab.setTab(<?php echo (int)$tabId; ?>)">
 		<?php endif; ?>
 
-		<?php echo $this->Form->create('EdumapVisibilitySettings', array(
+		<?php echo $this->Form->create('VisibilitySettings', array(
 			'name' => 'form',
 			'novalidate' => true,
 		)); ?>
 
 			<div class="panel panel-default">
 				<div class="panel-body has-feedback">
-					<?php echo $this->element('EdumapVisibilitySettings/edit_form'); ?>
+					<?php echo $this->element('VisibilitySettings/edit_form'); ?>
 				</div>
 
 				<div class="panel-footer text-center">

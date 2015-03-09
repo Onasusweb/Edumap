@@ -9,7 +9,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapVisibilitySettingsController', 'Edumap.Controller');
+App::uses('VisibilitySettingsController', 'Edumap.Controller');
 App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
 
 /**
@@ -18,7 +18,7 @@ App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Controller
  */
-class EdumapVisibilitySettingsControllerTest extends EdumapControllerTestBase {
+class VisibilitySettingsControllerTest extends EdumapControllerTestBase {
 
 /**
  * default value
@@ -60,11 +60,11 @@ class EdumapVisibilitySettingsControllerTest extends EdumapControllerTestBase {
  * @return void
  */
 	public function testEditGet() {
-		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		$this->testAction(
-			'/edumap/edumapVisibilitySettings/edit/1',
+			'/edumap/visibilitySettings/edit/1',
 			array(
 				'method' => 'get',
 				'return' => 'contents'
@@ -82,11 +82,11 @@ class EdumapVisibilitySettingsControllerTest extends EdumapControllerTestBase {
  * @return void
  */
 	public function testAddFrameWithoutBlock() {
-		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		$this->testAction(
-			'/edumap/edumapVisibilitySettings/edit/2',
+			'/edumap/visibilitySettings/edit/2',
 			array(
 				'method' => 'get',
 				'return' => 'contents'
@@ -103,7 +103,7 @@ class EdumapVisibilitySettingsControllerTest extends EdumapControllerTestBase {
  * @return void
  */
 	public function testEditPost() {
-		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -124,7 +124,7 @@ class EdumapVisibilitySettingsControllerTest extends EdumapControllerTestBase {
 		);
 
 		$this->testAction(
-			'/edumap/edumapVisibilitySettings/edit/' . $frameId,
+			'/edumap/visibilitySettings/edit/' . $frameId,
 			array(
 				'method' => 'post',
 				'data' => $data,
@@ -142,7 +142,7 @@ class EdumapVisibilitySettingsControllerTest extends EdumapControllerTestBase {
  * @return void
  */
 	public function testEditPostWithoutBlock() {
-		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成

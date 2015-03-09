@@ -9,7 +9,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapVisibilitySettingsController', 'Edumap.Controller');
+App::uses('VisibilitySettingsController', 'Edumap.Controller');
 App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
 
 /**
@@ -18,7 +18,7 @@ App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Controller
  */
-class EdumapVisibilitySettingsControllerValidateErrorTest extends EdumapControllerTestBase {
+class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTestBase {
 
 /**
  * default value
@@ -59,7 +59,7 @@ class EdumapVisibilitySettingsControllerValidateErrorTest extends EdumapControll
  * @return void
  */
 	public function testSaveEditErrorByEdumapKey() {
-		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -80,7 +80,7 @@ class EdumapVisibilitySettingsControllerValidateErrorTest extends EdumapControll
 
 		//テスト実行
 		$ret = $this->testAction(
-			'/edumap/edumapVisibilitySettings/edit/' . $frameId . '.json',
+			'/edumap/visibilitySettings/edit/' . $frameId . '.json',
 			array(
 				'method' => 'post',
 				'data' => $data,
@@ -106,7 +106,7 @@ class EdumapVisibilitySettingsControllerValidateErrorTest extends EdumapControll
  * @return void
  */
 	public function testSaveEditErrorByUnknownEdumap() {
-		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -128,7 +128,7 @@ class EdumapVisibilitySettingsControllerValidateErrorTest extends EdumapControll
 		//テスト実行
 		$this->setExpectedException('BadRequestException');
 		$ret = $this->testAction(
-			'/edumap/edumapVisibilitySettings/edit/' . $frameId,
+			'/edumap/visibilitySettings/edit/' . $frameId,
 			array(
 				'method' => 'post',
 				'data' => $data,
@@ -145,7 +145,7 @@ class EdumapVisibilitySettingsControllerValidateErrorTest extends EdumapControll
  * @return void
  */
 	public function testSaveEditErrorJsonByUnknownEdumap() {
-		$this->_generateController('Edumap.EdumapVisibilitySettings');
+		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -166,7 +166,7 @@ class EdumapVisibilitySettingsControllerValidateErrorTest extends EdumapControll
 
 		//テスト実行
 		$ret = $this->testAction(
-			'/edumap/edumapVisibilitySettings/edit/' . $frameId . '.json',
+			'/edumap/visibilitySettings/edit/' . $frameId . '.json',
 			array(
 				'method' => 'post',
 				'data' => $data,

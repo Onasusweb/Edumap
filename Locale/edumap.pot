@@ -17,56 +17,56 @@ msgstr ""
 #: Edumap/Model/Edumap.php:156
 #: Edumap/View/Elements/Edumap/edit_form.ctp:78
 #: Edumap/View/Elements/Edumap/view_contents.ctp:25
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:33
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:33
 msgid "School name"
 msgstr ""
 
 #: Edumap/Model/Edumap.php:163
 #: Edumap/View/Elements/Edumap/edit_form.ctp:92
 #: Edumap/View/Elements/Edumap/view_contents.ctp:29
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:48
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:48
 msgid "Handle name"
 msgstr ""
 
 #: Edumap/Model/Edumap.php:170;175
 #: Edumap/View/Elements/Edumap/edit_form.ctp:99
 #: Edumap/View/Elements/Edumap/view_contents.ctp:31
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:50
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:50
 msgid "Postal code"
 msgstr ""
 
 #: Edumap/Model/Edumap.php:181
 #: Edumap/View/Elements/Edumap/edit_form.ctp:111
 #: Edumap/View/Elements/Edumap/view_contents.ctp:33
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:52
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:52
 msgid "Prefecture"
 msgstr ""
 
 #: Edumap/Model/Edumap.php:192
 #: Edumap/View/Elements/Edumap/edit_form.ctp:134
 #: Edumap/View/Elements/Edumap/view_contents.ctp:35
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:54
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:54
 msgid "Location"
 msgstr ""
 
 #: Edumap/Model/Edumap.php:199;204
 #: Edumap/View/Elements/Edumap/edit_form.ctp:141
 #: Edumap/View/Elements/Edumap/view_contents.ctp:37
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:56
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:56
 msgid "Phone number"
 msgstr ""
 
 #: Edumap/Model/Edumap.php:210
 #: Edumap/View/Elements/Edumap/edit_form.ctp:153
 #: Edumap/View/Elements/Edumap/view_contents.ctp:39
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:58
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:58
 msgid "Fax number"
 msgstr ""
 
 #: Edumap/Model/Edumap.php:217;222
 #: Edumap/View/Elements/Edumap/edit_form.ctp:165
 #: Edumap/View/Elements/Edumap/view_contents.ctp:41
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:60
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:60
 msgid "Emergency contact email"
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr ""
 #: Edumap/Model/Edumap.php:228
 #: Edumap/View/Elements/Edumap/edit_form.ctp:183
 #: Edumap/View/Elements/Edumap/view_contents.ctp:45
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:64
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:64
 msgid "Site URL"
 msgstr ""
 
@@ -88,14 +88,14 @@ msgstr ""
 #: Edumap/Model/Edumap.php:235
 #: Edumap/View/Elements/Edumap/edit_form.ctp:209
 #: Edumap/View/Elements/Edumap/view_contents.ctp:51
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:70
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:70
 msgid "RSS URL"
 msgstr ""
 
 #: Edumap/Model/Edumap.php:242
 #: Edumap/View/Elements/Edumap/edit_form.ctp:193
 #: Edumap/View/Elements/Edumap/view_contents.ctp:47
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:66
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:66
 msgid "Foundation date"
 msgstr ""
 
@@ -106,19 +106,19 @@ msgstr ""
 #: Edumap/Model/Edumap.php:249
 #: Edumap/View/Elements/Edumap/edit_form.ctp:201
 #: Edumap/View/Elements/Edumap/view_contents.ctp:49
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:68
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:68
 msgid "Closed date"
 msgstr ""
 
 #: Edumap/Model/Edumap.php:256
 #: Edumap/View/Elements/Edumap/edit_form.ctp:315
 #: Edumap/View/Elements/Edumap/view_contents.ctp:61
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:80
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:80
 msgid "Principal email"
 msgstr ""
 
 #: Edumap/View/Edumap/edit.ctp:24
-#: Edumap/View/EdumapVisibilitySettings/edit.ctp:19
+#: Edumap/View/VisibilitySettings/edit.ctp:19
 msgid "Plugin name"
 msgstr ""
 
@@ -126,12 +126,12 @@ msgstr ""
 msgid "Edumap edit"
 msgstr ""
 
-#: Edumap/View/EdumapVisibilitySettings/edit.ctp:25
+#: Edumap/View/VisibilitySettings/edit.ctp:25
 msgid "Edumap visibilty settings"
 msgstr ""
 
 #: Edumap/View/Elements/Edumap/edit_form.ctp:25
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:29
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:29
 msgid "Avatar"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgstr ""
 
 #: Edumap/View/Elements/Edumap/edit_form.ctp:85
 #: Edumap/View/Elements/Edumap/view_contents.ctp:27
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:46
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:46
 msgid "School name(kana)"
 msgstr ""
 
@@ -151,37 +151,37 @@ msgstr ""
 
 #: Edumap/View/Elements/Edumap/edit_form.ctp:176
 #: Edumap/View/Elements/Edumap/view_contents.ctp:43
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:62
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:62
 msgid "Inquiry"
 msgstr ""
 
 #: Edumap/View/Elements/Edumap/edit_form.ctp:219
 #: Edumap/View/Elements/Edumap/view_contents.ctp:53
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:72
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:72
 msgid "Governing body type"
 msgstr ""
 
 #: Edumap/View/Elements/Edumap/edit_form.ctp:251
 #: Edumap/View/Elements/Edumap/view_contents.ctp:55
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:74
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:74
 msgid "Education type"
 msgstr ""
 
 #: Edumap/View/Elements/Edumap/edit_form.ctp:280
 #: Edumap/View/Elements/Edumap/view_contents.ctp:57
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:76
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:76
 msgid "Coeducation"
 msgstr ""
 
 #: Edumap/View/Elements/Edumap/edit_form.ctp:308
 #: Edumap/View/Elements/Edumap/view_contents.ctp:59
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:78
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:78
 msgid "Principal name"
 msgstr ""
 
 #: Edumap/View/Elements/Edumap/edit_form.ctp:330
 #: Edumap/View/Elements/Edumap/view_contents.ctp:98
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:88
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:88
 msgid "Description"
 msgstr ""
 
@@ -192,7 +192,7 @@ msgstr ""
 
 #: Edumap/View/Elements/Edumap/input_students.ctp:16
 #: Edumap/View/Elements/Edumap/view_contents.ctp:69
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:83
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:83
 msgid "Number of students"
 msgstr ""
 
@@ -242,7 +242,7 @@ msgstr ""
 msgid "Female: %d students"
 msgstr ""
 
-#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:86
+#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:86
 msgid "Social media"
 msgstr ""
 
