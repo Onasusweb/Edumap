@@ -42,9 +42,9 @@ class EdumapSocialMediumFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'edumap_id' => 1,
-			'type' => 'Lorem ipsum dolor sit amet',
-			'value' => 'Lorem ipsum dolor sit amet',
+			'edumap_id' => 2,
+			'type' => 'twitter',
+			'value' => 'Lorem',
 			'created_user' => 1,
 			'created' => '2014-11-18 03:17:45',
 			'modified_user' => 1,

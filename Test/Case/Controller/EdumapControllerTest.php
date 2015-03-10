@@ -83,7 +83,6 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 			),
 		),
 		'DeleteFile' => array(array('File' => array('id' => '0')))
-
 	);
 
 /**
@@ -225,6 +224,27 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 		$this->assertTextEquals('edit', $this->controller->view);
 
 		$folder->delete(TMP . 'tests' . DS . 'test');
+		AuthGeneralControllerTest::logout($this);
+	}
+
+/**
+ * Expect admin user can access edit action
+ *
+ * @return void
+ */
+	public function testEditGetWithoutBlock() {
+		$this->_generateController('Edumap.Edumap');
+		RolesControllerTest::login($this);
+
+		$this->testAction(
+			'/edumap/edumap/edit/3',
+			array(
+				'method' => 'get',
+				'return' => 'contents'
+			)
+		);
+		$this->assertTextEquals('edit', $this->controller->view);
+
 		AuthGeneralControllerTest::logout($this);
 	}
 

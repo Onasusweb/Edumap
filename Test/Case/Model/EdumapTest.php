@@ -129,10 +129,12 @@ class EdumapTest extends EdumapModelTestBase {
 		$this->Edumap->Behaviors->Publishable->setup($this->Edumap, ['contentPublishable' => true]);
 
 		//アップロードファイル
+		$folder = new Folder();
+		$folder->create(TMP . 'tests' . DS . 'test');
 		$file = new File(
 			APP . 'Plugin' . DS . 'Files' . DS . 'Test' . DS . 'Fixture' . DS . 'logo.gif'
 		);
-		$file->copy(TMP . 'tests' . DS . 'logo.gif');
+		$file->copy(TMP . 'tests' . DS . 'test' . DS . 'logo.gif');
 		$file->close();
 
 		//データ生成
@@ -149,7 +151,7 @@ class EdumapTest extends EdumapModelTestBase {
 					Edumap::AVATAR_INPUT => array(
 						'name' => 'logo.gif',
 						'type' => 'image/gif',
-						'tmp_name' => TMP . 'tests' . DS . 'logo.gif',
+						'tmp_name' => TMP . 'tests' . DS . 'test' . DS . 'logo.gif',
 						'error' => 0,
 						'size' => 5873,
 					),
@@ -208,6 +210,8 @@ class EdumapTest extends EdumapModelTestBase {
 
 		//テスト実施
 		$this->__assertSaveEdumap($expected);
+
+		$folder->delete(TMP . 'tests' . DS . 'test');
 	}
 
 /**

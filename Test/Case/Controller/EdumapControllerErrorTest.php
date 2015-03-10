@@ -19,111 +19,182 @@ App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
  * @package NetCommons\Edumap\Test\Case\Controller
  */
 class EdumapControllerErrorTest extends EdumapControllerTestBase {
+/**
+ * default value
+ *
+ * @var array
+ */
+	private $__saveDefault = array(
+		'Edumap' => array(
+			'name' => 'Edit name',
+			'name_kana' => 'Edit name_kana',
+			'handle' => 'Edit handle',
+			'postal_code' => '123-4567',
+			'prefecture_code' => '01',
+			'location' => 'Edit location',
+			'tel' => '01-2345-6789',
+			'fax' => '09-8765-4321',
+			'emergency_email' => 'emergency@example.com',
+			'inquiry' => 'Edit inquiry',
+			'site_url' => 'http://site.example.com',
+			'rss_url' => 'http://rss.example.com',
+			'foundation_date' => array('year' => '1945', 'month' => '12'),
+			'closed_date' => array('year' => '2015', 'month' => '04'),
+			'governor_type' => '3',
+			'education_type' => '4',
+			'coeducation_type' => '2',
+			'principal_name' => 'Edit principal_name',
+			'principal_email' => 'principal@example.com',
+			'description' => 'Edit description',
+		),
+		'EdumapSocialMedium' => array(
+			EdumapSocialMedium::SOCIAL_TYPE_TWITTER => array(
+				'value' => 'EditTwitterValue',
+				'type' => EdumapSocialMedium::SOCIAL_TYPE_TWITTER
+			)
+		),
+		'EdumapStudent' => array(
+				array('grade' => '1', 'gendar' => false, 'number' => ''),
+				array('grade' => '1', 'gendar' => true, 'number' => ''),
+				array('grade' => '2', 'gendar' => false, 'number' => '123'),
+				array('grade' => '2', 'gendar' => true, 'number' => '456'),
+				array('grade' => '3', 'gendar' => false, 'number' => '789'),
+				array('grade' => '3', 'gendar' => true, 'number' => ''),
+				array('grade' => '4', 'gendar' => false, 'number' => ''),
+				array('grade' => '4', 'gendar' => true, 'number' => '654'),
+				array('grade' => '5', 'gendar' => false, 'number' => ''),
+				array('grade' => '5', 'gendar' => true, 'number' => ''),
+				array('grade' => '6', 'gendar' => false, 'number' => ''),
+				array('grade' => '6', 'gendar' => true, 'number' => ''),
+		),
+		'Comment' => array(
+			'comment' => 'Edit comment'
+		),
+		Edumap::AVATAR_INPUT => array(
+			'FilesPlugin' => array(
+				'plugin_key' => 'edumap'
+			),
+			'FilesRoom' => array(
+				'room_id' => 1
+			),
+			'FilesUser' => array(
+				'user_id' => 1
+			),
+		),
+		'DeleteFile' => array(array('File' => array('id' => '0')))
+	);
 
 /**
  * Expect unauthenticated user cannot view edit action
  *
  * @return void
  */
-	//public function testEditLoginError() {
-	//	$this->setExpectedException('ForbiddenException');
-	//	$this->testAction('/announcements/announcements/edit/1.json', array('method' => 'get'));
-	//}
+	public function testEditLoginError() {
+		$this->setExpectedException('ForbiddenException');
+		$this->testAction('/edumap/edumap/edit/1.json', array('method' => 'get'));
+	}
 
 /**
  * Expect visitor cannot view edit action
  *
  * @return void
  */
-	//public function testContentEditableError() {
-	//	$this->setExpectedException('ForbiddenException');
-	//
-	//	$this->_generateController('Edumap.Edumap');
-	//	$this->_loginVisitor();
-	//
-	//	$this->testAction('/announcements/announcements/edit/1.json', array('method' => 'get'));
-	//
-	//	/* $this->_logout(); */
-	//}
+	public function testContentEditableError() {
+		$this->setExpectedException('ForbiddenException');
+
+		$this->_generateController('Edumap.Edumap');
+		RolesControllerTest::login($this, Role::ROLE_KEY_VISITOR);
+
+		$this->testAction('/edumap/edumap/edit/1.json', array('method' => 'get'));
+
+		AuthGeneralControllerTest::logout($this);
+	}
 
 /**
- * Expect editor cannot publish announcement
+ * Expect editor cannot publish edumap
  *
  * @return void
  */
-	//public function testEditContentPublishedError() {
-	//	$this->_generateController('Edumap.Edumap');
-	//	$this->_loginEditor();
-	//
-	//	$postData = array(
-	//		'Announcement' => array(
-	//			'block_id' => '1',
-	//			'key' => 'announcement_1',
-	//			'content' => 'edit content',
-	//		),
-	//		'Comment' => array(
-	//			'comment' => 'edit comment',
-	//		),
-	//		'Frame' => array(
-	//			'id' => '1'
-	//		),
-	//		sprintf('save_%s', NetCommonsBlockComponent::STATUS_PUBLISHED) => '',
-	//	);
-	//
-	//	$view = $this->testAction(
-	//			'/announcements/announcements/edit/1.json',
-	//			array(
-	//				'method' => 'post',
-	//				'type' => 'json',
-	//				'data' => $postData,
-	//				'return' => 'contents'
-	//			)
-	//		);
-	//
-	//	$result = json_decode($view, true);
-	//	$this->assertArrayHasKey('code', $result, print_r($result, true));
-	//	$this->assertEquals(400, $result['code'], print_r($result, true));
-	//
-	//	/* $this->_logout(); */
-	//}
+	public function testEditContentPublishedError() {
+		$this->_generateController('Edumap.Edumap');
+		RolesControllerTest::login($this, Role::ROLE_KEY_EDITOR);
+
+		//データ生成
+		$frameId = 1;
+		$blockId = 1;
+
+		$data = Hash::merge(
+			$this->__saveDefault,
+			array(
+				'Frame' => array('id' => $frameId),
+				'Block' => array('id' => $blockId),
+				'Edumap' => array(
+					'id' => '',
+					'key' => 'edumap_1',
+				),
+				sprintf('save_%s', NetCommonsBlockComponent::STATUS_PUBLISHED) => ''
+			)
+		);
+
+		//テスト実行
+		$view = $this->testAction(
+			'/edumap/edumap/edit/' . $frameId . '.json',
+			array(
+				'method' => 'post',
+				'type' => 'json',
+				'data' => $data,
+				'return' => 'contents'
+			)
+		);
+
+		$result = json_decode($view, true);
+		$this->assertArrayHasKey('code', $result, print_r($result, true));
+		$this->assertEquals(400, $result['code'], print_r($result, true));
+
+		AuthGeneralControllerTest::logout($this);
+	}
 
 /**
- * Expect editor cannot disapprove announcement
+ * Expect editor cannot disapprove edumap
  *
  * @return void
  */
-	//public function testEditContentDisapprovedError() {
-	//	$this->_generateController('Edumap.Edumap');
-	//	$this->_loginEditor();
-	//
-	//	$postData = array(
-	//		'Announcement' => array(
-	//			'block_id' => '1',
-	//			'key' => 'announcement_1',
-	//			'content' => 'edit content',
-	//		),
-	//		'Comment' => array(
-	//			'comment' => 'edit comment',
-	//		),
-	//		'Frame' => array(
-	//			'id' => '1'
-	//		),
-	//		sprintf('save_%s', NetCommonsBlockComponent::STATUS_DISAPPROVED) => '',
-	//	);
-	//
-	//	$view = $this->testAction(
-	//			'/announcements/announcements/edit/1.json',
-	//			array(
-	//				'method' => 'post',
-	//				'type' => 'json',
-	//				'data' => $postData,
-	//				'return' => 'contents'
-	//			)
-	//		);
-	//	$result = json_decode($view, true);
-	//	$this->assertArrayHasKey('code', $result, print_r($result, true));
-	//	$this->assertEquals(400, $result['code'], print_r($result, true));
-	//
-	//	/* $this->_logout(); */
-	//}
+	public function testEditContentDisapprovedError() {
+		$this->_generateController('Edumap.Edumap');
+		RolesControllerTest::login($this, Role::ROLE_KEY_EDITOR);
+
+		//データ生成
+		$frameId = 1;
+		$blockId = 1;
+
+		$data = Hash::merge(
+			$this->__saveDefault,
+			array(
+				'Frame' => array('id' => $frameId),
+				'Block' => array('id' => $blockId),
+				'Edumap' => array(
+					'id' => '',
+					'key' => 'edumap_1',
+				),
+				sprintf('save_%s', NetCommonsBlockComponent::STATUS_DISAPPROVED) => ''
+			)
+		);
+
+		//テスト実行
+		$view = $this->testAction(
+			'/edumap/edumap/edit/' . $frameId . '.json',
+			array(
+				'method' => 'post',
+				'type' => 'json',
+				'data' => $data,
+				'return' => 'contents'
+			)
+		);
+
+		$result = json_decode($view, true);
+		$this->assertArrayHasKey('code', $result, print_r($result, true));
+		$this->assertEquals(400, $result['code'], print_r($result, true));
+
+		AuthGeneralControllerTest::logout($this);
+	}
 }
