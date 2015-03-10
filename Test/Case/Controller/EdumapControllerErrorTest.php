@@ -19,6 +19,7 @@ App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
  * @package NetCommons\Edumap\Test\Case\Controller
  */
 class EdumapControllerErrorTest extends EdumapControllerTestBase {
+
 /**
  * default value
  *

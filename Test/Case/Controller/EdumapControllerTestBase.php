@@ -15,6 +15,9 @@ App::uses('NetCommonsRoomRoleComponent', 'NetCommons.Controller/Component');
 App::uses('YAControllerTestCase', 'NetCommons.TestSuite');
 App::uses('RolesControllerTest', 'Roles.Test/Case/Controller');
 App::uses('AuthGeneralControllerTest', 'AuthGeneral.Test/Case/Controller');
+App::uses('Edumap', 'Edumap.Model');
+App::uses('EdumapSocialMedium', 'Edumap.Model');
+App::uses('EdumapVisibilitySetting', 'Edumap.Model');
 
 /**
  * EdumapController Test Case

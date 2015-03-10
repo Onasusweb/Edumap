@@ -17,6 +17,7 @@ App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Controller
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class EdumapControllerTest extends EdumapControllerTestBase {
 

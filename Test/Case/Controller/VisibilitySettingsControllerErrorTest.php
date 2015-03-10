@@ -1,6 +1,6 @@
 <?php
 /**
- * AnnouncementEditController Test Case
+ * EdumapController Test Case
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -13,12 +13,12 @@ App::uses('VisibilitySettingsController', 'Edumap.Controller');
 App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
 
 /**
- * EdumapController Validation Error Test Case based on models
+ * EdumapController Error Test Case w/o model based validation errors
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Controller
  */
-class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTestBase {
+class VisibilitySettingsControllerErrorTest extends EdumapControllerTestBase {
 
 /**
  * default value
@@ -50,17 +50,46 @@ class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTest
 			'student_number' => EdumapVisibilitySetting::PUBLIC_ON_EDUMAP_VISIBILITY,
 			'social_media' => EdumapVisibilitySetting::PUBLIC_ON_EDUMAP_VISIBILITY,
 			'description' => EdumapVisibilitySetting::PUBLIC_ON_EDUMAP_VISIBILITY,
-		)
+		),
+		'save' => ''
 	);
 
 /**
- * Expect user cannot edit w/o valid announcements.content
+ * Expect unauthenticated user cannot view edit action
  *
  * @return void
  */
-	public function testSaveEditErrorByEdumapKey() {
+	public function testEditLoginError() {
+		$this->setExpectedException('ForbiddenException');
+		$this->testAction('/edumap/visibilitySettings/edit/1.json', array('method' => 'get'));
+	}
+
+/**
+ * Expect visitor cannot view edit action
+ *
+ * @return void
+ */
+	public function testContentEditableError() {
+		$this->setExpectedException('ForbiddenException');
+
 		$this->_generateController('Edumap.VisibilitySettings');
-		RolesControllerTest::login($this);
+		RolesControllerTest::login($this, Role::ROLE_KEY_VISITOR);
+
+		$this->testAction('/edumap/visibilitySettings/edit/1.json', array('method' => 'get'));
+
+		AuthGeneralControllerTest::logout($this);
+	}
+
+/**
+ * Expect editor cannot publish edumap
+ *
+ * @return void
+ */
+	public function testEditContentPublishedError() {
+		$this->setExpectedException('ForbiddenException');
+
+		$this->_generateController('Edumap.VisibilitySettings');
+		RolesControllerTest::login($this, Role::ROLE_KEY_EDITOR);
 
 		//データ生成
 		$frameId = 1;
@@ -73,116 +102,22 @@ class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTest
 				'Block' => array('id' => $blockId),
 				'EdumapVisibilitySetting' => array(
 					'id' => '1',
-					'edumap_key' => '',
+					'edumap_key' => 'edumap_1',
 				),
 			)
 		);
 
 		//テスト実行
-		$ret = $this->testAction(
-			'/edumap/visibilitySettings/edit/' . $frameId . '.json',
-			array(
-				'method' => 'post',
-				'data' => $data,
-				'type' => 'json',
-				'return' => 'contents'
-			)
-		);
-		$result = json_decode($ret, true);
-
-		$this->assertArrayHasKey('code', $result, print_r($result, true));
-		$this->assertEquals(400, $result['code'], print_r($result, true));
-		$this->assertArrayHasKey('name', $result, print_r($result, true));
-		$this->assertArrayHasKey('error', $result, print_r($result, true));
-		$this->assertArrayHasKey('validationErrors', $result['error'], print_r($result, true));
-		$this->assertArrayHasKey('edumapKey', $result['error']['validationErrors'], print_r($result, true));
-
-		AuthGeneralControllerTest::logout($this);
-	}
-
-/**
- * Expect user cannot edit w/o valid announcements.content
- *
- * @return void
- */
-	public function testSaveEditErrorByUnknownEdumap() {
-		$this->_generateController('Edumap.VisibilitySettings');
-		RolesControllerTest::login($this);
-
-		//データ生成
-		$frameId = 3;
-		$blockId = 10;
-
-		$data = Hash::merge(
-			$this->__saveDefault,
-			array(
-				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId),
-				'EdumapVisibilitySetting' => array(
-					'id' => '',
-					'edumap_key' => '',
-				),
-			)
-		);
-
-		//テスト実行
-		$this->setExpectedException('BadRequestException');
 		$this->testAction(
-			'/edumap/visibilitySettings/edit/' . $frameId,
-			array(
-				'method' => 'post',
-				'data' => $data,
-				'return' => 'contents'
-			)
-		);
-
-		AuthGeneralControllerTest::logout($this);
-	}
-
-/**
- * Expect user cannot edit w/o valid announcements.content
- *
- * @return void
- */
-	public function testSaveEditErrorJsonByUnknownEdumap() {
-		$this->_generateController('Edumap.VisibilitySettings');
-		RolesControllerTest::login($this);
-
-		//データ生成
-		$frameId = 3;
-		$blockId = 10;
-
-		$data = Hash::merge(
-			$this->__saveDefault,
-			array(
-				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId),
-				'EdumapVisibilitySetting' => array(
-					'id' => '',
-					'edumap_key' => '',
-				),
-			)
-		);
-
-		//テスト実行
-		$ret = $this->testAction(
 			'/edumap/visibilitySettings/edit/' . $frameId . '.json',
 			array(
 				'method' => 'post',
-				'data' => $data,
 				'type' => 'json',
+				'data' => $data,
 				'return' => 'contents'
 			)
 		);
-		$result = json_decode($ret, true);
-
-		$this->assertArrayHasKey('code', $result, print_r($result, true));
-		$this->assertEquals(400, $result['code'], print_r($result, true));
-		$this->assertArrayHasKey('name', $result, print_r($result, true));
-		$this->assertArrayHasKey('error', $result, print_r($result, true));
-		$this->assertArrayHasKey('validationErrors', $result['error'], print_r($result, true));
 
 		AuthGeneralControllerTest::logout($this);
 	}
-
 }

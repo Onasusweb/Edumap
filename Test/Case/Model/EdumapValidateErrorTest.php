@@ -18,6 +18,7 @@ App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class EdumapValidateErrorTest extends EdumapModelTestBase {
 
