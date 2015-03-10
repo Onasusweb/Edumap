@@ -36,9 +36,6 @@
         "netcommons/users":             "dev-master",
         "satooshi/php-coveralls":       "~0.6.1"
     },
-	"suggest": {
-		"ext-imagick": "*"
-	},
     "license": "NetCommons License",
     "authors": [
         {
