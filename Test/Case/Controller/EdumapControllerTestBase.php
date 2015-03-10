@@ -105,12 +105,4 @@ class EdumapControllerTestBase extends YAControllerTestCase {
 		$this->generate($controllerName, $params);
 	}
 
-/**
- * testIndex method
- *
- * @return void
- */
-	public function testIndex() {
-		$this->assertTrue(true);
-	}
 }

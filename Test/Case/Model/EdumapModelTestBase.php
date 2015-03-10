@@ -108,12 +108,4 @@ class EdumapModelTestBase extends YACakeTestCase {
 		}
 	}
 
-/**
- * testIndex method
- *
- * @return void
- */
-	public function testIndex() {
-		$this->assertTrue(true);
-	}
 }
