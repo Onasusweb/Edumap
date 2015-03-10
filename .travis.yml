@@ -14,7 +14,7 @@ before_script:
   - cd $NETCOMMONS_BUILD_DIR
   - git checkout $NETCOMMONS_VERSION
   - . tools/build/plugins/cakephp/travis/pre.sh
-  - pecl install imagick
+  - printf "\n" | pecl install imagick
 
 script:
   - . tools/build/plugins/cakephp/travis/main.sh
