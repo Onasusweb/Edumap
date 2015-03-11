@@ -75,10 +75,9 @@ class EdumapTest extends EdumapModelTestBase {
  * @return void
  */
 	public function testGetEdumap() {
-		$frameId = 1;
 		$blockId = 1;
 		$contentEditable = true;
-		$result = $this->Edumap->getEdumap($frameId, $blockId, $contentEditable);
+		$result = $this->Edumap->getEdumap($blockId, $contentEditable);
 
 		$expected = array(
 			'Edumap' => array(
@@ -98,10 +97,9 @@ class EdumapTest extends EdumapModelTestBase {
  * @return void
  */
 	public function testGetEdumapByNoEditable() {
-		$frameId = 1;
 		$blockId = 1;
 		$contentEditable = false;
-		$result = $this->Edumap->getEdumap($frameId, $blockId, $contentEditable);
+		$result = $this->Edumap->getEdumap($blockId, $contentEditable);
 
 		$expected = array(
 			'Edumap' => array(
@@ -326,7 +324,7 @@ class EdumapTest extends EdumapModelTestBase {
  */
 	private function __assertSaveEdumap($expected) {
 		//edumap
-		$result = $this->Edumap->getEdumap($expected['Frame']['id'], $expected['Block']['id'], true);
+		$result = $this->Edumap->getEdumap($expected['Block']['id'], true);
 		$this->_assertArray(null, $expected['Edumap'], $result['Edumap']);
 
 		//edumapStudent

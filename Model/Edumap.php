@@ -257,12 +257,11 @@ class Edumap extends EdumapAppModel {
 /**
  * get dumap
  *
- * @param int $frameId frames.id
  * @param int $blockId blocks.id
  * @param bool $contentEditable true can edit the content, false not can edit the content.
  * @return array
  */
-	public function getEdumap($frameId, $blockId, $contentEditable) {
+	public function getEdumap($blockId, $contentEditable) {
 		$conditions = array(
 			$this->alias . '.block_id' => $blockId,
 		);

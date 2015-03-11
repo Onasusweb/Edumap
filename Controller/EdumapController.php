@@ -119,7 +119,6 @@ class EdumapController extends EdumapAppController {
 
 			//最新データ取得
 			if (! $edumap = $this->Edumap->getEdumap(
-				(int)$data['Frame']['id'],
 				isset($data['Block']['id']) ? (int)$data['Block']['id'] : null,
 				true
 			)) {
@@ -160,7 +159,6 @@ class EdumapController extends EdumapAppController {
 	private function __initEdumap() {
 		//edumapデータ基本情報
 		if (! $edumap = $this->Edumap->getEdumap(
-			$this->viewVars['frameId'],
 			$this->viewVars['blockId'],
 			$this->viewVars['contentEditable']
 		)) {

@@ -87,7 +87,6 @@ class VisibilitySettingsController extends EdumapAppController {
  */
 	private function __initEdumapVisibilitySetting() {
 		if (! $edumap = $this->Edumap->getEdumap(
-			$this->viewVars['frameId'],
 			$this->viewVars['blockId'],
 			$this->viewVars['contentEditable']
 		)) {
