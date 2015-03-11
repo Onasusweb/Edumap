@@ -255,7 +255,7 @@ class EdumapController extends EdumapAppController {
 		$data = $this->data;
 
 		//アバター
-		$data[Edumap::AVATAR_INPUT]['File'] = $this->FileUpload->upload($this, $this->Edumap->alias, Edumap::AVATAR_INPUT);
+		$data[Edumap::AVATAR_INPUT]['File'] = $this->FileUpload->upload($this->Edumap->alias, Edumap::AVATAR_INPUT);
 		if (! $data[Edumap::AVATAR_INPUT]['File']) {
 			unset($data[Edumap::AVATAR_INPUT]);
 		}
