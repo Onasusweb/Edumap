@@ -34,7 +34,7 @@ class Initialize extends CakeMigration {
 			'create_table' => array(
 				'edumap' => array(
 					'id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'key' => 'primary', 'comment' => 'ID |  |  | '),
-					'language_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 6, 'after' => 'id'),
+					'language_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 6, 'comment' => 'language id | 言語ID | languages.id | '),
 					'block_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'comment' => 'block id | ブロックID | blocks.id | '),
 					'status' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 4, 'comment' => 'public status, 1: public, 2: public pending, 3: draft during 4: remand | 公開状況  1:公開中、2:公開申請中、3:下書き中、4:差し戻し |  | '),
 					'key' => array('type' => 'string', 'null' => false, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => 'key | キー |  | ', 'charset' => 'utf8'),
