@@ -52,7 +52,6 @@ class Edumap extends EdumapAppModel {
  */
 	public $actsAs = array(
 		'NetCommons.Publishable',
-		'Containable',
 		'Files.YAUpload' => array(
 			self::AVATAR_INPUT => array(
 				//UploadBefavior settings
@@ -76,7 +75,7 @@ class Edumap extends EdumapAppModel {
  */
 	public $belongsTo = array(
 		'Block' => array(
-			'className' => 'Block',
+			'className' => 'Blocks.Block',
 			'foreignKey' => 'block_id',
 			'conditions' => '',
 			'fields' => '',
@@ -300,6 +299,7 @@ class Edumap extends EdumapAppModel {
 			'FilesUser' => 'Files.FilesUser',
 		]);
 
+		//トランザクションBegin
 		$dataSource = $this->getDataSource();
 		$dataSource->begin();
 
@@ -535,5 +535,4 @@ class Edumap extends EdumapAppModel {
 
 		return true;
 	}
-
 }

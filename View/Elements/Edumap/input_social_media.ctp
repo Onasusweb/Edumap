@@ -35,6 +35,11 @@ if (isset($edumapSocialMedium[EdumapSocialMedium::SOCIAL_TYPE_TWITTER])) {
 			)); ?>
 	</div>
 	<div class="col-xs-12">
-		<?php echo $this->element('error', ['model' => 'EdumapSocialMedium', 'field' => 'twitter']); ?>
+		<?php echo $this->element(
+			'Edumap.error', [
+				'errors' => $this->validationErrors['EdumapSocialMedium'],
+				'model' => 'twitter',
+				'field' => 'value',
+			]); ?>
 	</div>
 </div>

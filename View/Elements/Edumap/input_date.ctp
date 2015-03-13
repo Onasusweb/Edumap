@@ -42,7 +42,12 @@ $month = isset($value['month']) ? $value['month'] : substr($value, 4, 2);
 		</div>
 	</div>
 	<div class="col-xs-12">
-		<?php echo $this->element('error', ['model' => $model, 'field' => $underscoreField]); ?>
+		<?php echo $this->element(
+			'Edumap.error', [
+				'errors' => $this->validationErrors,
+				'model' => $model,
+				'field' => $underscoreField,
+			]); ?>
 	</div>
 </div>
 

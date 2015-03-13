@@ -20,7 +20,7 @@ App::uses('EdumapAppController', 'Edumap.Controller');
 class EdumapController extends EdumapAppController {
 
 /**
- * use model
+ * use models
  *
  * @var array
  */
@@ -34,13 +34,13 @@ class EdumapController extends EdumapAppController {
 	);
 
 /**
- * use component
+ * use components
  *
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsBlock',
 		'NetCommons.NetCommonsFrame',
+		'NetCommons.NetCommonsWorkflow',
 		'NetCommons.NetCommonsRoomRole' => array(
 			//コンテンツの権限設定
 			'allowedActions' => array(
@@ -56,7 +56,8 @@ class EdumapController extends EdumapAppController {
  * @var array
  */
 	public $helpers = array(
-		'Edumap.Edumap'
+		'Edumap.Edumap',
+		'NetCommons.Token'
 	);
 
 /**
@@ -108,7 +109,7 @@ class EdumapController extends EdumapAppController {
 		}
 
 		if ($this->request->isPost()) {
-			if (!$status = $this->__parseStatus()) {
+			if (!$status = $this->NetCommonsWorkflow->parseStatus()) {
 				return;
 			}
 
@@ -221,30 +222,6 @@ class EdumapController extends EdumapAppController {
 	}
 
 /**
- * Parse content status from request
- *
- * @return mixed status on success, false on error
- * @throws BadRequestException
- */
-	private function __parseStatus() {
-		if ($matches = preg_grep('/^save_\d/', array_keys($this->data))) {
-			list(, $status) = explode('_', array_shift($matches));
-		} else {
-			if ($this->request->is('ajax')) {
-				$this->renderJson(
-					['error' => ['validationErrors' => ['status' => __d('net_commons', 'Invalid request.')]]],
-					__d('net_commons', 'Bad Request'), 400
-				);
-			} else {
-				throw new BadRequestException(__d('net_commons', 'Bad Request'));
-			}
-			return false;
-		}
-
-		return $status;
-	}
-
-/**
  * Parse data from request
  *
  * @return array
@@ -304,5 +281,4 @@ class EdumapController extends EdumapAppController {
 
 		return true;
 	}
-
 }

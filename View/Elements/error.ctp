@@ -10,13 +10,12 @@
  */
 ?>
 
-<div class="has-error">
-	<?php if ($this->validationErrors[$model] && isset($this->validationErrors[$model][$field])): ?>
-		<?php $messages = Hash::flatten($this->validationErrors[$model][$field]); ?>
-		<?php foreach ($messages as $message): ?>
+<?php if (isset($errors[$model][$field])): ?>
+	<div class="has-error">
+		<?php foreach ($errors[$model][$field] as $message): ?>
 			<div class="help-block">
 				<?php echo $message; ?>
 			</div>
 		<?php endforeach; ?>
-	<?php endif; ?>
-</div>
+	</div>
+<?php endif;

@@ -65,10 +65,12 @@
 	</div>
 
 	<div class="col-xs-12">
-		<?php echo $this->element('error', array(
-			'model' => 'Edumap',
-			'field' => Edumap::AVATAR_INPUT
-		)); ?>
+		<?php echo $this->element(
+			'Edumap.error', [
+				'errors' => $this->validationErrors,
+				'model' => 'Edumap',
+				'field' => Edumap::AVATAR_INPUT,
+			]); ?>
 	</div>
 </div>
 
@@ -124,7 +126,12 @@
 		?>
 	</div>
 	<div class="col-xs-12">
-		<?php echo $this->element('error', ['model' => 'Edumap', 'field' => 'prefecture_code']); ?>
+		<?php echo $this->element(
+			'Edumap.error', [
+				'errors' => $this->validationErrors,
+				'model' => 'Edumap',
+				'field' => 'prefecture_code',
+			]); ?>
 	</div>
 </div>
 
@@ -241,7 +248,12 @@
 	</div>
 
 	<div class="col-xs-12">
-		<?php echo $this->element('error', ['model' => 'Edumap', 'field' => 'governor_type']); ?>
+		<?php echo $this->element(
+			'Edumap.error', [
+				'errors' => $this->validationErrors,
+				'model' => 'Edumap',
+				'field' => 'governor_type',
+			]); ?>
 	</div>
 </div>
 
@@ -270,7 +282,12 @@
 	</div>
 
 	<div class="col-xs-12">
-		<?php echo $this->element('error', ['model' => 'Edumap', 'field' => 'education_type']); ?>
+		<?php echo $this->element(
+			'Edumap.error', [
+				'errors' => $this->validationErrors,
+				'model' => 'Edumap',
+				'field' => 'education_type',
+			]); ?>
 	</div>
 </div>
 
@@ -298,7 +315,12 @@
 	</div>
 
 	<div class="col-xs-12">
-		<?php echo $this->element('error', ['model' => 'Edumap', 'field' => 'coeducation_type']); ?>
+		<?php echo $this->element(
+			'Edumap.error', [
+				'errors' => $this->validationErrors,
+				'model' => 'Edumap',
+				'field' => 'coeducation_type',
+			]); ?>
 	</div>
 </div>
 
@@ -335,6 +357,11 @@
 	</div>
 
 	<div class="col-xs-12">
-		<?php echo $this->element('error', ['model' => 'Edumap', 'field' => 'description']); ?>
+		<?php echo $this->element(
+			'Edumap.error', [
+				'errors' => $this->validationErrors,
+				'model' => 'Edumap',
+				'field' => 'description',
+			]); ?>
 	</div>
 </div>
