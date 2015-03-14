@@ -13,13 +13,6 @@
 NetCommonsApp.controller('Edumap', function($scope, NetCommonsTab) {
 
   /**
-   * params
-   *
-   * @type {bool}
-   */
-  $scope.status = 0;
-
-  /**
    * tab
    *
    * @type {object}
