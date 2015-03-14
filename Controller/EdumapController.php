@@ -102,7 +102,7 @@ class EdumapController extends EdumapAppController {
  * @return void
  */
 	public function edit() {
-		$this->__initEdumap();
+		$this->__initEdumap(['comments']);
 
 		if ($this->request->isGet()) {
 			CakeSession::write('backUrl', $this->request->referer());
@@ -134,7 +134,7 @@ class EdumapController extends EdumapAppController {
 			$edumap = $this->Edumap->saveEdumap($data);
 
 			//エラーチェック＆出力
-			if (! $this->__handleValidationError($this->Edumap->validationErrors)) {
+			if (! $this->handleValidationError($this->Edumap->validationErrors)) {
 				$data['Edumap']['foundation_date'] = $this->data['Edumap']['foundation_date'];
 				$data['Edumap']['closed_date'] = $this->data['Edumap']['closed_date'];
 				$results = $this->camelizeKeyRecursive($data);
@@ -155,9 +155,10 @@ class EdumapController extends EdumapAppController {
 /**
  * __initEdumap method
  *
+ * @param array $contains Optional result sets
  * @return void
  */
-	private function __initEdumap() {
+	private function __initEdumap($contains = []) {
 		//edumapデータ基本情報
 		if (! $edumap = $this->Edumap->getEdumap(
 			$this->viewVars['blockId'],
@@ -165,25 +166,35 @@ class EdumapController extends EdumapAppController {
 		)) {
 			$edumap = $this->Edumap->create(['id' => null, 'key' => null, 'file_id' => null]);
 		}
+
+		$results = array(
+			'edumap' => $edumap['Edumap'],
+			'contentStatus' => $edumap['Edumap']['status'],
+		);
+
 		//公開設定
-		if (! $visibilitySetting = $this->EdumapVisibilitySetting->find('first', array(
+		if (! $edumapVisibilitySetting = $this->EdumapVisibilitySetting->find('first', array(
 			'recursive' => -1,
 			'conditions' => array(
 				'edumap_key' => $edumap['Edumap']['key']
 			)
 		))) {
-			$visibilitySetting = $this->EdumapVisibilitySetting->create();
+			$edumapVisibilitySetting = $this->EdumapVisibilitySetting->create();
 		}
+		$results['edumapVisibilitySetting'] = $edumapVisibilitySetting['EdumapVisibilitySetting'];
+
 		//アバター取得
-		$avatar = $this->FileModel->find('first', array(
+		if ($file = $this->FileModel->find('first', array(
 			'recursive' => -1,
 			'conditions' => array(
 				$this->FileModel->alias . '.id' => $edumap['Edumap']['file_id']
 			)
-		));
+		))) {
+			$results['file'] = $file['File'];
+		}
 
 		//生徒数取得
-		$edumapStudents = $this->EdumapStudent->find('list', array(
+		$results['edumapStudents'] = $this->EdumapStudent->find('list', array(
 			'fields' => array('gendar', 'number', 'grade'),
 			'recursive' => -1,
 			'conditions' => array(
@@ -191,32 +202,24 @@ class EdumapController extends EdumapAppController {
 			)
 		));
 		//SNS取得
-		$edumapSocialMedia = $this->EdumapSocialMedium->find('list', array(
+		$results['edumapSocialMedium'] = $this->EdumapSocialMedium->find('list', array(
 			'fields' => array('type', 'value'),
 			'recursive' => -1,
 			'conditions' => array(
 				'edumap_id' => $edumap['Edumap']['id']
 			)
 		));
-		//コメント
-		$comments = $this->Comment->getComments(
-			array(
-				'plugin_key' => 'edumap',
-				'content_key' => $edumap['Edumap']['key']
-			)
-		);
 
-		$results = Hash::merge(
-			$edumap,
-			$visibilitySetting,
-			$avatar,
-			array(
-				'edumapStudents' => $edumapStudents,
-				'edumapSocialMedium' => $edumapSocialMedia,
-				'comments' => $comments,
-				'contentStatus' => $edumap['Edumap']['status']
-			)
-		);
+		//コメント
+		if (in_array('comments', $contains, true)) {
+			$results['comments'] = $this->Comment->getComments(
+				array(
+					'plugin_key' => 'edumap',
+					'content_key' => $edumap['Edumap']['key']
+				)
+			);
+		}
+
 		$results = $this->camelizeKeyRecursive($results);
 		$this->set($results);
 	}
@@ -261,24 +264,5 @@ class EdumapController extends EdumapAppController {
 		}
 
 		return $data;
-	}
-
-/**
- * Handle validation error
- *
- * @param array $errors validation errors
- * @return bool true on success, false on error
- */
-	private function __handleValidationError($errors) {
-		if ($errors) {
-			$this->validationErrors = $errors;
-			if ($this->request->is('ajax')) {
-				$results = ['error' => ['validationErrors' => $errors]];
-				$this->renderJson($results, __d('net_commons', 'Bad Request'), 400);
-			}
-			return false;
-		}
-
-		return true;
 	}
 }
