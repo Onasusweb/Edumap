@@ -327,7 +327,7 @@ class Edumap extends EdumapAppModel {
 			$this->data['Edumap']['language_id'] = (int)$block['Block']['language_id'];
 
 			//ブロック名の登録
-			$block['Block']['name'] = $data['Edumap']['name'];
+			$block['Block']['name'] = $this->data['Edumap']['name'];
 			if (! $this->Block->save($block)) {
 				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
@@ -502,7 +502,7 @@ class Edumap extends EdumapAppModel {
 			$data['EdumapStudent'] = Hash::insert($data['EdumapStudent'], '{n}.edumap_id', $data[$this->alias]['id']);
 			if (! $this->EdumapStudent->saveMany($data['EdumapStudent'], ['validate' => false])) {
 				// @codeCoverageIgnoreStart
-				return false;
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				// @codeCoverageIgnoreEnd
 			}
 		}
