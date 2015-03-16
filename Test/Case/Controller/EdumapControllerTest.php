@@ -367,38 +367,13 @@ class EdumapControllerTest extends EdumapControllerTestBase {
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_1',
-					'name_kana' => '',
-					'fax' => '',
-					'inquiry' => '',
-					'site_url' => '',
-					'rss_url' => '',
 					'foundation_date' => array('year' => '', 'month' => ''),
 					'closed_date' => array('year' => '', 'month' => ''),
-					'governor_type' => '0',
-					'education_type' => '0',
-					'coeducation_type' => '0',
-					'principal_name' => '',
-					'principal_email' => '',
-					'description' => '',
 				),
 				'EdumapSocialMedium' => array(
 					EdumapSocialMedium::SOCIAL_TYPE_TWITTER => array(
 						'value' => '',
 					)
-				),
-				'EdumapStudent' => array(
-					array('grade' => '1', 'gendar' => false, 'number' => ''),
-					array('grade' => '1', 'gendar' => true, 'number' => ''),
-					array('grade' => '2', 'gendar' => false, 'number' => ''),
-					array('grade' => '2', 'gendar' => true, 'number' => ''),
-					array('grade' => '3', 'gendar' => false, 'number' => ''),
-					array('grade' => '3', 'gendar' => true, 'number' => ''),
-					array('grade' => '4', 'gendar' => false, 'number' => ''),
-					array('grade' => '4', 'gendar' => true, 'number' => ''),
-					array('grade' => '5', 'gendar' => false, 'number' => ''),
-					array('grade' => '5', 'gendar' => true, 'number' => ''),
-					array('grade' => '6', 'gendar' => false, 'number' => ''),
-					array('grade' => '6', 'gendar' => true, 'number' => ''),
 				),
 				sprintf('save_%s', NetCommonsBlockComponent::STATUS_PUBLISHED) => ''
 			)
