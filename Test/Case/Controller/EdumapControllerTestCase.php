@@ -26,7 +26,7 @@ App::uses('EdumapVisibilitySetting', 'Edumap.Model');
  * @package NetCommons\Edumap\Test\Case\Controller
  * @SuppressWarnings(PHPMD.LongVariable)
  */
-class EdumapControllerTestBase extends YAControllerTestCase {
+class EdumapControllerTestCase extends YAControllerTestCase {
 
 /**
  * Fixtures

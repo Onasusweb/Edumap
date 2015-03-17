@@ -25,7 +25,7 @@ App::uses('AuthComponent', 'Component');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapModelTestBase extends YACakeTestCase {
+class EdumapModelTestCase extends YACakeTestCase {
 
 /**
  * Fixtures

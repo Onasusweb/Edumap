@@ -10,7 +10,7 @@
  */
 
 App::uses('EdumapController', 'Edumap.Controller');
-App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
+App::uses('EdumapControllerTestCase', 'Edumap.Test/Case/Controller');
 
 /**
  * EdumapController Validation Error Test Case based on models
@@ -18,7 +18,7 @@ App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Controller
  */
-class EdumapControllerValidateErrorTest extends EdumapControllerTestBase {
+class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
 
 /**
  * default value

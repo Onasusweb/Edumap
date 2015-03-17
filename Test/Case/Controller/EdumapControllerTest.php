@@ -10,7 +10,7 @@
  */
 
 App::uses('EdumapController', 'Edumap.Controller');
-App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
+App::uses('EdumapControllerTestCase', 'Edumap.Test/Case/Controller');
 
 /**
  * EdumapController Test Case
@@ -19,7 +19,7 @@ App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
  * @package NetCommons\Edumap\Test\Case\Controller
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
-class EdumapControllerTest extends EdumapControllerTestBase {
+class EdumapControllerTest extends EdumapControllerTestCase {
 
 /**
  * default value

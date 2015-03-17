@@ -10,7 +10,7 @@
  */
 
 App::uses('VisibilitySettingsController', 'Edumap.Controller');
-App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
+App::uses('EdumapControllerTestCase', 'Edumap.Test/Case/Controller');
 
 /**
  * EdumapController Validation Error Test Case based on models
@@ -18,7 +18,7 @@ App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Controller
  */
-class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTestBase {
+class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTestCase {
 
 /**
  * default value

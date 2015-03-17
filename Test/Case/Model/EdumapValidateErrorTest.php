@@ -11,7 +11,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
+App::uses('EdumapModelTestCase', 'Edumap.Test/Case/Model');
 
 /**
  * Edumap Model Test Case
@@ -20,7 +20,7 @@ App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
  * @package NetCommons\Edumap\Test\Case\Model
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
-class EdumapValidateErrorTest extends EdumapModelTestBase {
+class EdumapValidateErrorTest extends EdumapModelTestCase {
 
 /**
  * default value
@@ -78,6 +78,10 @@ class EdumapValidateErrorTest extends EdumapModelTestBase {
 	public function testSaveEdumapByStatus() {
 		$frameId = 1;
 		$blockId = 1;
+
+		//コンテンツの公開権限true
+		$this->Edumap->Behaviors->attach('Publishable');
+		$this->Edumap->Behaviors->Publishable->setup($this->Edumap, ['contentPublishable' => true]);
 
 		$checks = array(
 			null, '', -1, 0, 5, 9999, 'abcde', false,

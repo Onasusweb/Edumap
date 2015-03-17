@@ -11,7 +11,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
+App::uses('EdumapModelTestCase', 'Edumap.Test/Case/Model');
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
 
@@ -21,7 +21,7 @@ App::uses('File', 'Utility');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapTest extends EdumapModelTestBase {
+class EdumapTest extends EdumapModelTestCase {
 
 /**
  * default value
