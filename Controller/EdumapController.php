@@ -173,15 +173,15 @@ class EdumapController extends EdumapAppController {
 		);
 
 		//公開設定
-		if (! $edumapVisibilitySetting = $this->EdumapVisibilitySetting->find('first', array(
+		if (! $visibilitySetting = $this->EdumapVisibilitySetting->find('first', array(
 			'recursive' => -1,
 			'conditions' => array(
 				'edumap_key' => $edumap['Edumap']['key']
 			)
 		))) {
-			$edumapVisibilitySetting = $this->EdumapVisibilitySetting->create();
+			$visibilitySetting = $this->EdumapVisibilitySetting->create();
 		}
-		$results['edumapVisibilitySetting'] = $edumapVisibilitySetting['EdumapVisibilitySetting'];
+		$results['edumapVisibilitySetting'] = $visibilitySetting['EdumapVisibilitySetting'];
 
 		//アバター取得
 		if ($file = $this->FileModel->find('first', array(
