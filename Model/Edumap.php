@@ -326,14 +326,6 @@ class Edumap extends EdumapAppModel {
 			$this->data['Edumap']['block_id'] = (int)$block['Block']['id'];
 			$this->data['Edumap']['language_id'] = (int)$block['Block']['language_id'];
 
-			//ブロック名の登録
-			$block['Block']['name'] = $this->data['Edumap']['name'];
-			if (! $this->Block->save($block)) {
-				// @codeCoverageIgnoreStart
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
-			}
-
 			//アバターの登録
 			$this->saveEdumapAvatar($data);
 

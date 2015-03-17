@@ -83,6 +83,7 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 		$this->Edumap->Behaviors->attach('Publishable');
 		$this->Edumap->Behaviors->Publishable->setup($this->Edumap, ['contentPublishable' => true]);
 
+		//Check項目
 		$checks = array(
 			null, '', -1, 0, 5, 9999, 'abcde', false,
 		);
@@ -100,19 +101,20 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 			)
 		);
 
+		//期待値
+		$expected = array(
+			'status' => array(
+				__d('net_commons', 'Invalid request.')
+			)
+		);
+
 		//テスト実施
 		unset($data['Edumap']['status']);
-		$this->setUp();
-		$result = $this->Edumap->saveEdumap($data);
-		$this->tearDown();
-		$this->assertFalse($result, 'Unknown status field ' . print_r($data, true));
+		$this->__assertSaveEdumap('status', $data, $expected);
 
 		foreach ($checks as $check) {
 			$data['Edumap']['status'] = $check;
-			$this->setUp();
-			$result = $this->Edumap->saveEdumap($data);
-			$this->tearDown();
-			$this->assertFalse($result, 'Error status field ' . print_r($data, true));
+			$this->__assertSaveEdumap('status', $data, $expected);
 		}
 	}
 
@@ -126,14 +128,22 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 		$frameId = 1;
 		$blockId = 1;
 
+		//Checkカラム
 		$fields = array(
-			'name', 'handle', 'postal_code', 'prefecture_code', 'location', 'tel', 'emergency_email'
+			'name' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'School name')),
+			'handle' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Handle name')),
+			'postal_code' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Postal code')),
+			'prefecture_code' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Prefecture')),
+			'location' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Location')),
+			'tel' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Phone number')),
+			'emergency_email' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Emergency contact email')),
 		);
+		//Check項目
 		$checks = array(
 			null, '', false,
 		);
 
-		foreach ($fields as $field) {
+		foreach ($fields as $field => $message) {
 			//データ生成
 			$data = Hash::merge(
 				$this->__saveDefault,
@@ -147,19 +157,18 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 				)
 			);
 
+			//期待値
+			$expected = array(
+				$field => array($message)
+			);
+
 			//テスト実施
 			unset($data['Edumap'][$field]);
-			$this->setUp();
-			$result = $this->Edumap->saveEdumap($data);
-			$this->tearDown();
-			$this->assertFalse($result, 'Unknown ' . $field . ' field ' . print_r($data, true));
+			$this->__assertSaveEdumap($field, $data, $expected);
 
 			foreach ($checks as $check) {
 				$data['Edumap'][$field] = $check;
-				$this->setUp();
-				$result = $this->Edumap->saveEdumap($data);
-				$this->tearDown();
-				$this->assertFalse($result, 'Error ' . $field . ' field ' . print_r($data, true));
+				$this->__assertSaveEdumap($field, $data, $expected);
 			}
 		}
 	}
@@ -174,14 +183,16 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 		$frameId = 1;
 		$blockId = 1;
 
+		//Checkカラム
 		$fields = array(
-			'postal_code'
+			'postal_code' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Postal code'), '999-9999')
 		);
+		//Check項目
 		$checks = array(
-			'9999-999', 'abc-defg', 'abcdefg', '9999999', '        '
+			'9999-999', 'abc-defg', 'abcdefg', '9999999'
 		);
 
-		foreach ($fields as $field) {
+		foreach ($fields as $field => $message) {
 			//データ生成
 			$data = Hash::merge(
 				$this->__saveDefault,
@@ -195,13 +206,15 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 				)
 			);
 
+			//期待値
+			$expected = array(
+				$field => array($message)
+			);
+
 			//テスト実施
 			foreach ($checks as $check) {
 				$data['Edumap'][$field] = $check;
-				$this->setUp();
-				$result = $this->Edumap->saveEdumap($data);
-				$this->tearDown();
-				$this->assertFalse($result, 'Error ' . $field . ' field ' . print_r($data, true));
+				$this->__assertSaveEdumap($field, $data, $expected);
 			}
 		}
 	}
@@ -216,14 +229,16 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 		$frameId = 1;
 		$blockId = 1;
 
+		//Checkカラム
 		$fields = array(
-			'prefecture_code'
+			'prefecture_code' => __d('net_commons', 'Invalid request.'),
 		);
+		//Check項目
 		$checks = array(
-			'00', '48', '9999', 'ab', 'abcd', '--', '  '
+			'00', '48', '9999', 'ab', 'abcd', '--'
 		);
 
-		foreach ($fields as $field) {
+		foreach ($fields as $field => $message) {
 			//データ生成
 			$data = Hash::merge(
 				$this->__saveDefault,
@@ -237,13 +252,15 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 				)
 			);
 
+			//期待値
+			$expected = array(
+				$field => array($message)
+			);
+
 			//テスト実施
 			foreach ($checks as $check) {
 				$data['Edumap'][$field] = $check;
-				$this->setUp();
-				$result = $this->Edumap->saveEdumap($data);
-				$this->tearDown();
-				$this->assertFalse($result, 'Error ' . $field . ' field ' . print_r($data, true));
+				$this->__assertSaveEdumap($field, $data, $expected);
 			}
 		}
 	}
@@ -258,17 +275,20 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 		$frameId = 1;
 		$blockId = 1;
 
+		//Checkカラム
 		$fields = array(
-			'tel', 'fax'
+			'tel' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Phone number'), __d('edumap', 'Phone number')),
+			'fax' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Fax number'), __d('edumap', 'Fax number')),
 		);
+		//Check項目
 		$checks = array(
-			'0123456789', 'abcdefghij', '          ',
+			'0123456789', 'abcdefghij',
 			'99-9999-9999', 'ab-cdef-ghij',
 			'99(9999)9999', 'ab(cdef)ghij', '01(2345)6789', '  (    )    ',
 			'+08-01-2345-6789',
 		);
 
-		foreach ($fields as $field) {
+		foreach ($fields as $field => $message) {
 			//データ生成
 			$data = Hash::merge(
 				$this->__saveDefault,
@@ -282,13 +302,15 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 				)
 			);
 
+			//期待値
+			$expected = array(
+				$field => array($message)
+			);
+
 			//テスト実施
 			foreach ($checks as $check) {
 				$data['Edumap'][$field] = $check;
-				$this->setUp();
-				$result = $this->Edumap->saveEdumap($data);
-				$this->tearDown();
-				$this->assertFalse($result, 'Error ' . $field . ' field ' . print_r($data, true));
+				$this->__assertSaveEdumap($field, $data, $expected);
 			}
 		}
 	}
@@ -303,16 +325,19 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 		$frameId = 1;
 		$blockId = 1;
 
+		//Checkカラム
 		$fields = array(
-			'emergency_email', 'principal_email'
+			'emergency_email' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Emergency contact email'), __d('edumap', 'E-mail')),
+			'principal_email' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Principal email'), __d('edumap', 'E-mail')),
 		);
+		//Check項目
 		$checks = array(
 			'abcdefghij', '9999999',
 			'@example.com', 'test@',
 			'  @example.com', 'test@    ', 'test@    .com',
 		);
 
-		foreach ($fields as $field) {
+		foreach ($fields as $field => $message) {
 			//データ生成
 			$data = Hash::merge(
 				$this->__saveDefault,
@@ -326,13 +351,15 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 				)
 			);
 
+			//期待値
+			$expected = array(
+				$field => array($message)
+			);
+
 			//テスト実施
 			foreach ($checks as $check) {
 				$data['Edumap'][$field] = $check;
-				$this->setUp();
-				$result = $this->Edumap->saveEdumap($data);
-				$this->tearDown();
-				$this->assertFalse($result, 'Error ' . $field . ' field ' . print_r($data, true));
+				$this->__assertSaveEdumap($field, $data, $expected);
 			}
 		}
 	}
@@ -347,9 +374,12 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 		$frameId = 1;
 		$blockId = 1;
 
+		//Checkカラム
 		$fields = array(
-			'site_url', 'rss_url'
+			'site_url' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Site URL'), __d('edumap', 'URL')),
+			'rss_url' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'RSS URL'), __d('edumap', 'URL')),
 		);
+		//Check項目
 		$checks = array(
 			'http:', 'https:', 'ftp:', 'javascript:',
 			'http:/', 'https:/', 'ftp:/', 'javascript:/',
@@ -357,7 +387,7 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 			'http://test', 'https://test', 'ftp://test', 'javascript:test', 'abc://exapmle.com',
 		);
 
-		foreach ($fields as $field) {
+		foreach ($fields as $field => $message) {
 			//データ生成
 			$data = Hash::merge(
 				$this->__saveDefault,
@@ -371,13 +401,15 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 				)
 			);
 
+			//期待値
+			$expected = array(
+				$field => array($message)
+			);
+
 			//テスト実施
 			foreach ($checks as $check) {
 				$data['Edumap'][$field] = $check;
-				$this->setUp();
-				$result = $this->Edumap->saveEdumap($data);
-				$this->tearDown();
-				$this->assertFalse($result, 'Error ' . $field . ' field ' . print_r($data, true));
+				$this->__assertSaveEdumap($field, $data, $expected);
 			}
 		}
 	}
@@ -392,14 +424,17 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 		$frameId = 1;
 		$blockId = 1;
 
+		//Checkカラム
 		$fields = array(
-			'foundation_date', 'closed_date'
+			'foundation_date' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Foundation date'), __d('edumap', 'Date')),
+			'closed_date' => sprintf(__d('net_commons', 'Unauthorized pattern for %s. Please input the data in %s format.'), __d('edumap', 'Closed date'), __d('edumap', 'Date')),
 		);
+		//Check項目
 		$checks = array(
 			'201405', 'abcdef', '20140512', '2014/05/12', '0000/00', '9999/99',
 		);
 
-		foreach ($fields as $field) {
+		foreach ($fields as $field => $message) {
 			//データ生成
 			$data = Hash::merge(
 				$this->__saveDefault,
@@ -413,13 +448,15 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 				)
 			);
 
+			//期待値
+			$expected = array(
+				$field => array($message)
+			);
+
 			//テスト実施
 			foreach ($checks as $check) {
 				$data['Edumap'][$field] = $check;
-				$this->setUp();
-				$result = $this->Edumap->saveEdumap($data);
-				$this->tearDown();
-				$this->assertFalse($result, 'Error ' . $field . ' field ' . print_r($data, true));
+				$this->__assertSaveEdumap($field, $data, $expected);
 			}
 		}
 	}
@@ -696,6 +733,28 @@ class EdumapValidateErrorTest extends EdumapModelTestCase {
 		//テスト実施
 		$result = $this->Edumap->saveEdumap($data);
 		$this->assertFalse($result, 'Error avatar ' . print_r($data, true));
+	}
+
+/**
+ * __assertSaveEdumap
+ *
+ * @param string $field Field name
+ * @param array $data Save data
+ * @param array $expected Expected value
+ * @return void
+ */
+	private function __assertSaveEdumap($field, $data, $expected) {
+		//初期処理
+		$this->setUp();
+		//登録処理実行
+		$result = $this->Edumap->saveEdumap($data);
+		//戻り値テスト
+		$this->assertFalse($result, 'Result error: ' . $field . ' ' . print_r($data, true));
+		//validationErrorsテスト
+		$this->assertEquals($this->Edumap->validationErrors, $expected,
+							'Validation error: ' . $field . ' ' . print_r($this->Edumap->validationErrors, true) . print_r($data, true));
+		//終了処理
+		$this->tearDown();
 	}
 
 }
