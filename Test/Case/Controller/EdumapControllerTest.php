@@ -87,6 +87,25 @@ class EdumapControllerTest extends EdumapControllerTestCase {
 	);
 
 /**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		$this->generate(
+			'Edumap.Edumap',
+			[
+				'components' => [
+					'Auth' => ['user'],
+					'Session',
+					'Security',
+				]
+			]
+		);
+		parent::setUp();
+	}
+
+/**
  * Expect visitor can access index action
  *
  * @return void
@@ -147,7 +166,6 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testViewByAdmin() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		$folder = new Folder();
@@ -200,7 +218,6 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditGet() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		$folder = new Folder();
@@ -234,7 +251,6 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditGetWithoutBlock() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		$this->testAction(
@@ -272,7 +288,6 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditPost() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -312,7 +327,6 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditPostWithoutBlock() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -352,7 +366,6 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditPostUnknownInputs() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		//データ生成

@@ -55,12 +55,30 @@ class VisibilitySettingsControllerTest extends EdumapControllerTestCase {
 	);
 
 /**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		$this->generate(
+			'Edumap.VisibilitySettings',
+			[
+				'components' => [
+					'Auth' => ['user'],
+					'Session',
+					'Security',
+				]
+			]
+		);
+		parent::setUp();
+	}
+
+/**
  * Expect admin user can access edit action
  *
  * @return void
  */
 	public function testEditGet() {
-		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		$this->testAction(
@@ -82,7 +100,6 @@ class VisibilitySettingsControllerTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testAddFrameWithoutBlock() {
-		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		$this->testAction(
@@ -103,7 +120,6 @@ class VisibilitySettingsControllerTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditPost() {
-		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -142,7 +158,6 @@ class VisibilitySettingsControllerTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditPostWithoutBlock() {
-		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成

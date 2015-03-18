@@ -86,26 +86,6 @@ class EdumapControllerTestCase extends YAControllerTestCase {
 	}
 
 /**
- * _generateController method
- *
- * @param string $controllerName controller name
- * @param array $addMocks generate options
- * @return void
- */
-	protected function _generateController($controllerName, $addMocks = array()) {
-		$mocks = array(
-			'components' => array(
-				'Auth' => array('user'),
-				'Session',
-				'Security',
-			)
-		);
-		$params = array_merge_recursive($mocks, $addMocks);
-
-		$this->generate($controllerName, $params);
-	}
-
-/**
  * testIndex method
  *
  * @return void

@@ -54,12 +54,30 @@ class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTest
 	);
 
 /**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		$this->generate(
+			'Edumap.VisibilitySettings',
+			[
+				'components' => [
+					'Auth' => ['user'],
+					'Session',
+					'Security',
+				]
+			]
+		);
+		parent::setUp();
+	}
+
+/**
  * Expect user cannot edit w/o valid announcements.content
  *
  * @return void
  */
 	public function testSaveEditErrorByEdumapKey() {
-		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -106,7 +124,6 @@ class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTest
  * @return void
  */
 	public function testSaveEditErrorByUnknownEdumap() {
-		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -145,7 +162,6 @@ class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTest
  * @return void
  */
 	public function testSaveEditErrorJsonByUnknownEdumap() {
-		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this);
 
 		//データ生成

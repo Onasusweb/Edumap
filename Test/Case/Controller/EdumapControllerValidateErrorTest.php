@@ -83,8 +83,26 @@ class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
 			),
 		),
 		'DeleteFile' => array(array('File' => array('id' => '0')))
-
 	);
+
+/**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		$this->generate(
+			'Edumap.Edumap',
+			[
+				'components' => [
+					'Auth' => ['user'],
+					'Session',
+					'Security',
+				]
+			]
+		);
+		parent::setUp();
+	}
 
 /**
  * Expect user cannot edit w/o valid edumap.status
@@ -92,7 +110,6 @@ class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditWithInvalidStatus() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -131,7 +148,6 @@ class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditWithInvalidStatusJson() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -173,7 +189,6 @@ class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditNameError() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		//データ生成
@@ -222,7 +237,6 @@ class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditCommentError() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this);
 
 		//データ生成

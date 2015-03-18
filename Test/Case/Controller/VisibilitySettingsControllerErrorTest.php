@@ -55,6 +55,25 @@ class VisibilitySettingsControllerErrorTest extends EdumapControllerTestCase {
 	);
 
 /**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		$this->generate(
+			'Edumap.VisibilitySettings',
+			[
+				'components' => [
+					'Auth' => ['user'],
+					'Session',
+					'Security',
+				]
+			]
+		);
+		parent::setUp();
+	}
+
+/**
  * Expect unauthenticated user cannot view edit action
  *
  * @return void
@@ -72,7 +91,6 @@ class VisibilitySettingsControllerErrorTest extends EdumapControllerTestCase {
 	public function testContentEditableError() {
 		$this->setExpectedException('ForbiddenException');
 
-		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this, Role::ROLE_KEY_VISITOR);
 
 		$this->testAction('/edumap/visibilitySettings/edit/1.json', array('method' => 'get'));
@@ -88,7 +106,6 @@ class VisibilitySettingsControllerErrorTest extends EdumapControllerTestCase {
 	public function testEditContentPublishedError() {
 		$this->setExpectedException('ForbiddenException');
 
-		$this->_generateController('Edumap.VisibilitySettings');
 		RolesControllerTest::login($this, Role::ROLE_KEY_EDITOR);
 
 		//データ生成

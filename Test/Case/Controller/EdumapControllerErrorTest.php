@@ -86,6 +86,25 @@ class EdumapControllerErrorTest extends EdumapControllerTestCase {
 	);
 
 /**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		$this->generate(
+			'Edumap.Edumap',
+			[
+				'components' => [
+					'Auth' => ['user'],
+					'Session',
+					'Security',
+				]
+			]
+		);
+		parent::setUp();
+	}
+
+/**
  * Expect unauthenticated user cannot view edit action
  *
  * @return void
@@ -103,7 +122,6 @@ class EdumapControllerErrorTest extends EdumapControllerTestCase {
 	public function testContentEditableError() {
 		$this->setExpectedException('ForbiddenException');
 
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this, Role::ROLE_KEY_VISITOR);
 
 		$this->testAction('/edumap/edumap/edit/1.json', array('method' => 'get'));
@@ -117,7 +135,6 @@ class EdumapControllerErrorTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditContentPublishedError() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this, Role::ROLE_KEY_EDITOR);
 
 		//データ生成
@@ -161,7 +178,6 @@ class EdumapControllerErrorTest extends EdumapControllerTestCase {
  * @return void
  */
 	public function testEditContentDisapprovedError() {
-		$this->_generateController('Edumap.Edumap');
 		RolesControllerTest::login($this, Role::ROLE_KEY_EDITOR);
 
 		//データ生成
