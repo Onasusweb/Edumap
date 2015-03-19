@@ -68,6 +68,7 @@ class EdumapModelTestCase extends YACakeTestCase {
 		$this->EdumapSocialMedium = ClassRegistry::init('Edumap.EdumapSocialMedium');
 		$this->EdumapVisibilitySetting = ClassRegistry::init('Edumap.EdumapVisibilitySetting');
 		$this->FileModel = ClassRegistry::init('Files.FileModel');
+		$this->Block = ClassRegistry::init('Blocks.Block');
 	}
 
 /**

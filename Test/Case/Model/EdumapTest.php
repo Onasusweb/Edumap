@@ -184,8 +184,8 @@ class EdumapTest extends EdumapModelTestCase {
 		$this->Edumap->saveEdumap($data);
 
 		//期待値の生成
-		$edumapId = 4;
-		$fileId = 2;
+		$edumapId = $this->Edumap->getLastInsertID();
+		$fileId = $this->FileModel->getLastInsertID();
 
 		$expected = $data;
 		$expected['Edumap'] = Hash::merge(
@@ -242,10 +242,10 @@ class EdumapTest extends EdumapModelTestCase {
 		$this->Edumap->saveEdumap($data);
 
 		//期待値の生成
-		$edumapId = 4;
+		$edumapId = $this->Edumap->getLastInsertID();
 
 		$expected = $data;
-		$expected['Block']['id'] = 3;
+		$expected['Block']['id'] = $this->Block->getLastInsertID();;
 
 		$expected['Edumap'] = Hash::merge(
 			$data['Edumap'],
@@ -294,7 +294,7 @@ class EdumapTest extends EdumapModelTestCase {
 		$this->Edumap->saveEdumap($data);
 
 		//期待値の生成
-		$edumapId = 4;
+		$edumapId = $this->Edumap->getLastInsertID();
 
 		$expected = $data;
 		$expected['Edumap'] = Hash::merge(
