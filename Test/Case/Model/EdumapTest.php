@@ -245,7 +245,7 @@ class EdumapTest extends EdumapModelTestCase {
 		$edumapId = $this->Edumap->getLastInsertID();
 
 		$expected = $data;
-		$expected['Block']['id'] = $this->Block->getLastInsertID();;
+		$expected['Block']['id'] = $this->Block->getLastInsertID();
 
 		$expected['Edumap'] = Hash::merge(
 			$data['Edumap'],
