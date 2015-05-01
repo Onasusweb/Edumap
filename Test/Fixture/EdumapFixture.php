@@ -75,7 +75,7 @@ class EdumapFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'language_id' => 2,
-			'block_id' => 1,
+			'block_id' => 121,
 			'status' => 1,
 			'key' => 'edumap_1',
 			'file_id' => 1,
@@ -105,7 +105,7 @@ class EdumapFixture extends CakeTestFixture {
 		array(
 			'id' => 2,
 			'language_id' => 2,
-			'block_id' => 1,
+			'block_id' => 121,
 			'status' => 3,
 			'key' => 'edumap_1',
 			'file_id' => 1,
@@ -135,7 +135,7 @@ class EdumapFixture extends CakeTestFixture {
 		array(
 			'id' => 3,
 			'language_id' => 2,
-			'block_id' => 2,
+			'block_id' => 122,
 			'status' => 1,
 			'key' => 'edumap_2',
 			'file_id' => 0,

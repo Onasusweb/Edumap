@@ -93,7 +93,7 @@ class VisibilitySettingsControllerErrorTest extends EdumapControllerTestCase {
 
 		RolesControllerTest::login($this, Role::ROLE_KEY_VISITOR);
 
-		$this->testAction('/edumap/visibilitySettings/edit/1.json', array('method' => 'get'));
+		$this->testAction('/edumap/visibilitySettings/edit/121.json', array('method' => 'get'));
 
 		AuthGeneralControllerTest::logout($this);
 	}
@@ -109,8 +109,8 @@ class VisibilitySettingsControllerErrorTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this, Role::ROLE_KEY_EDITOR);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,

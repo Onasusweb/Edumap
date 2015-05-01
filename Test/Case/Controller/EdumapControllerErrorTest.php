@@ -111,7 +111,7 @@ class EdumapControllerErrorTest extends EdumapControllerTestCase {
  */
 	public function testEditLoginError() {
 		$this->setExpectedException('ForbiddenException');
-		$this->testAction('/edumap/edumap/edit/1.json', array('method' => 'get'));
+		$this->testAction('/edumap/edumap/edit/121.json', array('method' => 'get'));
 	}
 
 /**
@@ -124,7 +124,7 @@ class EdumapControllerErrorTest extends EdumapControllerTestCase {
 
 		RolesControllerTest::login($this, Role::ROLE_KEY_VISITOR);
 
-		$this->testAction('/edumap/edumap/edit/1.json', array('method' => 'get'));
+		$this->testAction('/edumap/edumap/edit/121.json', array('method' => 'get'));
 
 		AuthGeneralControllerTest::logout($this);
 	}
@@ -138,8 +138,8 @@ class EdumapControllerErrorTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this, Role::ROLE_KEY_EDITOR);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,
@@ -181,8 +181,8 @@ class EdumapControllerErrorTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this, Role::ROLE_KEY_EDITOR);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,

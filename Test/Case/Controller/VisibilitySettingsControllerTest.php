@@ -82,7 +82,7 @@ class VisibilitySettingsControllerTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		$this->testAction(
-			'/edumap/visibilitySettings/edit/1',
+			'/edumap/visibilitySettings/edit/121',
 			array(
 				'method' => 'get',
 				'return' => 'contents'
@@ -103,7 +103,7 @@ class VisibilitySettingsControllerTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		$this->testAction(
-			'/edumap/visibilitySettings/edit/2',
+			'/edumap/visibilitySettings/edit/122',
 			array(
 				'method' => 'get',
 				'return' => 'contents'
@@ -123,8 +123,8 @@ class VisibilitySettingsControllerTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		//登録処理実行
 		$data = Hash::merge(
@@ -161,8 +161,8 @@ class VisibilitySettingsControllerTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 2;
-		$blockId = 2;
+		$frameId = 122;
+		$blockId = 122;
 
 		//登録処理実行
 		$data = Hash::merge(

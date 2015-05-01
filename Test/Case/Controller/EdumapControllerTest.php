@@ -112,7 +112,7 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  */
 	public function testIndex() {
 		$this->testAction(
-			'/edumap/edumap/index/1',
+			'/edumap/edumap/index/121',
 			array(
 				'method' => 'get',
 				'return' => 'view',
@@ -129,7 +129,7 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  */
 	public function testView() {
 		$this->testAction(
-			'/edumap/edumap/view/1',
+			'/edumap/edumap/view/121',
 			array(
 				'method' => 'get',
 				'return' => 'view',
@@ -146,7 +146,7 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  */
 	public function testViewJson() {
 		$ret = $this->testAction(
-			'/edumap/edumap/view/1.json',
+			'/edumap/edumap/view/121.json',
 			array(
 				'method' => 'get',
 				'type' => 'json',
@@ -181,7 +181,7 @@ class EdumapControllerTest extends EdumapControllerTestCase {
 		$file->close();
 
 		$view = $this->testAction(
-			'/edumap/edumap/view/1',
+			'/edumap/edumap/view/121',
 			array(
 				'method' => 'get',
 				'return' => 'view',
@@ -189,8 +189,8 @@ class EdumapControllerTest extends EdumapControllerTestCase {
 		);
 
 		$this->assertTextEquals('Edumap/viewForEditor', $this->controller->view);
-		$this->assertTextContains('nc-edumap-1', $view, print_r($view, true));
-		$this->assertTextContains('/edumap/edumap/edit/1', $view, print_r($view, true));
+		$this->assertTextContains('nc-edumap-121', $view, print_r($view, true));
+		$this->assertTextContains('/edumap/edumap/edit/121', $view, print_r($view, true));
 
 		$folder->delete(TMP . 'tests' . DS . 'file');
 		AuthGeneralControllerTest::logout($this);
@@ -233,7 +233,7 @@ class EdumapControllerTest extends EdumapControllerTestCase {
 		$file->close();
 
 		$this->testAction(
-			'/edumap/edumap/edit/1',
+			'/edumap/edumap/edit/121',
 			array(
 				'method' => 'get',
 				'return' => 'contents'
@@ -254,7 +254,7 @@ class EdumapControllerTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		$this->testAction(
-			'/edumap/edumap/edit/3',
+			'/edumap/edumap/edit/123',
 			array(
 				'method' => 'get',
 				'return' => 'contents'
@@ -273,7 +273,7 @@ class EdumapControllerTest extends EdumapControllerTestCase {
  */
 	public function testAddFrameWithoutBlock() {
 		$this->testAction(
-			'/edumap/edumap/view/3',
+			'/edumap/edumap/view/123',
 			array(
 				'method' => 'get',
 				'return' => 'contents'
@@ -291,8 +291,8 @@ class EdumapControllerTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,
@@ -330,7 +330,7 @@ class EdumapControllerTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 3;
+		$frameId = 123;
 		$blockId = '';
 
 		$data = Hash::merge(
@@ -369,8 +369,8 @@ class EdumapControllerTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,

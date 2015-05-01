@@ -70,12 +70,12 @@ class EdumapTest extends EdumapModelTestCase {
 	);
 
 /**
- * testGetEdumap 
+ * testGetEdumap
  *
  * @return void
  */
 	public function testGetEdumap() {
-		$blockId = 1;
+		$blockId = 121;
 		$contentEditable = true;
 		$result = $this->Edumap->getEdumap($blockId, $contentEditable);
 
@@ -97,7 +97,7 @@ class EdumapTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testGetEdumapByNoEditable() {
-		$blockId = 1;
+		$blockId = 121;
 		$contentEditable = false;
 		$result = $this->Edumap->getEdumap($blockId, $contentEditable);
 
@@ -119,8 +119,8 @@ class EdumapTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testSaveEdumap() {
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		//コンテンツの公開権限true
 		$this->Edumap->Behaviors->attach('Publishable');
@@ -218,7 +218,7 @@ class EdumapTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testSaveEdumapWithoutBlockId() {
-		$frameId = 3;
+		$frameId = 123;
 		$blockId = null;
 
 		//コンテンツの公開権限true
@@ -273,8 +273,8 @@ class EdumapTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testSaveEdumapWithoutPublishable() {
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		//データ生成
 		$data = Hash::merge(

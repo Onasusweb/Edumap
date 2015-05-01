@@ -29,7 +29,7 @@ class EdumapErrorTest extends EdumapModelTestCase {
 	public function testSaveEdumapByUnknownFrameId() {
 		$this->setExpectedException('InternalErrorException');
 
-		$frameId = 10;
+		$frameId = 9999;
 		$blockId = 1;
 
 		//データ生成

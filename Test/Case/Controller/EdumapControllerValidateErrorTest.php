@@ -113,8 +113,8 @@ class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,
@@ -151,8 +151,8 @@ class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,
@@ -192,8 +192,8 @@ class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,
@@ -240,8 +240,8 @@ class EdumapControllerValidateErrorTest extends EdumapControllerTestCase {
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,

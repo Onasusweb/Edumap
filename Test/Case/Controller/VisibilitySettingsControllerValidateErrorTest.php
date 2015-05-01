@@ -81,8 +81,8 @@ class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTest
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = 121;
+		$blockId = 121;
 
 		$data = Hash::merge(
 			$this->__saveDefault,
@@ -127,8 +127,8 @@ class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTest
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 3;
-		$blockId = 10;
+		$frameId = 123;
+		$blockId = 123;
 
 		$data = Hash::merge(
 			$this->__saveDefault,
@@ -165,8 +165,8 @@ class VisibilitySettingsControllerValidateErrorTest extends EdumapControllerTest
 		RolesControllerTest::login($this);
 
 		//データ生成
-		$frameId = 3;
-		$blockId = 10;
+		$frameId = 123;
+		$blockId = 123;
 
 		$data = Hash::merge(
 			$this->__saveDefault,
