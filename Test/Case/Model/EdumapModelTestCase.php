@@ -33,27 +33,27 @@ class EdumapModelTestCase extends YACakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'plugin.edumap.block',
-		'plugin.edumap.comment',
+		'plugin.blocks.block',
+		'plugin.boxes.box',
+		'plugin.comments.comment',
 		'plugin.edumap.edumap',
 		'plugin.edumap.edumap_social_medium',
 		'plugin.edumap.edumap_student',
 		'plugin.edumap.edumap_visibility_setting',
-		'plugin.edumap.frame',
-		'plugin.edumap.plugin',
-		'plugin.edumap.user',
-		'plugin.edumap.user_attributes_user',
 		'plugin.files.file',
 		'plugin.files.files_plugin',
 		'plugin.files.files_room',
 		'plugin.files.files_user',
-		'plugin.frames.box',
+		'plugin.frames.frame',
+		'plugin.frames.plugin',
 		'plugin.m17n.language',
-		'plugin.rooms.room',
-		'plugin.rooms.roles_rooms_user',
 		'plugin.roles.default_role_permission',
+		'plugin.rooms.roles_rooms_user',
 		'plugin.rooms.roles_room',
+		'plugin.rooms.room',
 		'plugin.rooms.room_role_permission',
+		'plugin.users.user',
+		'plugin.users.user_attributes_user',
 	);
 
 /**
