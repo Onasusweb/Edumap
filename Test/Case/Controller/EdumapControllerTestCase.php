@@ -66,7 +66,7 @@ class EdumapControllerTestCase extends YAControllerTestCase {
 	);
 
 /**
- * setUp method
+ * setUp
  *
  * @return void
  */
@@ -76,7 +76,7 @@ class EdumapControllerTestCase extends YAControllerTestCase {
 	}
 
 /**
- * tearDown method
+ * tearDown 
  *
  * @return void
  */

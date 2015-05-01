@@ -70,7 +70,7 @@ class EdumapTest extends EdumapModelTestCase {
 	);
 
 /**
- * testGetEdumap method
+ * testGetEdumap 
  *
  * @return void
  */
