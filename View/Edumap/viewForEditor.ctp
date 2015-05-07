@@ -22,11 +22,6 @@
 					<span class="glyphicon glyphicon-edit"> </span>
 				</a>
 			</span>
-			<span>
-				<a href="<?php echo $this->Html->url('/edumap/visibility_settings/edit/' . $frameId) ?>" class="btn btn-default">
-					<span class="glyphicon glyphicon-cog"> </span>
-				</a>
-			</span>
 		</div>
 	</div>
 
