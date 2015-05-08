@@ -15,12 +15,12 @@
 
 	<div class="tab-content">
 		<div class="text-right">
-			<a class="btn btn-success" href="<?php echo $this->Html->url('/iframes/blocks/add/' . $frameId);?>">
+			<a class="btn btn-success" href="<?php echo $this->Html->url('/edumap/blocks/add/' . $frameId);?>">
 				<span class="glyphicon glyphicon-plus"> </span>
 			</a>
 		</div>
 
-		<div id="nc-iframe-setting-<?php echo $frameId; ?>">
+		<div id="nc-edumap-setting-<?php echo $frameId; ?>">
 			<?php echo $this->Form->create('', array(
 					'url' => '/frames/frames/edit/' . $frameId
 				)); ?>
@@ -34,49 +34,49 @@
 						<tr>
 							<th>#</th>
 							<th>
-								<?php echo $this->Paginator->sort('Iframe.url', __d('iframes', 'URL')); ?>
+								<?php echo $this->Paginator->sort('Edumap.name', __d('edumap', 'School name')); ?>
 							</th>
 							<th>
 								<?php echo $this->Paginator->sort('Block.public_type', __d('blocks', 'Publishing setting')); ?>
 							</th>
 							<th>
-								<?php echo $this->Paginator->sort('Iframe.modified', __d('net_commons', 'Updated date')); ?>
+								<?php echo $this->Paginator->sort('Edumap.modified', __d('net_commons', 'Updated date')); ?>
 							</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($iframes as $iframe) : ?>
-							<tr<?php echo ($blockId === $iframe['block']['id'] ? ' class="active"' : ''); ?>>
+						<?php foreach ($edumaps as $edumap) : ?>
+							<tr<?php echo ($blockId === $edumap['block']['id'] ? ' class="active"' : ''); ?>>
 								<td>
 									<?php echo $this->Form->input('Frame.block_id',
 										array(
 											'type' => 'radio',
 											'name' => 'data[Frame][block_id]',
-											'options' => array((int)$iframe['block']['id'] => ''),
+											'options' => array((int)$edumap['block']['id'] => ''),
 											'div' => false,
 											'legend' => false,
 											'label' => false,
 											'hiddenField' => false,
-											'checked' => (int)$iframe['block']['id'] === (int)$blockId,
+											'checked' => (int)$edumap['block']['id'] === (int)$blockId,
 											'onclick' => 'submit()'
 										)); ?>
 								</td>
 								<td>
-									<a href="<?php echo $this->Html->url('/iframes/blocks/edit/' . $frameId . '/' . (int)$iframe['block']['id']); ?>">
-										<?php echo h($iframe['iframe']['url']); ?>
+									<a href="<?php echo $this->Html->url('/edumap/blocks/edit/' . $frameId . '/' . (int)$edumap['block']['id']); ?>">
+										<?php echo h($edumap['edumap']['name']); ?>
 									</a>
 								</td>
 								<td>
-									<?php if ($iframe['block']['publicType'] === '0') : ?>
+									<?php if ($edumap['block']['publicType'] === '0') : ?>
 										<?php echo __d('blocks', 'Private'); ?>
-									<?php elseif ($iframe['block']['publicType'] === '1') : ?>
+									<?php elseif ($edumap['block']['publicType'] === '1') : ?>
 										<?php echo __d('blocks', 'Public'); ?>
-									<?php elseif ($iframe['block']['publicType'] === '2') : ?>
+									<?php elseif ($edumap['block']['publicType'] === '2') : ?>
 										<?php echo __d('blocks', 'Limited'); ?>
 									<?php endif; ?>
 								</td>
 								<td>
-									<?php echo $this->Date->dateFormat($iframe['iframe']['modified']); ?>
+									<?php echo $this->Date->dateFormat($edumap['edumap']['modified']); ?>
 								</td>
 							</tr>
 						<?php endforeach; ?>

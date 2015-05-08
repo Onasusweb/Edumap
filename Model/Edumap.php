@@ -51,6 +51,7 @@ class Edumap extends EdumapAppModel {
  * @var array
  */
 	public $actsAs = array(
+		'NetCommons.OriginalKey',
 		'NetCommons.Publishable',
 		'Files.YAUpload' => array(
 			self::AVATAR_INPUT => array(
@@ -124,14 +125,17 @@ class Edumap extends EdumapAppModel {
 					'allowEmpty' => true
 				)
 			),
-			'key' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
-					'message' => __d('net_commons', 'Invalid request.'),
-					'allowEmpty' => false,
-					'required' => true,
-				)
-			),
+
+			//key to set in OriginalKeyBehavior.
+
+			//'key' => array(
+			//	'notEmpty' => array(
+			//		'rule' => array('notEmpty'),
+			//		'message' => __d('net_commons', 'Invalid request.'),
+			//		'allowEmpty' => false,
+			//		'required' => true,
+			//	)
+			//),
 
 			//status to set in PublishableBehavior.
 
@@ -152,14 +156,14 @@ class Edumap extends EdumapAppModel {
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Handle name')),
-					'required' => true,
+					//'required' => true,
 				)
 			),
 			'postal_code' => array(
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Postal code')),
-					'required' => true,
+					//'required' => true,
 				),
 				'postal' => array(
 					'rule' => '/^\d{3}-\d{4}$/',
@@ -170,7 +174,7 @@ class Edumap extends EdumapAppModel {
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Prefecture')),
-					'required' => true,
+					//'required' => true,
 				),
 				'prefectureCode' => array(
 					'rule' => '/^0[1-9]|[1-3]\d|4[0-7]$/i',
@@ -181,14 +185,14 @@ class Edumap extends EdumapAppModel {
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Location')),
-					'required' => true,
+					//'required' => true,
 				)
 			),
 			'tel' => array(
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Phone number')),
-					'required' => true,
+					//'required' => true,
 				),
 				'phone' => array(
 					'rule' => '/^0\d{1,4}-\d{1,4}-\d{1,4}$/',
@@ -206,7 +210,7 @@ class Edumap extends EdumapAppModel {
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Emergency contact email')),
-					'required' => true,
+					//'required' => true,
 				),
 				'email' => array(
 					'rule' => array('email'),

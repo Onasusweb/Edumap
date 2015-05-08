@@ -19,15 +19,15 @@
 		<?php echo $this->element('Blocks.edit_form', array(
 				'controller' => 'Blocks',
 				'action' => h($this->request->params['action']) . '/' . $frameId . '/' . $blockId,
-				'callback' => 'Iframes.Blocks/edit_form',
-				'cancelUrl' => '/iframes/blocks/index/' . $frameId
+				'callback' => 'Edumap.Blocks/edit_form',
+				'cancelUrl' => '/edumap/blocks/index/' . $frameId
 			)); ?>
 
 		<?php if ($this->request->params['action'] === 'edit') : ?>
 			<?php echo $this->element('Blocks.delete_form', array(
 					'controller' => 'Blocks',
-					'action' => 'delete/' . $frameId . '/' . (int)$iframe['blockId'],
-					'callback' => 'Iframes.Blocks/delete_form'
+					'action' => 'delete/' . $frameId . '/' . (int)$edumap['blockId'],
+					'callback' => 'Edumap.Blocks/delete_form'
 				)); ?>
 		<?php endif; ?>
 	</div>

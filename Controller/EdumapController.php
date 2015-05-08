@@ -25,7 +25,6 @@ class EdumapController extends EdumapAppController {
  * @var array
  */
 	public $uses = array(
-		'Edumap.Edumap',
 		'Edumap.EdumapStudent',
 		'Edumap.EdumapSocialMedium',
 		'Edumap.EdumapVisibilitySetting',
@@ -39,7 +38,6 @@ class EdumapController extends EdumapAppController {
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsFrame',
 		'NetCommons.NetCommonsWorkflow',
 		'NetCommons.NetCommonsRoomRole' => array(
 			//コンテンツの権限設定
