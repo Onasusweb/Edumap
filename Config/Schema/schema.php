@@ -16,7 +16,7 @@
  * @package NetCommons\Edumap\Config\Schema
  * @SuppressWarnings(PHPMD.LongVariable)
  */
-class EdumapSchema extends CakeSchema {
+class AppSchema extends CakeSchema {
 
 /**
  * Database connection
@@ -52,10 +52,10 @@ class EdumapSchema extends CakeSchema {
 	public $edumap = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary', 'comment' => 'ID |  |  | '),
 		'language_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 6, 'comment' => 'language id | 言語ID | languages.id | '),
-		'block_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'comment' => 'block id | ブロックID | blocks.id | '),
-		'status' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 4, 'comment' => 'public status, 1: public, 2: public pending, 3: draft during 4: remand | 公開状況  1:公開中、2:公開申請中、3:下書き中、4:差し戻し |  | '),
-		'is_active' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => 'Is active, 0:deactive 1:acive | アクティブなコンテンツかどうか 0:アクティブでない 1:アクティブ | | '),
-		'is_latest' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => 'Is latest, 0:not latest 1:latest | 最新コンテンツかどうか 0:最新でない 1:最新 | | '),
+		'block_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'comment' => 'block id | ブロックID | blocks.id | '),
+		'status' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 4, 'comment' => 'public status, 1: public, 2: public pending, 3: draft during 4: remand | 公開状況  1:公開中、2:公開申請中、3:下書き中、4:差し戻し |  | '),
+		'is_active' => array('type' => 'boolean', 'null' => true, 'default' => '0', 'comment' => 'public status, 1: public, 2: public pending, 3: draft during 4: remand | 公開状況  1:公開中、2:公開申請中、3:下書き中、4:差し戻し |  | '),
+		'is_latest' => array('type' => 'boolean', 'null' => true, 'default' => '0', 'comment' => 'Is active, 0:deactive 1:acive | アクティブなコンテンツかどうか 0:アクティブでない 1:アクティブ | | '),
 		'key' => array('type' => 'string', 'null' => false, 'collate' => 'utf8_general_ci', 'comment' => 'key | キー |  | ', 'charset' => 'utf8'),
 		'file_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'comment' => 'file id | アバター ファイルID | files.id | '),
 		'name' => array('type' => 'string', 'null' => true, 'collate' => 'utf8_general_ci', 'comment' => 'school name | 学校名 |  | ', 'charset' => 'utf8'),
@@ -92,11 +92,11 @@ class EdumapSchema extends CakeSchema {
 	);
 
 /**
- * edumap_social_medium table
+ * edumap_social_media table
  *
  * @var array
  */
-	public $edumap_social_medium = array(
+	public $edumap_social_media = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary', 'comment' => 'ID |  |  | '),
 		'edumap_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'comment' => 'edumap id | edumap ID | edumap.id | '),
 		'type' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 32, 'collate' => 'utf8_general_ci', 'comment' => 'social media type, twitter:twitter, facebook:facebook | SNSタイプ  twitter:ツイッター、facebook:フェイスブック |  | ', 'charset' => 'utf8'),

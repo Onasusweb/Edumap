@@ -33,6 +33,7 @@ class BlocksController extends EdumapAppController {
  */
 	public $uses = array(
 		'Blocks.Block',
+		'Edumap.EdumapVisibilitySetting'
 	);
 
 /**
@@ -41,8 +42,7 @@ class BlocksController extends EdumapAppController {
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsWorkflow',
-		'NetCommons.NetCommonsPage',
+		'NetCommons.NetCommonsBlock',
 		'NetCommons.NetCommonsRoomRole' => array(
 			//コンテンツの権限設定
 			'allowedActions' => array(
@@ -133,7 +133,7 @@ class BlocksController extends EdumapAppController {
 				'id' => null,
 				'key' => null,
 				'block_id' => null,
-				'url' => null,
+				'name' => __d('edumap', 'New school %s ', date('YmdHis')),
 			)
 		);
 		$block = $this->Block->create(
@@ -141,13 +141,25 @@ class BlocksController extends EdumapAppController {
 		);
 
 		$data = array();
-		//if ($this->request->isPost()) {
-		//	if (! $data = $this->__saveIframe()) {
-		//		return;
-		//	}
-		//	$results = $this->camelizeKeyRecursive($data);
-		//	$this->set($results);
-		//}
+		if ($this->request->isPost()) {
+			$data = $this->__parseRequestData();
+			$data['Edumap']['status'] = NetCommonsBlockComponent::STATUS_PUBLISHED;
+
+			$visibilitySetting = $this->EdumapVisibilitySetting->create();
+			$data = Hash::merge($data, $visibilitySetting);
+
+			$edumap = $this->Edumap->saveEdumap($data);
+			if ($this->handleValidationError($this->Edumap->validationErrors)) {
+				if (! $this->request->is('ajax')) {
+					//$this->redirect('/edumap/visibility_settings/edit/' . $this->viewVars['frameId'] . '/' . $edumap['Edumap']['block_id']);
+					$this->redirect('/edumap/blocks/index/' . $this->viewVars['frameId']);
+				}
+				return;
+			}
+
+			$data['Block']['id'] = null;
+			$data['Block']['key'] = null;
+		}
 
 		$data = Hash::merge($edumap, $block, $data);
 		$results = $this->camelizeKeyRecursive($data);
@@ -160,26 +172,30 @@ class BlocksController extends EdumapAppController {
  * @return void
  */
 	public function edit() {
-		//if (! $this->NetCommonsBlock->validateBlockId()) {
-		//	$this->throwBadRequest();
-		//	return false;
-		//}
-		//$this->set('blockId', (int)$this->params['pass'][1]);
-		//
-		//if (! $iframe = $this->Iframe->getIframe($this->viewVars['blockId'], $this->viewVars['roomId'])) {
-		//	$this->throwBadRequest();
-		//	return false;
-		//}
-		//$results = $this->camelizeKeyRecursive($iframe);
-		//$this->set($results);
-		//
-		//if ($this->request->isPost()) {
-		//	if (! $data = $this->__saveIframe()) {
-		//		return;
-		//	}
-		//	$results = $this->camelizeKeyRecursive($data);
-		//	$this->set($results);
-		//}
+		if (! $this->NetCommonsBlock->validateBlockId()) {
+			$this->throwBadRequest();
+			return false;
+		}
+		$this->set('blockId', (int)$this->params['pass'][1]);
+
+		if (! $this->initEdumap()) {
+			return;
+		}
+
+		if ($this->request->isPost()) {
+			$data = $this->__parseRequestData();
+
+			$this->Edumap->saveEdumap($data);
+			if ($this->handleValidationError($this->Edumap->validationErrors)) {
+				if (! $this->request->is('ajax')) {
+					$this->redirect('/edumap/blocks/index/' . $this->viewVars['frameId']);
+				}
+				return;
+			}
+
+			$results = $this->camelizeKeyRecursive($data);
+			$this->set($results);
+		}
 	}
 
 /**
@@ -189,27 +205,26 @@ class BlocksController extends EdumapAppController {
  * @return void
  */
 	public function delete() {
-		//if (! $this->NetCommonsBlock->validateBlockId()) {
-		//	$this->throwBadRequest();
-		//	return false;
-		//}
-		//$this->set('blockId', (int)$this->params['pass'][1]);
-		//
-		//if (! $this->Iframe->getIframe($this->viewVars['blockId'], $this->viewVars['roomId'])) {
-		//	$this->throwBadRequest();
-		//	return false;
-		//}
-		//
-		//if ($this->request->isDelete()) {
-		//	if ($this->Iframe->deleteIframe($this->data)) {
-		//		if (! $this->request->is('ajax')) {
-		//			$this->redirect('/iframes/blocks/index/' . $this->viewVars['frameId']);
-		//		}
-		//		return;
-		//	}
-		//}
-		//
-		//$this->throwBadRequest();
+		if (! $this->NetCommonsBlock->validateBlockId()) {
+			$this->throwBadRequest();
+			return false;
+		}
+		$this->set('blockId', (int)$this->params['pass'][1]);
+
+		if (! $this->initEdumap()) {
+			return;
+		}
+
+		if ($this->request->isDelete()) {
+			if ($this->Edumap->deleteEdumap($this->data)) {
+				if (! $this->request->is('ajax')) {
+					$this->redirect('/edumap/blocks/index/' . $this->viewVars['frameId']);
+				}
+				return;
+			}
+		}
+
+		$this->throwBadRequest();
 	}
 
 /**
@@ -235,5 +250,22 @@ class BlocksController extends EdumapAppController {
 	//
 	//	return $data;
 	//}
+
+/**
+ * Parse data from request
+ *
+ * @return array
+ */
+	private function __parseRequestData() {
+		$data = $this->data;
+		if ($data['Block']['public_type'] === Block::TYPE_LIMITED) {
+			//$data['Block']['from'] = implode('-', $data['Block']['from']);
+			//$data['Block']['to'] = implode('-', $data['Block']['to']);
+		} else {
+			unset($data['Block']['from'], $data['Block']['to']);
+		}
+
+		return $data;
+	}
 
 }

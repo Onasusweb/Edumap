@@ -20,6 +20,13 @@ App::uses('EdumapAppController', 'Edumap.Controller');
 class VisibilitySettingsController extends EdumapAppController {
 
 /**
+ * layout
+ *
+ * @var array
+ */
+	public $layout = 'NetCommons.setting';
+
+/**
  * use model
  *
  * @var array
@@ -55,64 +62,50 @@ class VisibilitySettingsController extends EdumapAppController {
 	);
 
 /**
+ * beforeFilter
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+
+		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
+		$this->set($results);
+
+		//タブの設定
+		$this->initTabs('block_index', 'visibility_settings');
+	}
+
+/**
  * edit method
  *
  * @return void
  */
 	public function edit() {
-		$this->__initEdumapVisibilitySetting();
-		if ($this->request->isGet()) {
-			CakeSession::write('backUrl', $this->request->referer());
+		if (! $this->NetCommonsBlock->validateBlockId()) {
+			$this->throwBadRequest();
+			return false;
+		}
+		$this->set('blockId', (int)$this->params['pass'][1]);
+
+		if (! $this->initEdumap(['edumapVisibilitySetting'])) {
+			return;
 		}
 
+		//$this->__initEdumapVisibilitySetting();
+		//if ($this->request->isGet()) {
+		//	CakeSession::write('backUrl', $this->request->referer());
+		//}
+		//
 		if ($this->request->isPost()) {
 			$this->EdumapVisibilitySetting->saveEdumapVisibilitySetting($this->data);
 			if (! $this->handleValidationError($this->EdumapVisibilitySetting->validationErrors)) {
 				return;
 			}
-			if (!$this->request->is('ajax')) {
-				$backUrl = CakeSession::read('backUrl');
-				CakeSession::delete('backUrl');
-				$this->redirect($backUrl);
+			if (! $this->request->is('ajax')) {
+				$this->redirect('/edumap/blocks/index/' . $this->viewVars['frameId']);
 			}
 			return;
 		}
-	}
-
-/**
- * __initEdumapVisibilitySetting method
- *
- * @return void
- * @throws BadRequestException
- */
-	private function __initEdumapVisibilitySetting() {
-		if (! $edumap = $this->Edumap->getEdumap(
-			$this->viewVars['blockId'],
-			$this->viewVars['contentEditable']
-		)) {
-			if ($this->request->is('ajax')) {
-				$this->renderJson(
-					['error' => ['validationErrors' => ['id' => __d('net_commons', 'Invalid request.')]]],
-					__d('net_commons', 'Bad Request'), 400
-				);
-				return;
-			} else {
-				throw new BadRequestException(__d('net_commons', 'Bad Request'));
-			}
-		};
-
-		if (! $visibilitySetting = $this->EdumapVisibilitySetting->find('first', array(
-			'recursive' => -1,
-			'conditions' => array(
-				'edumap_key' => $edumap['Edumap']['key']
-			)
-		))) {
-			$visibilitySetting = $this->EdumapVisibilitySetting->create(
-				['edumap_key' => $edumap['Edumap']['key']]
-			);
-		}
-
-		$results = $this->camelizeKeyRecursive($visibilitySetting);
-		$this->set($results);
 	}
 }

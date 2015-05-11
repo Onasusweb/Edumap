@@ -116,6 +116,7 @@ class Edumap extends EdumapAppModel {
 					'message' => __d('net_commons', 'Invalid request.'),
 					'allowEmpty' => false,
 					//'required' => true,
+					'on' => 'update', // Limit validation to 'create' or 'update' operations
 				)
 			),
 			'file_id' => array(
@@ -127,15 +128,6 @@ class Edumap extends EdumapAppModel {
 			),
 
 			//key to set in OriginalKeyBehavior.
-
-			//'key' => array(
-			//	'notEmpty' => array(
-			//		'rule' => array('notEmpty'),
-			//		'message' => __d('net_commons', 'Invalid request.'),
-			//		'allowEmpty' => false,
-			//		'required' => true,
-			//	)
-			//),
 
 			//status to set in PublishableBehavior.
 
@@ -261,19 +253,21 @@ class Edumap extends EdumapAppModel {
  * get dumap
  *
  * @param int $blockId blocks.id
+ * @param int $roomId rooms.id
  * @param bool $contentEditable true can edit the content, false not can edit the content.
  * @return array
  */
-	public function getEdumap($blockId, $contentEditable) {
+	public function getEdumap($blockId, $roomId, $contentEditable) {
 		$conditions = array(
-			$this->alias . '.block_id' => $blockId,
+			'Block.id' => $blockId,
+			'Block.room_id' => $roomId,
 		);
 		if (! $contentEditable) {
 			$conditions[$this->alias . '.status'] = NetCommonsBlockComponent::STATUS_PUBLISHED;
 		}
 
 		$edumap = $this->find('first', array(
-				'recursive' => -1,
+				'recursive' => 0,
 				'conditions' => $conditions,
 				'order' => $this->alias . '.id DESC'
 			)
@@ -304,44 +298,36 @@ class Edumap extends EdumapAppModel {
 		]);
 
 		//トランザクションBegin
+		$this->setDataSource('master');
 		$dataSource = $this->getDataSource();
 		$dataSource->begin();
 
 		try {
 			//edumapデータのvalidate
-			if (! $this->validateEdumap($data)) {
+			if (! $this->validateEdumap($data, ['avatar', 'associated', 'block', 'comment'])) {
 				return false;
 			}
-			$this->data['Edumap']['foundation_date'] = str_replace(Edumap::DATE_SEPARATOR, '', $this->data['Edumap']['foundation_date']);
-			$this->data['Edumap']['closed_date'] = str_replace(Edumap::DATE_SEPARATOR, '', $this->data['Edumap']['closed_date']);
-
-			//アバターのvalidate
-			if (! $data = $this->validateEdumapAvatar($data)) {
-				return false;
+			if (isset($this->data['Edumap']['foundation_date'])) {
+				$this->data['Edumap']['foundation_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['foundation_date']);
 			}
-
-			//Associatedのvalidate
-			if (! $this->validateEdumapAssociated($data)) {
-				return false;
+			if (isset($this->data['Edumap']['closed_date'])) {
+				$this->data['Edumap']['closed_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['closed_date']);
 			}
 
 			//ブロックの登録
-			$block = $this->Block->saveByFrameId($data['Frame']['id'], false);
-			$this->data['Edumap']['block_id'] = (int)$block['Block']['id'];
-			$this->data['Edumap']['language_id'] = (int)$block['Block']['language_id'];
+			$block = $this->Block->saveByFrameId($data['Frame']['id']);
+			$this->data[$this->alias]['block_id'] = (int)$block['Block']['id'];
 
 			//アバターの登録
-			$this->saveEdumapAvatar($data);
+			$this->__saveEdumapAvatar($data);
 
 			//Edumapの登録
 			if (! $edumap = $this->save(null, false)) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 
 			//Associatedの登録
-			$this->saveEdumapAssociated($edumap);
+			$this->__saveEdumapAssociated($edumap);
 
 			$dataSource->commit();
 
@@ -355,15 +341,50 @@ class Edumap extends EdumapAppModel {
 	}
 
 /**
- * validate edumap
+ * Validate of edumap
  *
  * @param array $data received post data
+ * @param array $contains Optional validate sets
  * @return bool True on success, false on error
  */
-	public function validateEdumap($data) {
+	public function validateEdumap($data, $contains = []) {
 		$this->set($data);
 		$this->validates();
-		return $this->validationErrors ? false : true;
+		if ($this->validationErrors) {
+			return false;
+		}
+
+		//アバターのvalidate
+		if (in_array('avatar', $contains, true)) {
+			if (! $data = $this->__validateEdumapAvatar($data)) {
+				return false;
+			}
+		}
+
+		//edumapのassciationテーブルのvalidate
+		if (in_array('associated', $contains, true)) {
+			if (! $this->__validateEdumapAssociated($data)) {
+				return false;
+			}
+		}
+
+		//ブロックのvalidate
+		if (in_array('block', $contains, true)) {
+			if (! $this->Block->validateBlock($data)) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->Block->validationErrors);
+				return false;
+			}
+		}
+
+		//コメントのvalidate
+		if (in_array('comment', $contains, true) && isset($data['Comment'])) {
+			if (! $this->Comment->validateByStatus($data, array('plugin' => $this->plugin, 'caller' => $this->name))) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->Comment->validationErrors);
+				return false;
+			}
+		}
+		return true;
+
 	}
 
 /**
@@ -372,7 +393,7 @@ class Edumap extends EdumapAppModel {
  * @param array $data received post data
  * @return mixed Array on success, false on error
  */
-	public function validateEdumapAvatar($data) {
+	private function __validateEdumapAvatar($data) {
 		//古いアバターの削除
 		if (isset($data[self::AVATAR_INPUT]) && $data['Edumap']['file_id'] !== 0) {
 			$data['DeleteFile'][0]['File'] = array(
@@ -410,25 +431,20 @@ class Edumap extends EdumapAppModel {
  * @param array $data received post data
  * @return bool True on success, false on error
  */
-	public function validateEdumapAssociated($data) {
+	private function __validateEdumapAssociated($data) {
 		//edumap生徒数データのvalidate
-		if ($data['EdumapStudent']) {
+		if (array_key_exists('EdumapStudent', $data)) {
 			if (! $this->EdumapStudent->validateEdumapStudents($data['EdumapStudent'])) {
 				$this->validationErrors = Hash::merge($this->validationErrors, $this->EdumapStudent->validationErrors);
 				return false;
 			}
 		}
 		//edumapSNSデータのvalidate
-		if ($data['EdumapSocialMedium']) {
+		if (array_key_exists('EdumapSocialMedium', $data)) {
 			if (! $this->EdumapSocialMedium->validateEdumapSocialMedia($data['EdumapSocialMedium'])) {
 				$this->validationErrors = Hash::merge($this->validationErrors, $this->EdumapSocialMedium->validationErrors);
 				return false;
 			}
-		}
-		//コメントのvalidate
-		if (! $this->Comment->validateByStatus($data, array('caller' => $this->alias))) {
-			$this->validationErrors = Hash::merge($this->validationErrors, $this->Comment->validationErrors);
-			return false;
 		}
 
 		return true;
@@ -441,19 +457,15 @@ class Edumap extends EdumapAppModel {
  * @return bool true on success, exception on error
  * @throws InternalErrorException
  */
-	public function saveEdumapAvatar($data) {
+	private function __saveEdumapAvatar($data) {
 		//アバターの削除
 		if (isset($data['DeleteFile']) && $data['DeleteFile'][0]['File']['id'] > 0) {
 			//データ削除
 			if (! $this->FileModel->deleteAll(['id' => $data['DeleteFile'][0]['File']['id']], true, false)) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 			if (! $this->FileModel->deleteFileAssociated($data['DeleteFile'][0]['File']['id'])) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 			$folder = new Folder();
 			$folder->delete($data['DeleteFile'][0]['File']['path']);
@@ -467,14 +479,10 @@ class Edumap extends EdumapAppModel {
 					$data[self::AVATAR_INPUT],
 					array('validate' => false, 'callbacks' => 'before')
 			)) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 			if (! $this->FileModel->saveFileAssociated($file)) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 			$this->data[self::AVATAR_INPUT] = Hash::insert(
 				$data[self::AVATAR_INPUT], '{s}.id', (int)$file[$this->FileModel->alias]['id']
@@ -492,43 +500,111 @@ class Edumap extends EdumapAppModel {
  * @return bool true on success, exception on error
  * @throws InternalErrorException
  */
-	public function saveEdumapAssociated($data) {
+	private function __saveEdumapAssociated($data) {
 		//Edumap生徒数の登録
 		if (isset($data['EdumapStudent'])) {
 			$data['EdumapStudent'] = Hash::insert($data['EdumapStudent'], '{n}.edumap_id', $data[$this->alias]['id']);
 			if (! $this->EdumapStudent->saveMany($data['EdumapStudent'], ['validate' => false])) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 		}
 		//EdumapSNSデータの登録
 		if (isset($data['EdumapSocialMedium'])) {
 			$data['EdumapSocialMedium'] = Hash::insert($data['EdumapSocialMedium'], '{s}.edumap_id', $data[$this->alias]['id']);
 			if (! $this->EdumapSocialMedium->saveMany($data['EdumapSocialMedium'], ['validate' => false])) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 		}
 		//コメントの登録
 		if ($this->Comment->data) {
-			$this->Comment->data['Comment']['plugin_key'] = 'edumap';
+//			$this->Comment->data['Comment']['plugin_key'] = 'edumap';
 			if (! $this->Comment->save(null, false)) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 		}
 		//表示方法変更(デフォルト値)の登録
 		if (isset($data['EdumapVisibilitySetting'])) {
+			$data['EdumapVisibilitySetting']['edumap_key'] = $data[$this->alias]['key'];
 			if (! $this->EdumapVisibilitySetting->save($data['EdumapVisibilitySetting'], false)) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 		}
 
 		return true;
 	}
+
+/**
+ * Delete faq
+ *
+ * @param array $data received post data
+ * @return mixed On success Model::$data if its not empty or true, false on failure
+ * @throws InternalErrorException
+ */
+	public function deleteEdumap($data) {
+		$this->loadModels([
+			'Edumap' => 'Edumap.Edumap',
+			'EdumapSocialMedium' => 'Edumap.EdumapSocialMedium',
+			'EdumapStudent' => 'Edumap.EdumapStudent',
+			'EdumapVisibilitySetting' => 'Edumap.EdumapVisibilitySetting',
+			'Block' => 'Blocks.Block',
+			'Comment' => 'Comments.Comment',
+			'FileModel' => 'Files.FileModel',
+			'FilesPlugin' => 'Files.FilesPlugin',
+			'FilesRoom' => 'Files.FilesRoom',
+			'FilesUser' => 'Files.FilesUser',
+		]);
+
+		//トランザクションBegin
+		$this->setDataSource('master');
+		$dataSource = $this->getDataSource();
+		$dataSource->begin();
+
+		$conditions = array(
+			$this->alias . '.key' => $data[$this->alias]['key']
+		);
+		$edumaps = $this->find('all', array(
+				'recursive' => -1,
+				'fields' => array('id', 'file_id'),
+				'conditions' => $conditions,
+			)
+		);
+		$edumapIds = Hash::extract($edumaps, '{n}.Edumap.id');
+		$fileIds = Hash::extract($edumaps, '{n}.Edumap.file_id');
+
+		try {
+			if (! $this->deleteAll(array($this->alias . '.key' => $data[$this->alias]['key']), false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			if (! $this->EdumapSocialMedium->deleteAll(array($this->EdumapSocialMedium->alias . '.edumap_id' => $edumapIds), false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			if (! $this->EdumapStudent->deleteAll(array($this->EdumapStudent->alias . '.edumap_id' => $edumapIds), false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			if (! $this->EdumapVisibilitySetting->deleteAll(array($this->EdumapVisibilitySetting->alias . '.edumap_key' => $data[$this->alias]['key']), false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			//Blockデータ削除
+			$this->Block->deleteBlock($data['Block']['key']);
+
+			//ファイルデータ削除
+			$this->FileModel->deleteFiles($fileIds);
+
+			//トランザクションCommit
+			$dataSource->commit();
+
+		} catch (Exception $ex) {
+			//トランザクションRollback
+			$dataSource->rollback();
+			CakeLog::error($ex);
+			throw $ex;
+		}
+
+		return true;
+	}
+
 }

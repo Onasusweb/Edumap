@@ -42,28 +42,28 @@
 		'value' => isset($edumap['key']) ? $edumap['key'] : null,
 	)); ?>
 
-<div class="row form-group">
-	<div class="col-xs-12">
-		<?php echo $this->Form->input(
-				'Iframe.url', array(
-					'type' => 'text',
-					'label' => __d('edumap', 'School name') . $this->element('NetCommons.required'),
-					'error' => false,
-					'class' => 'form-control',
-					'autofocus' => true,
-					'value' => (isset($edumap['name']) ? $edumap['name'] : '')
-				)
-			); ?>
-	</div>
+<?php echo $this->Form->hidden('Edumap.language_id', array(
+		'value' => $languageId,
+	)); ?>
 
-	<div class="col-xs-12">
-		<?php echo $this->element(
-			'NetCommons.errors', [
-				'errors' => $this->validationErrors,
-				'model' => 'Edumap',
-				'field' => 'url',
-			]); ?>
-	</div>
+<div class="form-group">
+	<?php echo $this->Form->input(
+			'Edumap.name', array(
+				'type' => 'text',
+				'label' => __d('edumap', 'School name') . $this->element('NetCommons.required'),
+				'error' => false,
+				'class' => 'form-control',
+				'autofocus' => true,
+				'value' => (isset($edumap['name']) ? $edumap['name'] : '')
+			)
+		); ?>
+
+	<?php echo $this->element(
+		'NetCommons.errors', [
+			'errors' => $this->validationErrors,
+			'model' => 'Edumap',
+			'field' => 'name',
+		]); ?>
 </div>
 
 <?php echo $this->element('Blocks.public_type');

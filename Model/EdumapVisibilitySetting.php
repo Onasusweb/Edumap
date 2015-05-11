@@ -26,21 +26,9 @@ class EdumapVisibilitySetting extends EdumapAppModel {
  *
  * @var string
  */
-	const PRIVATE_VISIBILITY = 0;
-
-/**
- * Public visibility
- *
- * @var string
- */
-	const PUBLIC_VISIBILITY = 1;
-
-/**
- * Public on Edumap visibility
- *
- * @var string
- */
-	const PUBLIC_ON_EDUMAP_VISIBILITY = 2;
+	const PRIVATE_VISIBILITY = '0',
+			PUBLIC_VISIBILITY = '1',
+			PUBLIC_ON_EDUMAP_VISIBILITY = '2';
 
 /**
  * belongsTo associations
@@ -73,12 +61,32 @@ class EdumapVisibilitySetting extends EdumapAppModel {
 					'rule' => array('notEmpty'),
 					'message' => __d('net_commons', 'Invalid request.'),
 					'allowEmpty' => false,
-					'required' => true,
+					//'required' => true,
 				)
 			),
 		));
 
 		return parent::beforeValidate($options);
+	}
+
+/**
+ * Get EdumapVisibilitySetting data
+ *
+ * @param string $edumapKey edumap.key
+ * @return array
+ */
+	public function getEdumapVisibilitySetting($edumapKey) {
+		$conditions = array(
+			$this->alias . '.edumap_key' => $edumapKey,
+		);
+
+		$visibilitySetting = $this->find('first', array(
+				'recursive' => -1,
+				'conditions' => $conditions,
+			)
+		);
+
+		return $visibilitySetting;
 	}
 
 /**
@@ -93,6 +101,8 @@ class EdumapVisibilitySetting extends EdumapAppModel {
 			'EdumapVisibilitySetting' => 'Edumap.EdumapVisibilitySetting',
 		]);
 
+		//トランザクションBegin
+		$this->setDataSource('master');
 		$dataSource = $this->getDataSource();
 		$dataSource->begin();
 
@@ -104,18 +114,14 @@ class EdumapVisibilitySetting extends EdumapAppModel {
 
 			//登録処理
 			if (! $this->save(null, false)) {
-				// @codeCoverageIgnoreStart
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				// @codeCoverageIgnoreEnd
 			}
 
 			$dataSource->commit();
 		} catch (Exception $ex) {
-			// @codeCoverageIgnoreStart
 			$dataSource->rollback();
 			CakeLog::error($ex);
 			throw $ex;
-			// @codeCoverageIgnoreEnd
 		}
 
 		return true;
@@ -130,7 +136,10 @@ class EdumapVisibilitySetting extends EdumapAppModel {
 	public function validateEdumapVisibilitySetting($data) {
 		$this->set($data);
 		$this->validates();
-		return $this->validationErrors ? false : true;
+		if ($this->validationErrors) {
+			return false;
+		}
+		return true;
 	}
 
 }
