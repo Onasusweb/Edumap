@@ -19,9 +19,9 @@
 		<?php echo $this->element('Blocks.setting_tabs', $blockSettingTabs); ?>
 
 		<?php echo $this->element('Blocks.edit_form', array(
-				'controller' => 'VisibilitySettings',
+				'controller' => 'EdumapVisibilitySettings',
 				'action' => h($this->request->params['action']) . '/' . $frameId . '/' . $blockId,
-				'callback' => 'Edumap.VisibilitySettings/edit_form',
+				'callback' => 'Edumap.EdumapVisibilitySettings/edit_form',
 				'cancelUrl' => '/edumap/blocks/index/' . $frameId
 			)); ?>
 	</div>

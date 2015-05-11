@@ -151,8 +151,7 @@ class BlocksController extends EdumapAppController {
 			$edumap = $this->Edumap->saveEdumap($data);
 			if ($this->handleValidationError($this->Edumap->validationErrors)) {
 				if (! $this->request->is('ajax')) {
-					//$this->redirect('/edumap/visibility_settings/edit/' . $this->viewVars['frameId'] . '/' . $edumap['Edumap']['block_id']);
-					$this->redirect('/edumap/blocks/index/' . $this->viewVars['frameId']);
+					$this->redirect('/edumap/edumap_visibility_settings/edit/' . $this->viewVars['frameId'] . '/' . $edumap['Edumap']['block_id']);
 				}
 				return;
 			}

@@ -83,7 +83,10 @@ class EdumapStudent extends EdumapAppModel {
  */
 	public function validateEdumapStudents($data) {
 		$this->validateMany($data);
-		return $this->validationErrors ? false : true;
+		if ($this->validationErrors) {
+			return false;
+		}
+		return true;
 	}
 
 }

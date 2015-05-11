@@ -35,6 +35,7 @@ class EdumapAppController extends AppController {
 		'NetCommons.NetCommonsFrame',
 		'Security',
 	);
+
 /**
  * use models
  *
@@ -43,6 +44,17 @@ class EdumapAppController extends AppController {
 	public $uses = array(
 		'Edumap.Edumap',
 	);
+
+/**
+ * beforeFilter
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$results = $this->camelizeKeyRecursive(['current' => $this->current]);
+		$this->set($results);
+	}
 
 /**
  * initEdumap
@@ -119,7 +131,7 @@ class EdumapAppController extends AppController {
 			$blockSettingTabs['tabs']['visibility_settings'] = array(
 				'url' => array(
 					'plugin' => $this->params['plugin'],
-					'controller' => 'visibility_settings',
+					'controller' => 'edumap_visibility_settings',
 					'action' => 'edit',
 					$this->viewVars['frameId'],
 					$this->viewVars['blockId']

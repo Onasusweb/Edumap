@@ -304,14 +304,24 @@ class Edumap extends EdumapAppModel {
 
 		try {
 			//edumapデータのvalidate
-			if (! $this->validateEdumap($data, ['avatar', 'associated', 'block', 'comment'])) {
+			if (! $this->validateEdumap($data, ['comment'])) {
 				return false;
 			}
-			if (isset($this->data['Edumap']['foundation_date'])) {
-				$this->data['Edumap']['foundation_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['foundation_date']);
+
+			//アバターのvalidate
+			if (! $data = $this->__validateEdumapAvatar($data)) {
+				return false;
 			}
-			if (isset($this->data['Edumap']['closed_date'])) {
-				$this->data['Edumap']['closed_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['closed_date']);
+
+			//edumapのassciationテーブルのvalidate
+			if (! $this->__validateEdumapAssociated($data)) {
+				return false;
+			}
+
+			//ブロックのvalidate
+			if (! $this->Block->validateBlock($data)) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->Block->validationErrors);
+				return false;
 			}
 
 			//ブロックの登録
@@ -322,6 +332,12 @@ class Edumap extends EdumapAppModel {
 			$this->__saveEdumapAvatar($data);
 
 			//Edumapの登録
+			if (isset($this->data['Edumap']['foundation_date'])) {
+				$this->data['Edumap']['foundation_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['foundation_date']);
+			}
+			if (isset($this->data['Edumap']['closed_date'])) {
+				$this->data['Edumap']['closed_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['closed_date']);
+			}
 			if (! $edumap = $this->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
@@ -354,28 +370,6 @@ class Edumap extends EdumapAppModel {
 			return false;
 		}
 
-		//アバターのvalidate
-		if (in_array('avatar', $contains, true)) {
-			if (! $data = $this->__validateEdumapAvatar($data)) {
-				return false;
-			}
-		}
-
-		//edumapのassciationテーブルのvalidate
-		if (in_array('associated', $contains, true)) {
-			if (! $this->__validateEdumapAssociated($data)) {
-				return false;
-			}
-		}
-
-		//ブロックのvalidate
-		if (in_array('block', $contains, true)) {
-			if (! $this->Block->validateBlock($data)) {
-				$this->validationErrors = Hash::merge($this->validationErrors, $this->Block->validationErrors);
-				return false;
-			}
-		}
-
 		//コメントのvalidate
 		if (in_array('comment', $contains, true) && isset($data['Comment'])) {
 			if (! $this->Comment->validateByStatus($data, array('plugin' => $this->plugin, 'caller' => $this->name))) {
@@ -384,7 +378,6 @@ class Edumap extends EdumapAppModel {
 			}
 		}
 		return true;
-
 	}
 
 /**
@@ -395,7 +388,7 @@ class Edumap extends EdumapAppModel {
  */
 	private function __validateEdumapAvatar($data) {
 		//古いアバターの削除
-		if (isset($data[self::AVATAR_INPUT]) && $data['Edumap']['file_id'] !== 0) {
+		if (isset($data[self::AVATAR_INPUT]) && (int)$data['Edumap']['file_id'] !== 0) {
 			$data['DeleteFile'][0]['File'] = array(
 				'id' => $data['Edumap']['file_id']
 			);
@@ -517,7 +510,6 @@ class Edumap extends EdumapAppModel {
 		}
 		//コメントの登録
 		if ($this->Comment->data) {
-//			$this->Comment->data['Comment']['plugin_key'] = 'edumap';
 			if (! $this->Comment->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}

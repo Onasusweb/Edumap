@@ -17,7 +17,7 @@ App::uses('EdumapAppController', 'Edumap.Controller');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Controller
  */
-class VisibilitySettingsController extends EdumapAppController {
+class EdumapVisibilitySettingsController extends EdumapAppController {
 
 /**
  * layout
@@ -92,11 +92,6 @@ class VisibilitySettingsController extends EdumapAppController {
 			return;
 		}
 
-		//$this->__initEdumapVisibilitySetting();
-		//if ($this->request->isGet()) {
-		//	CakeSession::write('backUrl', $this->request->referer());
-		//}
-		//
 		if ($this->request->isPost()) {
 			$this->EdumapVisibilitySetting->saveEdumapVisibilitySetting($this->data);
 			if (! $this->handleValidationError($this->EdumapVisibilitySetting->validationErrors)) {

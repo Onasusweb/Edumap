@@ -36,7 +36,7 @@ $colSize = isset($colSize) ? $colSize : 'col-xs-12';
 
 	<div class="col-xs-12">
 		<?php echo $this->element(
-			'Edumap.error', [
+			'NetCommons.errors', [
 				'errors' => $this->validationErrors,
 				'model' => $model,
 				'field' => $underscoreField,
