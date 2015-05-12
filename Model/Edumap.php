@@ -262,8 +262,10 @@ class Edumap extends EdumapAppModel {
 			'Block.id' => $blockId,
 			'Block.room_id' => $roomId,
 		);
-		if (! $contentEditable) {
-			$conditions[$this->alias . '.status'] = NetCommonsBlockComponent::STATUS_PUBLISHED;
+		if ($contentEditable) {
+			$conditions[$this->alias . '.is_latest'] = true;
+		} else {
+			$conditions[$this->alias . '.is_active'] = true;
 		}
 
 		$edumap = $this->find('first', array(

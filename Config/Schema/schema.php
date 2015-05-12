@@ -57,7 +57,7 @@ class AppSchema extends CakeSchema {
 		'is_active' => array('type' => 'boolean', 'null' => true, 'default' => '0', 'comment' => 'public status, 1: public, 2: public pending, 3: draft during 4: remand | 公開状況  1:公開中、2:公開申請中、3:下書き中、4:差し戻し |  | '),
 		'is_latest' => array('type' => 'boolean', 'null' => true, 'default' => '0', 'comment' => 'Is active, 0:deactive 1:acive | アクティブなコンテンツかどうか 0:アクティブでない 1:アクティブ | | '),
 		'key' => array('type' => 'string', 'null' => false, 'collate' => 'utf8_general_ci', 'comment' => 'key | キー |  | ', 'charset' => 'utf8'),
-		'file_id' => array('type' => 'integer', 'null' => false, 'default' => '0', 'comment' => 'file id | アバター ファイルID | files.id | '),
+		'file_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'comment' => 'file id | アバター ファイルID | files.id | '),
 		'name' => array('type' => 'string', 'null' => true, 'collate' => 'utf8_general_ci', 'comment' => 'school name | 学校名 |  | ', 'charset' => 'utf8'),
 		'name_kana' => array('type' => 'string', 'null' => true, 'collate' => 'utf8_general_ci', 'comment' => 'school kana name | 学校名カナ |  | ', 'charset' => 'utf8'),
 		'handle' => array('type' => 'string', 'null' => true, 'collate' => 'utf8_general_ci', 'comment' => 'handle | ハンドル |  | ', 'charset' => 'utf8'),

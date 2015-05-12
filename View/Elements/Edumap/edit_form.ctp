@@ -22,6 +22,18 @@
 	'value' => $blockKey,
 )); ?>
 
+<?php echo $this->Form->hidden('Block.language_id', array(
+		'value' => $languageId,
+	)); ?>
+
+<?php echo $this->Form->hidden('Block.room_id', array(
+		'value' => $roomId,
+	)); ?>
+
+<?php echo $this->Form->hidden('Block.plugin_key', array(
+		'value' => $this->params['plugin'],
+	)); ?>
+
 <?php echo $this->Form->hidden('Edumap.id', array(
 		'value' => isset($edumap['id']) ? (int)$edumap['id'] : null,
 	)); ?>
@@ -39,7 +51,7 @@
 	)); ?>
 
 <?php echo $this->Form->hidden('Edumap.file_id', array(
-		'value' => $edumap['fileId'],
+		'value' => isset($edumap['fileId']) ? $edumap['fileId'] : '',
 	)); ?>
 
 <div class="row form-group">
