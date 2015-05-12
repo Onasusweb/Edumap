@@ -10,15 +10,37 @@
  */
 ?>
 
-<?php echo $this->Form->hidden('id'); ?>
-
 <?php echo $this->Form->hidden('Frame.id', array(
 	'value' => $frameId
 )); ?>
 
 <?php echo $this->Form->hidden('Block.id', array(
-	'value' => (int)$blockId,
+	'value' => $blockId,
 )); ?>
+
+<?php echo $this->Form->hidden('Block.key', array(
+	'value' => $blockKey,
+)); ?>
+
+<?php echo $this->Form->hidden('Edumap.id', array(
+		'value' => isset($edumap['id']) ? (int)$edumap['id'] : null,
+	)); ?>
+
+<?php echo $this->Form->hidden('Edumap.block_id', array(
+		'value' => $blockId,
+	)); ?>
+
+<?php echo $this->Form->hidden('Edumap.key', array(
+		'value' => $edumap['key'],
+	)); ?>
+
+<?php echo $this->Form->hidden('Edumap.language_id', array(
+		'value' => $languageId,
+	)); ?>
+
+<?php echo $this->Form->hidden('Edumap.file_id', array(
+		'value' => $edumap['fileId'],
+	)); ?>
 
 <div class="row form-group">
 	<div class="col-xs-12">
@@ -54,19 +76,19 @@
 			'value' => '{ROOT}edumap{DS}' . $roomId . '{DS}'
 		)); ?>
 		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT . '.FilesPlugin.plugin_key', array(
-			'value' => 'edumap'
+			'value' => $this->request->params['plugin']
 		)); ?>
 		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT . '.FilesRoom.room_id', array(
 			'value' => $roomId
 		)); ?>
 		<?php echo $this->Form->hidden(Edumap::AVATAR_INPUT . '.FilesUser.user_id', array(
-			'value' => (int)AuthComponent::user('id')
+			'value' => $userId
 		)); ?>
 	</div>
 
 	<div class="col-xs-12">
 		<?php echo $this->element(
-			'Edumap.error', [
+			'NetCommons.errors', [
 				'errors' => $this->validationErrors,
 				'model' => 'Edumap',
 				'field' => Edumap::AVATAR_INPUT,
@@ -127,7 +149,7 @@
 	</div>
 	<div class="col-xs-12">
 		<?php echo $this->element(
-			'Edumap.error', [
+			'NetCommons.errors', [
 				'errors' => $this->validationErrors,
 				'model' => 'Edumap',
 				'field' => 'prefecture_code',
@@ -249,7 +271,7 @@
 
 	<div class="col-xs-12">
 		<?php echo $this->element(
-			'Edumap.error', [
+			'NetCommons.errors', [
 				'errors' => $this->validationErrors,
 				'model' => 'Edumap',
 				'field' => 'governor_type',
@@ -283,7 +305,7 @@
 
 	<div class="col-xs-12">
 		<?php echo $this->element(
-			'Edumap.error', [
+			'NetCommons.errors', [
 				'errors' => $this->validationErrors,
 				'model' => 'Edumap',
 				'field' => 'education_type',
@@ -316,7 +338,7 @@
 
 	<div class="col-xs-12">
 		<?php echo $this->element(
-			'Edumap.error', [
+			'NetCommons.errors', [
 				'errors' => $this->validationErrors,
 				'model' => 'Edumap',
 				'field' => 'coeducation_type',
@@ -358,7 +380,7 @@
 
 	<div class="col-xs-12">
 		<?php echo $this->element(
-			'Edumap.error', [
+			'NetCommons.errors', [
 				'errors' => $this->validationErrors,
 				'model' => 'Edumap',
 				'field' => 'description',

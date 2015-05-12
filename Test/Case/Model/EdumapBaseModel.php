@@ -25,7 +25,7 @@ App::uses('AuthComponent', 'Component');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapModelTestCase extends YACakeTestCase {
+class EdumapBaseModel extends YACakeTestCase {
 
 /**
  * Fixtures
@@ -54,6 +54,104 @@ class EdumapModelTestCase extends YACakeTestCase {
 		'plugin.rooms.room_role_permission',
 		'plugin.users.user',
 		'plugin.users.user_attributes_user',
+	);
+
+/**
+ * Test case of notEmpty
+ *
+ * @var array
+ */
+	public $testCaseNotEmpty = array(
+		null, '', false,
+	);
+
+/**
+ * Test case of boolean
+ *
+ * @var array
+ */
+	public $testCaseBoolean = array(
+		null, '', 'a', '99', 'false', 'true'
+	);
+
+/**
+ * Test case of boolean
+ *
+ * @var array
+ */
+	public $testCaseNumber = array(
+		null, '', 'abcde', false, true, '123abcd', 'false', 'true'
+	);
+
+/**
+ * Test case of status
+ *
+ * @var array
+ */
+	public $testCaseStatus = array(
+		null, '', -1, 0, 5, 9999, 'abcde', false,
+	);
+
+/**
+ * Test case of postal
+ *
+ * @var array
+ */
+	public $testCasePostal = array(
+		'9999-999', 'abc-defg', 'abcdefg', '9999999'
+	);
+
+/**
+ * Test case of prefecture
+ *
+ * @var array
+ */
+	public $testCasePrefecture = array(
+		'00', '48', '9999', 'ab', 'abcd', '--'
+	);
+
+/**
+ * Test case of phone
+ *
+ * @var array
+ */
+	public $testCasePhone = array(
+		'0123456789', 'abcdefghij',
+		'99-9999-9999', 'ab-cdef-ghij',
+		'99(9999)9999', 'ab(cdef)ghij', '01(2345)6789', '  (    )    ',
+		'+08-01-2345-6789',
+	);
+
+/**
+ * Test case of email
+ *
+ * @var array
+ */
+	public $testCaseEmail = array(
+		'abcdefghij', '9999999',
+		'@example.com', 'test@',
+		'  @example.com', 'test@    ', 'test@    .com',
+	);
+
+/**
+ * Test case of url
+ *
+ * @var array
+ */
+	public $testCaseUrl = array(
+		'http:', 'https:', 'ftp:', 'javascript:',
+		'http:/', 'https:/', 'ftp:/', 'javascript:/',
+		'http://', 'https://', 'ftp://', 'javascript://',
+		'http://test', 'https://test', 'ftp://test', 'javascript:test', 'abc://exapmle.com',
+	);
+
+/**
+ * Test case of date
+ *
+ * @var array
+ */
+	public $testCaseDate = array(
+		'201405', 'abcdef', '20140512', '2014/05/12', '0000/00', '9999/99',
 	);
 
 /**

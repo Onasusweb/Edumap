@@ -25,7 +25,6 @@ class EdumapController extends EdumapAppController {
  * @var array
  */
 	public $uses = array(
-		'Edumap.Edumap',
 		'Edumap.EdumapStudent',
 		'Edumap.EdumapSocialMedium',
 		'Edumap.EdumapVisibilitySetting',
@@ -39,7 +38,6 @@ class EdumapController extends EdumapAppController {
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsFrame',
 		'NetCommons.NetCommonsWorkflow',
 		'NetCommons.NetCommonsRoomRole' => array(
 			//コンテンツの権限設定
@@ -61,17 +59,16 @@ class EdumapController extends EdumapAppController {
 	);
 
 /**
- * index method
+ * index
  *
  * @return void
  */
 	public function index() {
-		$this->view = 'Edumap/view';
-		$this->view();
+		$this->setAction('view');
 	}
 
 /**
- * view method
+ * view
  *
  * @return void
  */
@@ -80,147 +77,128 @@ class EdumapController extends EdumapAppController {
 		$this->__initEdumap();
 
 		if ($this->request->is('ajax')) {
-			$tokenFields = Hash::flatten($this->request->data);
-			$hiddenFields = array(
-				'Edumap.block_id',
-				'Edumap.key'
+			$results = array(
+				$this->viewVars['edumap'],
+				$this->viewVars['file'],
+				$this->viewVars['edumapStudents'],
+				$this->viewVars['edumapSocialMedia'],
 			);
-			$this->set('tokenFields', $tokenFields);
-			$this->set('hiddenFields', $hiddenFields);
-			$this->renderJson();
-		} else {
-			if ($this->viewVars['contentEditable']) {
-				$this->view = 'Edumap/viewForEditor';
-			}
+			$this->renderJson($results);
 		}
 	}
 
 /**
- * edit method
+ * edit
  *
  * @throws BadRequestException
  * @return void
  */
 	public function edit() {
-		$this->__initEdumap(['comments']);
+		//Edumapデータを取得
+		$this->__initEdumap();
 
-		if ($this->request->isGet()) {
-			CakeSession::write('backUrl', $this->request->referer());
-		}
+		//コメントデータ取得
+		$comments = $this->Comment->getComments(
+			array(
+				'plugin_key' => $this->params['plugin'],
+				'content_key' => $this->viewVars['edumap']['key']
+			)
+		);
 
+		$data = array();
 		if ($this->request->isPost()) {
-			if (!$status = $this->NetCommonsWorkflow->parseStatus()) {
+			if (! $status = $this->NetCommonsWorkflow->parseStatus()) {
 				return;
 			}
 
-			$data = Hash::merge(
-				$this->__parseRequestData(),
-				['Edumap' => ['status' => $status]]
-			);
+			$data = $this->__parseRequestData();
+			$data = Hash::merge($data, array(
+				'Edumap' => array('status' => $status)
+			));
+			unset($data['Edumap']['id']);
 
-			//最新データ取得
-			if (! $edumap = $this->Edumap->getEdumap(
-				isset($data['Block']['id']) ? (int)$data['Block']['id'] : null,
-				true
-			)) {
-				$edumap = $this->Edumap->create(['key' => Security::hash($this->Edumap->name . mt_rand() . microtime(), 'md5')]);
-
-				$visibilitySetting = $this->EdumapVisibilitySetting->create(['edumap_key' => $edumap['Edumap']['key']]);
+			if (! $this->viewVars['blockId']) {
+				$visibilitySetting = $this->EdumapVisibilitySetting->create();
 				$data = Hash::merge($data, $visibilitySetting);
 			}
-			$data = Hash::merge($edumap, $data);
 
 			//登録処理
-			$edumap = $this->Edumap->saveEdumap($data);
-
-			//エラーチェック＆出力
-			if (! $this->handleValidationError($this->Edumap->validationErrors)) {
-				$data['Edumap']['foundation_date'] = $this->data['Edumap']['foundation_date'];
-				$data['Edumap']['closed_date'] = $this->data['Edumap']['closed_date'];
-				$results = $this->camelizeKeyRecursive($data);
-				$this->set($results);
+			$this->Edumap->saveEdumap($data);
+			if ($this->handleValidationError($this->Edumap->validationErrors)) {
+				//正常の場合
+				$this->redirectByFrameId();
 				return;
 			}
-			$this->set('blockId', $edumap['Edumap']['block_id']);
-
-			if (! $this->request->is('ajax')) {
-				$backUrl = CakeSession::read('backUrl');
-				CakeSession::delete('backUrl');
-				$this->redirect($backUrl);
-			}
-			return;
+			$data['Edumap']['foundation_date'] = $this->data['Edumap']['foundation_date'];
+			$data['Edumap']['closed_date'] = $this->data['Edumap']['closed_date'];
+			$data['contentStatus'] = null;
+			$data['comments'] = null;
+			unset($data['Edumap']['status']);
 		}
+
+		$data = $this->camelizeKeyRecursive(Hash::merge(
+			$data,
+			array(
+				'comments' => $comments
+			)
+		));
+		$results = Hash::merge($this->viewVars, $data);
+		$this->set($results);
 	}
 
 /**
- * __initEdumap method
+ * __initEdumap
  *
- * @param array $contains Optional result sets
  * @return void
  */
-	private function __initEdumap($contains = []) {
+	private function __initEdumap() {
 		//edumapデータ基本情報
-		if (! $edumap = $this->Edumap->getEdumap(
-			$this->viewVars['blockId'],
-			$this->viewVars['contentEditable']
-		)) {
-			$edumap = $this->Edumap->create(['id' => null, 'key' => null, 'file_id' => null]);
+		if ($this->viewVars['blockId']) {
+			$this->initEdumap(['edumapVisibilitySetting']);
+		} else {
+			$edumap = $this->Edumap->create(array(
+				'id' => null,
+				'key' => null,
+				'file_id' => null,
+				'status' => null,
+				'name' => ''
+			));
+			$results = $this->camelizeKeyRecursive($edumap);
+			$this->set($results);
 		}
-
-		$results = array(
-			'edumap' => $edumap['Edumap'],
-			'contentStatus' => $edumap['Edumap']['status'],
-		);
-
-		//公開設定
-		if (! $visibilitySetting = $this->EdumapVisibilitySetting->find('first', array(
-			'recursive' => -1,
-			'conditions' => array(
-				'edumap_key' => $edumap['Edumap']['key']
-			)
-		))) {
-			$visibilitySetting = $this->EdumapVisibilitySetting->create();
-		}
-		$results['edumapVisibilitySetting'] = $visibilitySetting['EdumapVisibilitySetting'];
-
 		//アバター取得
-		if ($file = $this->FileModel->find('first', array(
+		$file = $this->FileModel->find('first', array(
 			'recursive' => -1,
 			'conditions' => array(
-				$this->FileModel->alias . '.id' => $edumap['Edumap']['file_id']
+				$this->FileModel->alias . '.id' => $this->viewVars['edumap']['fileId']
 			)
-		))) {
-			$results['file'] = $file['File'];
-		}
-
+		));
 		//生徒数取得
-		$results['edumapStudents'] = $this->EdumapStudent->find('list', array(
+		$edumapStudents = $this->EdumapStudent->find('list', array(
 			'fields' => array('gendar', 'number', 'grade'),
 			'recursive' => -1,
 			'conditions' => array(
-				'edumap_id' => $edumap['Edumap']['id']
+				'edumap_id' => $this->viewVars['edumap']['id']
 			)
 		));
 		//SNS取得
-		$results['edumapSocialMedium'] = $this->EdumapSocialMedium->find('list', array(
+		$edumapSocialMedia = $this->EdumapSocialMedium->find('list', array(
 			'fields' => array('type', 'value'),
 			'recursive' => -1,
 			'conditions' => array(
-				'edumap_id' => $edumap['Edumap']['id']
+				'edumap_id' => $this->viewVars['edumap']['id']
 			)
 		));
 
-		//コメント
-		if (in_array('comments', $contains, true)) {
-			$results['comments'] = $this->Comment->getComments(
-				array(
-					'plugin_key' => 'edumap',
-					'content_key' => $edumap['Edumap']['key']
-				)
-			);
-		}
-
-		$results = $this->camelizeKeyRecursive($results);
+		//Viewにセット
+		$results = $this->camelizeKeyRecursive(Hash::merge(
+			$file,
+			array(
+				'contentStatus' => $this->viewVars['edumap']['status'],
+				'edumapStudents' => $edumapStudents,
+				'edumapSocialMedia' => $edumapSocialMedia
+			)
+		));
 		$this->set($results);
 	}
 

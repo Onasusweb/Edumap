@@ -1,6 +1,6 @@
 <?php
 /**
- * Edumap Model Test Case
+ * Test of Edumap->saveEdumap()
  *
  * @property Edumap $Edumap
  *
@@ -11,17 +11,17 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapModelTestCase', 'Edumap.Test/Case/Model');
+App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
 
 /**
- * Edumap Model Test Case
+ * Test of Edumap->saveEdumap()
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapTest extends EdumapModelTestCase {
+class EdumapTestSaveEdumap extends EdumapBaseModel {
 
 /**
  * default value
@@ -70,57 +70,14 @@ class EdumapTest extends EdumapModelTestCase {
 	);
 
 /**
- * testGetEdumap
- *
- * @return void
- */
-	public function testGetEdumap() {
-		$blockId = 121;
-		$contentEditable = true;
-		$result = $this->Edumap->getEdumap($blockId, $contentEditable);
-
-		$expected = array(
-			'Edumap' => array(
-				'id' => '2',
-				'block_id' => $blockId,
-				'status' => NetCommonsBlockComponent::STATUS_IN_DRAFT,
-				'key' => 'edumap_1',
-			),
-		);
-
-		$this->_assertArray(null, $expected, $result);
-	}
-
-/**
- * testGetEdumapByNoEditable method
- *
- * @return void
- */
-	public function testGetEdumapByNoEditable() {
-		$blockId = 121;
-		$contentEditable = false;
-		$result = $this->Edumap->getEdumap($blockId, $contentEditable);
-
-		$expected = array(
-			'Edumap' => array(
-				'id' => '1',
-				'block_id' => $blockId,
-				'status' => NetCommonsBlockComponent::STATUS_PUBLISHED,
-				'key' => 'edumap_1',
-			),
-		);
-
-		$this->_assertArray(null, $expected, $result);
-	}
-
-/**
- * testSaveAnnouncement method
+ * Expect Edumap->saveEdumap() saves data
  *
  * @return void
  */
 	public function testSaveEdumap() {
-		$frameId = 121;
-		$blockId = 121;
+		$frameId = '121';
+		$blockId = '121';
+		$roomId = '1';
 
 		//コンテンツの公開権限true
 		$this->Edumap->Behaviors->attach('Publishable');
@@ -140,7 +97,7 @@ class EdumapTest extends EdumapModelTestCase {
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId),
+				'Block' => array('id' => $blockId, 'room_id' => $roomId),
 				'Edumap' => array(
 					'block_id' => $blockId,
 					'key' => 'edumap_1',
@@ -207,19 +164,20 @@ class EdumapTest extends EdumapModelTestCase {
 		unset($expected['Edumap'][Edumap::AVATAR_INPUT]);
 
 		//テスト実施
-		$this->__assertSaveEdumap($expected);
+		$this->__assert($expected, $roomId);
 
 		$folder->delete(TMP . 'tests' . DS . 'test');
 	}
 
 /**
- * testSaveEdumapByNoBlockId
+ * Expect Edumap->saveEdumap() saves data without null block_id
  *
  * @return void
  */
-	public function testSaveEdumapWithoutBlockId() {
-		$frameId = 123;
+	public function testWithoutBlockId() {
+		$frameId = '123';
 		$blockId = null;
+		$roomId = '2';
 
 		//コンテンツの公開権限true
 		$this->Edumap->Behaviors->attach('Publishable');
@@ -230,7 +188,7 @@ class EdumapTest extends EdumapModelTestCase {
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId),
+				'Block' => array('id' => $blockId, 'room_id' => $roomId),
 				'Edumap' => array(
 					'key' => 'edumap_3',
 					'status' => NetCommonsBlockComponent::STATUS_PUBLISHED,
@@ -264,24 +222,25 @@ class EdumapTest extends EdumapModelTestCase {
 		);
 
 		//テスト実施
-		$this->__assertSaveEdumap($expected);
+		$this->__assert($expected, $roomId);
 	}
 
 /**
- * testSaveEdumapApproved
+ * Expect Edumap->saveEdumap() saves data without content_publishable privilege
  *
  * @return void
  */
-	public function testSaveEdumapWithoutPublishable() {
-		$frameId = 121;
-		$blockId = 121;
+	public function testWithoutPublishable() {
+		$frameId = '121';
+		$blockId = '121';
+		$roomId = '1';
 
 		//データ生成
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId),
+				'Block' => array('id' => $blockId, 'room_id' => $roomId),
 				'Edumap' => array(
 					'block_id' => $blockId,
 					'key' => 'edumap_1',
@@ -313,18 +272,262 @@ class EdumapTest extends EdumapModelTestCase {
 		);
 
 		//テスト実施
-		$this->__assertSaveEdumap($expected);
+		$this->__assert($expected, $roomId);
 	}
 
 /**
- * __assertSaveEdumap method
+ * Expect Edumap->validateEdumap() to validate files.id
+ *   and return false on validation error
  *
- * @param array $expected Expected value
  * @return void
  */
-	private function __assertSaveEdumap($expected) {
+	public function testValidationErrorByUnknownFileId() {
+		$frameId = '121';
+		$blockId = '121';
+		$roomId = '1';
+
+		//データ生成
+		$data = Hash::merge(
+			$this->__saveDefault,
+			array(
+				'Frame' => array('id' => $frameId),
+				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Edumap' => array(
+					'block_id' => $blockId,
+					'key' => 'edumap_1',
+					'file_id' => 10,
+					Edumap::AVATAR_INPUT => array(
+						'name' => 'logo.gif',
+						'type' => 'image/gif',
+						'tmp_name' => TESTS . 'logo.gif',
+						'error' => 0,
+						'size' => 5873,
+					),
+				),
+				Edumap::AVATAR_INPUT => array(
+					'File' => array(
+						'status' => 1,
+						'role_type' => 'room_file_role',
+						'path' => '{ROOT}test{DS}1{DS}',
+						'slug' => 'edumap_avatar_1',
+						'extension' => 'gif',
+						'original_name' => 'edumap_avatar_1',
+						'mimetype' => 'image/gif',
+						'name' => 'logo.gif',
+						'alt' => 'logo.gif',
+						'size' => 5873,
+					),
+					'FilesPlugin' => array(
+						'plugin_key' => 'edumap'
+					),
+					'FilesRoom' => array(
+						'room_id' => 1
+					),
+					'FilesUser' => array(
+						'user_id' => 1
+					),
+				)
+			)
+		);
+
+		//テスト実施
+		$result = $this->Edumap->saveEdumap($data);
+		$this->assertFalse($result, 'Error avatar ' . print_r($data, true));
+	}
+
+/**
+ * Expect Edumap->validateEdumap() to validate file
+ *   and return false on validation error
+ *
+ * @return void
+ */
+	public function testValidationErrorByFile() {
+		$frameId = '121';
+		$blockId = '121';
+		$roomId = '1';
+
+		//データ生成
+		$data = Hash::merge(
+			$this->__saveDefault,
+			array(
+				'Frame' => array('id' => $frameId),
+				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Edumap' => array(
+					'block_id' => $blockId,
+					'key' => 'edumap_1',
+					'file_id' => 0,
+					Edumap::AVATAR_INPUT => array(
+						'name' => 'logo.gif',
+						'type' => 'image/gif',
+						'tmp_name' => TESTS . 'logo.gif',
+						'error' => 0,
+						'size' => 5873,
+					),
+				),
+				Edumap::AVATAR_INPUT => array(
+					'File' => array(
+						'status' => 1,
+						'role_type' => 'room_file_role',
+						'path' => '{ROOT}test{DS}1{DS}',
+						'slug' => 'edumap_avatar_1',
+						'extension' => 'gif',
+						'original_name' => 'edumap_avatar_1',
+						'mimetype' => 'image/gif',
+						'name' => '',
+						'alt' => 'logo.gif',
+						'size' => 5873,
+					),
+					'FilesPlugin' => array(
+						'plugin_key' => 'edumap'
+					),
+					'FilesRoom' => array(
+						'room_id' => 1
+					),
+					'FilesUser' => array(
+						'user_id' => 1
+					),
+				)
+			)
+		);
+
+		//テスト実施
+		$result = $this->Edumap->saveEdumap($data);
+		$this->assertFalse($result, 'Error avatar ' . print_r($data, true));
+	}
+
+/**
+ * Expect Edumap->validateEdumap() to validate file asspcoated
+ *   and return false on validation error
+ *
+ * @return void
+ */
+	public function testValidationErrorByFileAssociated() {
+		$frameId = '121';
+		$blockId = '121';
+		$roomId = '1';
+
+		//データ生成
+		$data = Hash::merge(
+			$this->__saveDefault,
+			array(
+				'Frame' => array('id' => $frameId),
+				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Edumap' => array(
+					'block_id' => $blockId,
+					'key' => 'edumap_1',
+					'file_id' => 0,
+					Edumap::AVATAR_INPUT => array(
+						'name' => 'logo.gif',
+						'type' => 'image/gif',
+						'tmp_name' => TESTS . 'logo.gif',
+						'error' => 0,
+						'size' => 5873,
+					),
+				),
+				Edumap::AVATAR_INPUT => array(
+					'File' => array(
+						'status' => 1,
+						'role_type' => 'room_file_role',
+						'path' => '{ROOT}test{DS}1{DS}',
+						'slug' => 'edumap_avatar_1',
+						'extension' => 'gif',
+						'original_name' => 'edumap_avatar_1',
+						'mimetype' => 'image/gif',
+						'name' => 'logo.gif',
+						'alt' => 'logo.gif',
+						'size' => 5873,
+					),
+					'FilesPlugin' => array(
+						'plugin_key' => ''
+					),
+					'FilesRoom' => array(
+						'room_id' => 1
+					),
+					'FilesUser' => array(
+						'user_id' => 1
+					),
+				)
+			)
+		);
+
+		//テスト実施
+		$result = $this->Edumap->saveEdumap($data);
+		$this->assertFalse($result, 'Error avatar ' . print_r($data, true));
+	}
+
+/**
+ * Expect Edumap->saveEdumap() to validate frames.id and throw exception on error
+ *
+ * @return void
+ */
+	public function testSaveEdumapByUnknownFrameId() {
+		$this->setExpectedException('InternalErrorException');
+
+		$frameId = 9999;
+		$blockId = '121';
+		$roomId = '1';
+
+		//データ生成
+		$data = array(
+			'Frame' => array('id' => $frameId),
+			'Block' => array('id' => $blockId, 'room_id' => $roomId),
+			'Edumap' => array(
+				'block_id' => $blockId,
+				'key' => 'edumap_1',
+				'status' => NetCommonsBlockComponent::STATUS_APPROVED,
+				'file_id' => 0,
+				'name' => 'Edit name',
+				'name_kana' => 'Edit name_kana',
+				'handle' => 'Edit handle',
+				'postal_code' => '123-4567',
+				'prefecture_code' => '01',
+				'location' => 'Edit location',
+				'tel' => '01-2345-6789',
+				'fax' => '09-8765-4321',
+				'emergency_email' => 'emergency@example.com',
+				'inquiry' => 'Edit inquiry',
+				'site_url' => 'http://site.example.com',
+				'rss_url' => 'http://rss.example.com',
+				'foundation_date' => '1945/12',
+				'closed_date' => '2015/04',
+				'governor_type' => '3',
+				'education_type' => '4',
+				'coeducation_type' => '2',
+				'principal_name' => 'Edit principal_name',
+				'principal_email' => 'principal@example.com',
+				'description' => 'Edit description',
+				'is_auto_translated' => true,
+				'translation_engine' => 'Edit translation_engine',
+			),
+			'EdumapSocialMedium' => array(
+				EdumapSocialMedium::SOCIAL_TYPE_TWITTER => array(
+					'value' => 'EditTwitterValue',
+					'type' => EdumapSocialMedium::SOCIAL_TYPE_TWITTER
+				)
+			),
+			'EdumapStudent' => array(
+				array('grade' => '2', 'gendar' => false, 'number' => '123'),
+				array('grade' => '2', 'gendar' => true, 'number' => '456'),
+				array('grade' => '3', 'gendar' => false, 'number' => '789'),
+				array('grade' => '4', 'gendar' => true, 'number' => '654'),
+			),
+			'Comment' => array('comment' => 'Edit comment'),
+		);
+
+		//登録処理実行
+		$this->Edumap->saveEdumap($data);
+	}
+
+/**
+ * __assert
+ *
+ * @param array $expected Expected value
+ * @param int $roomId rooms.id
+ * @return void
+ */
+	private function __assert($expected, $roomId) {
 		//edumap
-		$result = $this->Edumap->getEdumap($expected['Block']['id'], true);
+		$result = $this->Edumap->getEdumap($expected['Block']['id'], $roomId, true);
 		$this->_assertArray(null, $expected['Edumap'], $result['Edumap']);
 
 		//edumapStudent

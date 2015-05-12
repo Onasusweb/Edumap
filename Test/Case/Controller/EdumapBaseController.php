@@ -26,7 +26,7 @@ App::uses('EdumapVisibilitySetting', 'Edumap.Model');
  * @package NetCommons\Edumap\Test\Case\Controller
  * @SuppressWarnings(PHPMD.LongVariable)
  */
-class EdumapControllerTestCase extends YAControllerTestCase {
+class EdumapBaseController extends YAControllerTestCase {
 
 /**
  * Fixtures
@@ -76,7 +76,7 @@ class EdumapControllerTestCase extends YAControllerTestCase {
 	}
 
 /**
- * tearDown 
+ * tearDown
  *
  * @return void
  */
@@ -91,7 +91,6 @@ class EdumapControllerTestCase extends YAControllerTestCase {
  *
  * @return void
  */
-	public function testIndex() {
-		$this->assertTrue(true);
+	public function test() {
 	}
 }

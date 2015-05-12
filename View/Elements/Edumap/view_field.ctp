@@ -34,7 +34,7 @@ switch ($field) {
 ?>
 
 <?php if ($value !== '' && isset($edumapVisibilitySetting[$field])) : ?>
-	<?php if ($edumapVisibilitySetting[$field] === '1' || $contentEditable) : ?>
+	<?php if ($edumapVisibilitySetting[$field] === EdumapVisibilitySetting::PUBLIC_VISIBILITY || $contentEditable) : ?>
 		<div class="row form-group">
 			<?php if (isset($label)) : ?>
 				<div class="col-xs-12 col-sm-4">

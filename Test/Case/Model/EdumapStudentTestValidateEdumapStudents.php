@@ -1,6 +1,6 @@
 <?php
 /**
- * EdumapStudent Model Test Case
+ * Test of EdumapStudent->validateEdumapStudents()
  *
  * @property EdumapStudent $EdumapStudent
  *
@@ -11,15 +11,15 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapModelTestCase', 'Edumap.Test/Case/Model');
+App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
 
 /**
- * EdumapStudent Model Test Case
+ * Test of EdumapStudent->validateEdumapStudents()
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapStudentTest extends EdumapModelTestCase {
+class EdumapStudentTestValidateEdumapStudents extends EdumapBaseModel {
 
 /**
  * Expect EdumapStudent->validateEdumapStudents() to validate and return true on validation success
