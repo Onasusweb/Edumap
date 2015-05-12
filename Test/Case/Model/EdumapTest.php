@@ -75,9 +75,10 @@ class EdumapTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testGetEdumap() {
-		$blockId = 121;
+		$blockId = '121';
+		$roomId = '1';
 		$contentEditable = true;
-		$result = $this->Edumap->getEdumap($blockId, $contentEditable);
+		$result = $this->Edumap->getEdumap($blockId, $roomId, $contentEditable);
 
 		$expected = array(
 			'Edumap' => array(
@@ -97,9 +98,10 @@ class EdumapTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testGetEdumapByNoEditable() {
-		$blockId = 121;
+		$blockId = '121';
+		$roomId = '1';
 		$contentEditable = false;
-		$result = $this->Edumap->getEdumap($blockId, $contentEditable);
+		$result = $this->Edumap->getEdumap($blockId, $roomId, $contentEditable);
 
 		$expected = array(
 			'Edumap' => array(
@@ -119,8 +121,9 @@ class EdumapTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testSaveEdumap() {
-		$frameId = 121;
-		$blockId = 121;
+		$frameId = '121';
+		$blockId = '121';
+		$roomId = '1';
 
 		//コンテンツの公開権限true
 		$this->Edumap->Behaviors->attach('Publishable');
@@ -207,7 +210,7 @@ class EdumapTest extends EdumapModelTestCase {
 		unset($expected['Edumap'][Edumap::AVATAR_INPUT]);
 
 		//テスト実施
-		$this->__assertSaveEdumap($expected);
+		$this->__assertSaveEdumap($expected, $roomId);
 
 		$folder->delete(TMP . 'tests' . DS . 'test');
 	}
@@ -218,8 +221,9 @@ class EdumapTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testSaveEdumapWithoutBlockId() {
-		$frameId = 123;
+		$frameId = '123';
 		$blockId = null;
+		$roomId = '2';
 
 		//コンテンツの公開権限true
 		$this->Edumap->Behaviors->attach('Publishable');
@@ -264,7 +268,7 @@ class EdumapTest extends EdumapModelTestCase {
 		);
 
 		//テスト実施
-		$this->__assertSaveEdumap($expected);
+		$this->__assertSaveEdumap($expected, $roomId);
 	}
 
 /**
@@ -273,8 +277,9 @@ class EdumapTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testSaveEdumapWithoutPublishable() {
-		$frameId = 121;
-		$blockId = 121;
+		$frameId = '121';
+		$blockId = '121';
+		$roomId = '1';
 
 		//データ生成
 		$data = Hash::merge(
@@ -313,18 +318,19 @@ class EdumapTest extends EdumapModelTestCase {
 		);
 
 		//テスト実施
-		$this->__assertSaveEdumap($expected);
+		$this->__assertSaveEdumap($expected, $roomId);
 	}
 
 /**
  * __assertSaveEdumap method
  *
  * @param array $expected Expected value
+ * @param int $roomId rooms.id
  * @return void
  */
-	private function __assertSaveEdumap($expected) {
+	private function __assertSaveEdumap($expected, $roomId) {
 		//edumap
-		$result = $this->Edumap->getEdumap($expected['Block']['id'], true);
+		$result = $this->Edumap->getEdumap($expected['Block']['id'], $roomId, true);
 		$this->_assertArray(null, $expected['Edumap'], $result['Edumap']);
 
 		//edumapStudent
