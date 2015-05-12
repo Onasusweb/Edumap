@@ -337,7 +337,7 @@ class Edumap extends EdumapAppModel {
 				$this->data['Edumap']['foundation_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['foundation_date']);
 				$this->data['Edumap']['closed_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['closed_date']);
 			}
-			
+
 			if (! $edumap = $this->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}

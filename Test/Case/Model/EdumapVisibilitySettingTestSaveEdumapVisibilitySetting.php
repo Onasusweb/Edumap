@@ -1,6 +1,6 @@
 <?php
 /**
- * EdumapVisibilitySetting Model Test Case
+ * Test of EdumapVisibilitySetting->saveEdumapVisibilitySetting()
  *
  * @property EdumapVisibilitySetting $EdumapVisibilitySetting
  *
@@ -11,15 +11,15 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapModelTestCase', 'Edumap.Test/Case/Model');
+App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
 
 /**
- * EdumapVisibilitySetting Model Test Case
+ * Test of EdumapVisibilitySetting->saveEdumapVisibilitySetting()
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapVisibilitySettingValidateErrorTest extends EdumapModelTestCase {
+class EdumapVisibilitySettingTestSaveEdumapVisibilitySetting extends EdumapBaseModel {
 
 /**
  * default value
@@ -60,8 +60,8 @@ class EdumapVisibilitySettingValidateErrorTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testSaveEdumapVisibilitySetting() {
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = '121';
+		$blockId = '121';
 		$edumapKey = 'edumap_1';
 
 		//データ生成
@@ -106,8 +106,8 @@ class EdumapVisibilitySettingValidateErrorTest extends EdumapModelTestCase {
  * @return void
  */
 	public function testSaveEdumapVisibilitySettingValidateError() {
-		$frameId = 1;
-		$blockId = 1;
+		$frameId = '121';
+		$blockId = '121';
 		$edumapKey = '';
 
 		//データ生成
