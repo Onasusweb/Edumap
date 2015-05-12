@@ -30,7 +30,8 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
  */
 	private $__saveDefault = array(
 		'Edumap' => array(
-			'file_id' => 0,
+			'language_id' => '2',
+			'file_id' => null,
 			'name' => 'Edit name',
 			'name_kana' => 'Edit name_kana',
 			'handle' => 'Edit handle',
@@ -67,6 +68,10 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 			array('grade' => '4', 'gendar' => true, 'number' => '654'),
 		),
 		'Comment' => array('comment' => 'Edit comment'),
+		'Block' => array(
+			'language_id' => '2',
+			'plugin_key' => 'edumap'
+		)
 	);
 
 /**
@@ -77,6 +82,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 	public function testSaveEdumap() {
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		//コンテンツの公開権限true
@@ -97,7 +103,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'block_id' => $blockId,
 					'key' => 'edumap_1',
@@ -152,6 +158,8 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 				'file_id' => $fileId,
 				'foundation_date' => '194512',
 				'closed_date' => '201504',
+				'is_active' => 1,
+				'is_latest' => 1,
 			)
 		);
 		$expected['EdumapSocialMedium'] = Hash::insert(
@@ -177,6 +185,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 	public function testWithoutBlockId() {
 		$frameId = '123';
 		$blockId = null;
+		$blockKey = null;
 		$roomId = '2';
 
 		//コンテンツの公開権限true
@@ -188,16 +197,16 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
-					'key' => 'edumap_3',
+					'key' => '',
 					'status' => NetCommonsBlockComponent::STATUS_PUBLISHED,
 				),
 			)
 		);
 
 		//登録処理実行
-		$this->Edumap->saveEdumap($data);
+		$edumap = $this->Edumap->saveEdumap($data);
 
 		//期待値の生成
 		$edumapId = $this->Edumap->getLastInsertID();
@@ -209,9 +218,12 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 			$data['Edumap'],
 			array(
 				'id' => $edumapId,
+				'key' => $edumap['Edumap']['key'],
 				'block_id' => $expected['Block']['id'],
 				'foundation_date' => '194512',
 				'closed_date' => '201504',
+				'is_active' => '1',
+				'is_latest' => '1',
 			)
 		);
 		$expected['EdumapSocialMedium'] = Hash::insert(
@@ -233,6 +245,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 	public function testWithoutPublishable() {
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		//データ生成
@@ -240,7 +253,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'block_id' => $blockId,
 					'key' => 'edumap_1',
@@ -262,6 +275,8 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 				'id' => $edumapId,
 				'foundation_date' => '194512',
 				'closed_date' => '201504',
+				'is_active' => 0,
+				'is_latest' => 1,
 			)
 		);
 		$expected['EdumapSocialMedium'] = Hash::insert(
@@ -284,6 +299,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 	public function testValidationErrorByUnknownFileId() {
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		//データ生成
@@ -291,7 +307,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'block_id' => $blockId,
 					'key' => 'edumap_1',
@@ -344,6 +360,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 	public function testValidationErrorByFile() {
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		//データ生成
@@ -351,7 +368,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'block_id' => $blockId,
 					'key' => 'edumap_1',
@@ -404,6 +421,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 	public function testValidationErrorByFileAssociated() {
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		//データ生成
@@ -411,7 +429,7 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'block_id' => $blockId,
 					'key' => 'edumap_1',
@@ -465,12 +483,13 @@ class EdumapTestSaveEdumap extends EdumapBaseModel {
 
 		$frameId = 9999;
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		//データ生成
 		$data = array(
 			'Frame' => array('id' => $frameId),
-			'Block' => array('id' => $blockId, 'room_id' => $roomId),
+			'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 			'Edumap' => array(
 				'block_id' => $blockId,
 				'key' => 'edumap_1',
