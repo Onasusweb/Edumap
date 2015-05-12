@@ -326,18 +326,18 @@ class Edumap extends EdumapAppModel {
 
 			//ブロックの登録
 			$block = $this->Block->saveByFrameId($data['Frame']['id']);
-			$this->data[$this->alias]['block_id'] = (int)$block['Block']['id'];
 
 			//アバターの登録
 			$this->__saveEdumapAvatar($data);
 
 			//Edumapの登録
+			$this->data[$this->alias]['block_id'] = (int)$block['Block']['id'];
 			if (isset($this->data['Edumap']['foundation_date'])) {
+				//必ず、foundation_dateとclosed_dateは対で入ってくる
 				$this->data['Edumap']['foundation_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['foundation_date']);
-			}
-			if (isset($this->data['Edumap']['closed_date'])) {
 				$this->data['Edumap']['closed_date'] = str_replace(self::DATE_SEPARATOR, '', $this->data['Edumap']['closed_date']);
 			}
+			
 			if (! $edumap = $this->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
@@ -387,11 +387,18 @@ class Edumap extends EdumapAppModel {
  * @return mixed Array on success, false on error
  */
 	private function __validateEdumapAvatar($data) {
-		//古いアバターの削除
-		if (isset($data[self::AVATAR_INPUT]) && (int)$data['Edumap']['file_id'] !== 0) {
-			$data['DeleteFile'][0]['File'] = array(
-				'id' => $data['Edumap']['file_id']
-			);
+		if (isset($data[self::AVATAR_INPUT])) {
+			//古いアバターの削除
+			if ((int)$data['Edumap']['file_id'] !== 0) {
+				$data['DeleteFile'][0]['File'] = array(
+					'id' => $data['Edumap']['file_id']
+				);
+			}
+			//アバターデータのvalidate
+			if (! $this->FileModel->validateFile($data[self::AVATAR_INPUT], ['associated'])) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
+				return false;
+			}
 		}
 
 		//アバター削除のvalidate
@@ -401,18 +408,6 @@ class Edumap extends EdumapAppModel {
 				return false;
 			}
 			$data['DeleteFile'] = $deleteFile;
-		}
-
-		//アバターデータのvalidate
-		if (isset($data[self::AVATAR_INPUT])) {
-			if (! $this->FileModel->validateFile($data[self::AVATAR_INPUT])) {
-				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
-				return false;
-			}
-			if (! $this->FileModel->validateFileAssociated($data[self::AVATAR_INPUT])) {
-				$this->validationErrors = Hash::merge($this->validationErrors, $this->FileModel->validationErrors);
-				return false;
-			}
 		}
 
 		return $data;
@@ -453,16 +448,7 @@ class Edumap extends EdumapAppModel {
 	private function __saveEdumapAvatar($data) {
 		//アバターの削除
 		if (isset($data['DeleteFile']) && $data['DeleteFile'][0]['File']['id'] > 0) {
-			//データ削除
-			if (! $this->FileModel->deleteAll(['id' => $data['DeleteFile'][0]['File']['id']], true, false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-			if (! $this->FileModel->deleteFileAssociated($data['DeleteFile'][0]['File']['id'])) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-			$folder = new Folder();
-			$folder->delete($data['DeleteFile'][0]['File']['path']);
-
+			$this->FileModel->deleteFiles([$data['DeleteFile'][0]['File']['id']]);
 			$this->data['Edumap']['file_id'] = 0;
 		}
 

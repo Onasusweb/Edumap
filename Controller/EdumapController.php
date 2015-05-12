@@ -160,7 +160,8 @@ class EdumapController extends EdumapAppController {
 				'id' => null,
 				'key' => null,
 				'file_id' => null,
-				'status' => null
+				'status' => null,
+				'name' => ''
 			));
 			$results = $this->camelizeKeyRecursive($edumap);
 			$this->set($results);

@@ -54,6 +54,8 @@ class EdumapAppController extends AppController {
 		parent::beforeFilter();
 		$results = $this->camelizeKeyRecursive(['current' => $this->current]);
 		$this->set($results);
+
+		$this->set('userId', (int)$this->Auth->user('id'));
 	}
 
 /**
@@ -82,8 +84,6 @@ class EdumapAppController extends AppController {
 			$visibilitySetting = $this->camelizeKeyRecursive($visibilitySetting);
 			$this->set($visibilitySetting);
 		}
-
-		$this->set('userId', (int)$this->Auth->user('id'));
 
 		return true;
 	}
