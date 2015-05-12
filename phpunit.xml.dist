@@ -14,6 +14,7 @@
             <directory suffix=".php">app/Plugin/Auth</directory>
             <directory suffix=".php">app/Plugin/AuthGeneral</directory>
             <directory suffix=".php">app/Plugin/Blocks</directory>
+            <directory suffix=".ctp">app/Plugin/Blocks</directory>
             <directory suffix=".php">app/Plugin/Boxes</directory>
             <directory suffix=".php">app/Plugin/Comments</directory>
             <directory suffix=".php">app/Plugin/Containers</directory>
