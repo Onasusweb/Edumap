@@ -75,7 +75,7 @@ class EdumapBaseModel extends YACakeTestCase {
 	);
 
 /**
- * Test case of boolean
+ * Test case of number
  *
  * @var array
  */
