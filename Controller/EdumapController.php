@@ -139,7 +139,8 @@ class EdumapController extends EdumapAppController {
 		$data = $this->camelizeKeyRecursive(Hash::merge(
 			$data,
 			array(
-				'comments' => $comments
+				'comments' => $comments,
+				'contentStatus' => $this->viewVars['edumap']['status']
 			)
 		));
 		$results = Hash::merge($this->viewVars, $data);
@@ -194,7 +195,6 @@ class EdumapController extends EdumapAppController {
 		$results = $this->camelizeKeyRecursive(Hash::merge(
 			$file,
 			array(
-				'contentStatus' => $this->viewVars['edumap']['status'],
 				'edumapStudents' => $edumapStudents,
 				'edumapSocialMedia' => $edumapSocialMedia
 			)
