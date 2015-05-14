@@ -43,7 +43,6 @@ class EdumapVisibilitySettingsController extends EdumapAppController {
  */
 	public $components = array(
 		'NetCommons.NetCommonsBlock',
-		'NetCommons.NetCommonsFrame',
 		'NetCommons.NetCommonsRoomRole' => array(
 			//コンテンツの権限設定
 			'allowedActions' => array(

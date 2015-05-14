@@ -20,13 +20,6 @@ App::uses('AppController', 'Controller');
 class EdumapAppController extends AppController {
 
 /**
- * layout
- *
- * @var array
- */
-	//public $layout = 'NetCommons.default2';
-
-/**
  * use component
  *
  * @var array
@@ -96,6 +89,12 @@ class EdumapAppController extends AppController {
  * @return void
  */
 	public function initTabs($mainActiveTab, $blockActiveTab) {
+		if (isset($this->params['pass'][1])) {
+			$blockId = (int)$this->params['pass'][1];
+		} else {
+			$blockId = null;
+		}
+
 		//タブの設定
 		$settingTabs = array(
 			'tabs' => array(
@@ -120,7 +119,7 @@ class EdumapAppController extends AppController {
 						'controller' => 'blocks',
 						'action' => $this->params['action'],
 						$this->viewVars['frameId'],
-						$this->viewVars['blockId']
+						$blockId
 					)
 				),
 			),
@@ -134,7 +133,7 @@ class EdumapAppController extends AppController {
 					'controller' => 'edumap_visibility_settings',
 					'action' => 'edit',
 					$this->viewVars['frameId'],
-					$this->viewVars['blockId']
+					$blockId
 				),
 				'label' => __d('edumap', 'Edumap visibilty settings'),
 			);
