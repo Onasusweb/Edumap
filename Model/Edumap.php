@@ -573,7 +573,7 @@ class Edumap extends EdumapAppModel {
 			}
 
 			//コメントの削除
-			$this->Comment->deleteByBlock($data['Block']['key']);
+			$this->Comment->deleteByBlockKey($data['Block']['key']);
 
 			//Blockデータ削除
 			$this->Block->deleteBlock($data['Block']['key']);
