@@ -345,6 +345,7 @@ class Edumap extends EdumapAppModel {
 			}
 
 			//Associatedの登録
+			$edumap['Block']['key'] = $block['Block']['key'];
 			$this->__saveEdumapAssociated($edumap);
 
 			$dataSource->commit();
@@ -374,7 +375,7 @@ class Edumap extends EdumapAppModel {
 
 		//コメントのvalidate
 		if (in_array('comment', $contains, true) && isset($data['Comment'])) {
-			if (! $this->Comment->validateByStatus($data, array('plugin' => $this->plugin, 'caller' => $this->name))) {
+			if (! $this->Comment->validateByStatus($data, array('plugin' => 'edumap', 'caller' => $this->name))) {
 				$this->validationErrors = Hash::merge($this->validationErrors, $this->Comment->validationErrors);
 				return false;
 			}
@@ -498,6 +499,9 @@ class Edumap extends EdumapAppModel {
 		}
 		//コメントの登録
 		if ($this->Comment->data) {
+			$this->Comment->data[$this->Comment->name]['plugin_key'] = 'edumap';
+			$this->Comment->data[$this->Comment->name]['block_key'] = $data['Block']['key'];
+			$this->Comment->data[$this->Comment->name]['content_key'] = $data[$this->alias]['key'];
 			if (! $this->Comment->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
@@ -567,6 +571,9 @@ class Edumap extends EdumapAppModel {
 			if (! $this->EdumapVisibilitySetting->deleteAll(array($this->EdumapVisibilitySetting->alias . '.edumap_key' => $data[$this->alias]['key']), false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
+
+			//コメントの削除
+			$this->Comment->deleteByBlock($data['Block']['key']);
 
 			//Blockデータ削除
 			$this->Block->deleteBlock($data['Block']['key']);

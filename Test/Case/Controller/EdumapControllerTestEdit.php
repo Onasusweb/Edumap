@@ -173,13 +173,14 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 		//データ生成
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_1',
@@ -213,13 +214,14 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 		//データ生成
 		$frameId = '123';
 		$blockId = '';
+		$blockKey = '';
 		$roomId = '2';
 
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_3',
@@ -253,13 +255,14 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 		//データ生成
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_1',
@@ -300,13 +303,14 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 		//データ生成
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_1',
@@ -339,13 +343,14 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 		//データ生成
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_1',
@@ -381,13 +386,14 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 		//データ生成
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_1',
@@ -430,13 +436,14 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 		//データ生成
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_1',
@@ -505,13 +512,14 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 		//データ生成
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_1',
@@ -549,13 +557,14 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 		//データ生成
 		$frameId = '121';
 		$blockId = '121';
+		$blockKey = 'block_' . $blockId;
 		$roomId = '1';
 
 		$data = Hash::merge(
 			$this->__saveDefault,
 			array(
 				'Frame' => array('id' => $frameId),
-				'Block' => array('id' => $blockId, 'room_id' => $roomId),
+				'Block' => array('id' => $blockId, 'key' => $blockKey, 'room_id' => $roomId),
 				'Edumap' => array(
 					'id' => '',
 					'key' => 'edumap_1',
