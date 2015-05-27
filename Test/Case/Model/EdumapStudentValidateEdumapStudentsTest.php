@@ -11,7 +11,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
+App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
 
 /**
  * Test of EdumapStudent->validateEdumapStudents()
@@ -19,7 +19,7 @@ App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapStudentTestValidateEdumapStudents extends EdumapBaseModel {
+class EdumapStudentValidateEdumapStudentsTest extends EdumapModelTestBase {
 
 /**
  * Expect EdumapStudent->validateEdumapStudents() to validate and return true on validation success

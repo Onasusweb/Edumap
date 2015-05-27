@@ -11,7 +11,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
+App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
 
 /**
  * Test of EdumapSocialMedium->validateEdumapSocialMedia()
@@ -19,7 +19,7 @@ App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapSocialMediumTestValidateEdumapSocialMedia extends EdumapBaseModel {
+class EdumapSocialMediumValidateEdumapSocialMediaTest extends EdumapModelTestBase {
 
 /**
  * Expect EdumapSocialMedia->validateEdumapSocialMedia() to validate

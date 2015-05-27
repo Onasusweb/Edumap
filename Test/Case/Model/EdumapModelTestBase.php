@@ -25,7 +25,7 @@ App::uses('AuthComponent', 'Component');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapBaseModel extends YACakeTestCase {
+class EdumapModelTestBase extends YACakeTestCase {
 
 /**
  * Fixtures
@@ -206,14 +206,4 @@ class EdumapBaseModel extends YACakeTestCase {
 			$this->assertEquals($value, $target, 'key=' . print_r($key, true) . '|value=' . print_r($value, true) . '|result=' . print_r($result, true));
 		}
 	}
-
-/**
- * testIndex method
- *
- * @return void
- */
-	public function testIndex() {
-		$this->assertTrue(true);
-	}
-
 }

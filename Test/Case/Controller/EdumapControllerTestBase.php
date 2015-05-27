@@ -26,7 +26,7 @@ App::uses('EdumapVisibilitySetting', 'Edumap.Model');
  * @package NetCommons\Edumap\Test\Case\Controller
  * @SuppressWarnings(PHPMD.LongVariable)
  */
-class EdumapBaseController extends YAControllerTestCase {
+class EdumapControllerTestBase extends YAControllerTestCase {
 
 /**
  * Fixtures
@@ -84,13 +84,5 @@ class EdumapBaseController extends YAControllerTestCase {
 		Configure::write('Config.language', null);
 		CakeSession::write('Auth.User', null);
 		parent::tearDown();
-	}
-
-/**
- * testIndex method
- *
- * @return void
- */
-	public function test() {
 	}
 }

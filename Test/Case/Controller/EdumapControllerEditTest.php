@@ -10,7 +10,7 @@
  */
 
 App::uses('EdumapController', 'Edumap.Controller');
-App::uses('EdumapBaseController', 'Edumap.Test/Case/Controller');
+App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
 
 /**
  * Test of EdumapController->edit()
@@ -19,7 +19,7 @@ App::uses('EdumapBaseController', 'Edumap.Test/Case/Controller');
  * @package NetCommons\Edumap\Test\Case\Controller
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
-class EdumapControllerTestEdit extends EdumapBaseController {
+class EdumapControllerEditTest extends EdumapControllerTestBase {
 
 /**
  * default value
@@ -269,11 +269,11 @@ class EdumapControllerTestEdit extends EdumapBaseController {
 					'foundation_date' => array('year' => '', 'month' => ''),
 					'closed_date' => array('year' => '', 'month' => ''),
 				),
-				'EdumapSocialMedium' => array(
-					EdumapSocialMedium::SOCIAL_TYPE_TWITTER => array(
-						'value' => '',
-					)
-				),
+				//'EdumapSocialMedium' => array(
+				//	EdumapSocialMedium::SOCIAL_TYPE_TWITTER => array(
+				//		'value' => '',
+				//	)
+				//),
 				sprintf('save_%s', NetCommonsBlockComponent::STATUS_PUBLISHED) => ''
 			)
 		);

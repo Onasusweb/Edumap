@@ -11,7 +11,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
+App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
 
 /**
  * Test of EdumapVisibilitySetting->saveEdumapVisibilitySetting()
@@ -19,7 +19,7 @@ App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Model
  */
-class EdumapVisibilitySettingTestSaveEdumapVisibilitySetting extends EdumapBaseModel {
+class EdumapVisibilitySettingSaveEdumapVisibilitySettingTest extends EdumapModelTestBase {
 
 /**
  * default value

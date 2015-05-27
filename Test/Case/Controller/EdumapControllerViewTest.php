@@ -10,7 +10,7 @@
  */
 
 App::uses('EdumapController', 'Edumap.Controller');
-App::uses('EdumapBaseController', 'Edumap.Test/Case/Controller');
+App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
 
 /**
  * Test of EdumapController->view()
@@ -18,7 +18,7 @@ App::uses('EdumapBaseController', 'Edumap.Test/Case/Controller');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Edumap\Test\Case\Controller
  */
-class EdumapControllerTestView extends EdumapBaseController {
+class EdumapControllerViewTest extends EdumapControllerTestBase {
 
 /**
  * setUp method

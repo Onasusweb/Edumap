@@ -10,7 +10,7 @@
  */
 
 App::uses('EdumapVisibilitySettingsController', 'Edumap.Controller');
-App::uses('EdumapBaseController', 'Edumap.Test/Case/Controller');
+App::uses('EdumapControllerTestBase', 'Edumap.Test/Case/Controller');
 
 /**
  * Test of EdumapVisibilitySettingsController->edit()
@@ -19,7 +19,7 @@ App::uses('EdumapBaseController', 'Edumap.Test/Case/Controller');
  * @package NetCommons\Edumap\Test\Case\Controller
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
-class EdumapVisibilitySettingsControllerTest extends EdumapBaseController {
+class EdumapVisibilitySettingsControllerEditTest extends EdumapControllerTestBase {
 
 /**
  * default value

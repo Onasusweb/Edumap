@@ -11,7 +11,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
+App::uses('EdumapModelTestBase', 'Edumap.Test/Case/Model');
 
 /**
  * Test of Edumap->validateEdumap()
@@ -20,7 +20,7 @@ App::uses('EdumapBaseModel', 'Edumap.Test/Case/Model');
  * @package NetCommons\Edumap\Test\Case\Model
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
-class EdumapTestValidateEdumap extends EdumapBaseModel {
+class EdumapValidateEdumapTest extends EdumapModelTestBase {
 
 /**
  * default value
