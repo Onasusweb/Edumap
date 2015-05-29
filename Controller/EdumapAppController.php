@@ -26,6 +26,7 @@ class EdumapAppController extends AppController {
  */
 	public $components = array(
 		'NetCommons.NetCommonsFrame',
+		'Pages.PageLayout',
 		'Security',
 	);
 
@@ -37,19 +38,6 @@ class EdumapAppController extends AppController {
 	public $uses = array(
 		'Edumap.Edumap',
 	);
-
-/**
- * beforeFilter
- *
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$results = $this->camelizeKeyRecursive(['current' => $this->current]);
-		$this->set($results);
-
-		$this->set('userId', (int)$this->Auth->user('id'));
-	}
 
 /**
  * initEdumap
