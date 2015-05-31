@@ -15,7 +15,7 @@
 
 	<div class="tab-content">
 		<div class="text-right">
-			<a class="btn btn-success" href="<?php echo $this->Html->url('/edumap/blocks/add/' . $frameId);?>">
+			<a class="btn btn-success" href="<?php echo $this->Html->url('/edumap/edumap_blocks/add/' . $frameId);?>">
 				<span class="glyphicon glyphicon-plus"> </span>
 			</a>
 		</div>

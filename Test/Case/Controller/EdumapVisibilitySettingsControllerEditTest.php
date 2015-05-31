@@ -61,6 +61,8 @@ class EdumapVisibilitySettingsControllerEditTest extends EdumapControllerTestBas
  * @return void
  */
 	public function setUp() {
+		parent::setUp();
+
 		$this->generate(
 			'Edumap.EdumapVisibilitySettings',
 			[
@@ -71,7 +73,6 @@ class EdumapVisibilitySettingsControllerEditTest extends EdumapControllerTestBas
 				]
 			]
 		);
-		parent::setUp();
 	}
 
 /**

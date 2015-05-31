@@ -26,6 +26,8 @@ class EdumapControllerViewTest extends EdumapControllerTestBase {
  * @return void
  */
 	public function setUp() {
+		parent::setUp();
+
 		$this->generate(
 			'Edumap.Edumap',
 			[
@@ -36,7 +38,6 @@ class EdumapControllerViewTest extends EdumapControllerTestBase {
 				]
 			]
 		);
-		parent::setUp();
 	}
 
 /**

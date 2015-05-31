@@ -15,7 +15,7 @@
 
 	<div class="tab-content">
 		<div class="text-right">
-			<a class="btn btn-success" href="<?php echo $this->Html->url('/edumap/blocks/add/' . $frameId);?>">
+			<a class="btn btn-success" href="<?php echo $this->Html->url('/edumap/edumap_blocks/add/' . $frameId);?>">
 				<span class="glyphicon glyphicon-plus"> </span>
 			</a>
 		</div>
@@ -32,12 +32,9 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>#</th>
+							<th></th>
 							<th>
 								<?php echo $this->Paginator->sort('Edumap.name', __d('edumap', 'School name')); ?>
-							</th>
-							<th>
-								<?php echo $this->Paginator->sort('Block.public_type', __d('blocks', 'Publishing setting')); ?>
 							</th>
 							<th>
 								<?php echo $this->Paginator->sort('Edumap.modified', __d('net_commons', 'Updated date')); ?>
@@ -62,18 +59,9 @@
 										)); ?>
 								</td>
 								<td>
-									<a href="<?php echo $this->Html->url('/edumap/blocks/edit/' . $frameId . '/' . (int)$edumap['block']['id']); ?>">
+									<a href="<?php echo $this->Html->url('/edumap/edumap_blocks/edit/' . $frameId . '/' . (int)$edumap['block']['id']); ?>">
 										<?php echo h($edumap['edumap']['name']); ?>
 									</a>
-								</td>
-								<td>
-									<?php if ($edumap['block']['publicType'] === '0') : ?>
-										<?php echo __d('blocks', 'Private'); ?>
-									<?php elseif ($edumap['block']['publicType'] === '1') : ?>
-										<?php echo __d('blocks', 'Public'); ?>
-									<?php elseif ($edumap['block']['publicType'] === '2') : ?>
-										<?php echo __d('blocks', 'Limited'); ?>
-									<?php endif; ?>
 								</td>
 								<td>
 									<?php echo $this->Date->dateFormat($edumap['edumap']['modified']); ?>
