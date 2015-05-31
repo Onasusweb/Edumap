@@ -59,15 +59,6 @@ class EdumapController extends EdumapAppController {
 	);
 
 /**
- * index
- *
- * @return void
- */
-	public function index() {
-		$this->setAction('view');
-	}
-
-/**
  * view
  *
  * @return void

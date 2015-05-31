@@ -157,6 +157,8 @@ class Initialize extends CakeMigration {
 				'namespace' => 'netcommons/edumap',
 				'name' => 'edumap連携',
 				'type' => 1,
+				'default_action' => 'edumap/view',
+				'default_setting_action' => 'edumap_blocks/index',
 			),
 		),
 

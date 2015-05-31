@@ -22,7 +22,7 @@
 				'controller' => 'EdumapVisibilitySettings',
 				'action' => h($this->request->params['action']) . '/' . $frameId . '/' . $blockId,
 				'callback' => 'Edumap.EdumapVisibilitySettings/edit_form',
-				'cancelUrl' => '/edumap/blocks/index/' . $frameId
+				'cancelUrl' => '/edumap/edumap_blocks/index/' . $frameId
 			)); ?>
 	</div>
 </div>

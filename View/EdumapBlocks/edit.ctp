@@ -17,17 +17,17 @@
 		<?php echo $this->element('Blocks.setting_tabs', $blockSettingTabs); ?>
 
 		<?php echo $this->element('Blocks.edit_form', array(
-				'controller' => 'Blocks',
+				'controller' => 'EdumapBlocks',
 				'action' => h($this->request->params['action']) . '/' . $frameId . '/' . $blockId,
-				'callback' => 'Edumap.Blocks/edit_form',
-				'cancelUrl' => '/edumap/blocks/index/' . $frameId
+				'callback' => 'Edumap.EdumapBlocks/edit_form',
+				'cancelUrl' => '/edumap/edumap_blocks/index/' . $frameId
 			)); ?>
 
 		<?php if ($this->request->params['action'] === 'edit') : ?>
 			<?php echo $this->element('Blocks.delete_form', array(
-					'controller' => 'Blocks',
+					'controller' => 'EdumapBlocks',
 					'action' => 'delete/' . $frameId . '/' . (int)$edumap['blockId'],
-					'callback' => 'Edumap.Blocks/delete_form'
+					'callback' => 'Edumap.EdumapBlocks/delete_form'
 				)); ?>
 		<?php endif; ?>
 	</div>

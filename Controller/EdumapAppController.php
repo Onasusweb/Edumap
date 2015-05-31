@@ -26,6 +26,7 @@ class EdumapAppController extends AppController {
  */
 	public $components = array(
 		'NetCommons.NetCommonsFrame',
+		'Pages.PageLayout',
 		'Security',
 	);
 
@@ -37,19 +38,6 @@ class EdumapAppController extends AppController {
 	public $uses = array(
 		'Edumap.Edumap',
 	);
-
-/**
- * beforeFilter
- *
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$results = $this->camelizeKeyRecursive(['current' => $this->current]);
-		$this->set($results);
-
-		$this->set('userId', (int)$this->Auth->user('id'));
-	}
 
 /**
  * initEdumap
@@ -101,7 +89,7 @@ class EdumapAppController extends AppController {
 				'block_index' => array(
 					'url' => array(
 						'plugin' => $this->params['plugin'],
-						'controller' => 'blocks',
+						'controller' => 'edumap_blocks',
 						'action' => 'index',
 						$this->viewVars['frameId'],
 					)
@@ -116,7 +104,7 @@ class EdumapAppController extends AppController {
 				'block_settings' => array(
 					'url' => array(
 						'plugin' => $this->params['plugin'],
-						'controller' => 'blocks',
+						'controller' => 'edumap_blocks',
 						'action' => $this->params['action'],
 						$this->viewVars['frameId'],
 						$blockId
