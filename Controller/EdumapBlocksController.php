@@ -78,7 +78,6 @@ class EdumapBlocksController extends EdumapAppController {
  * index
  *
  * @return void
- * @throws Exception
  */
 	public function index() {
 		$this->Paginator->settings = array(
@@ -93,17 +92,7 @@ class EdumapBlocksController extends EdumapAppController {
 			)
 		);
 
-		try {
-			$edumaps = $this->Paginator->paginate('Edumap');
-		} catch (Exception $ex) {
-			if (isset($this->request['paging']) && $this->params['named']) {
-				$this->redirect('/edumap/edumap_blocks/index/' . $this->viewVars['frameId']);
-				return;
-			}
-			CakeLog::error($ex);
-			throw $ex;
-		}
-
+		$edumaps = $this->Paginator->paginate('Edumap');
 		if (! $edumaps) {
 			$this->view = 'not_found';
 			return;
