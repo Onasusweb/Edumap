@@ -14,7 +14,7 @@
 	<?php if (isset($edumapStudents[$grade])) : ?>
 		<div class="row">
 			<div class="col-xs-offset-1 col-xs-12 col-sm-3">
-				<?php echo h(__d('edumap', $grade . ' grader')); ?>
+				<?php echo $this->element('Edumap/school_grade_label', array('grade' => $grade)); ?>
 			</div>
 
 			<div class="col-xs-offset-2 col-xs-12 col-sm-offset-0 col-sm-4">

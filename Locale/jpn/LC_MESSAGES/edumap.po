@@ -4,225 +4,562 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-03-06 23:05+0000\n"
-"PO-Revision-Date: 2015-03-08 18:12+0900\n"
+"PO-Revision-Date: 2015-06-01 17:58+0900\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 1.5.7\n"
+"POT-Creation-Date: \n"
+"Language: ja\n"
+"X-Generator: Poedit 1.8.1\n"
 
-#: Edumap/Model/Edumap.php:156 Edumap/View/Elements/Edumap/edit_form.ctp:78
-#: Edumap/View/Elements/Edumap/view_contents.ctp:25
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:33
-msgid "School name"
-msgstr "学校名"
-
-#: Edumap/Model/Edumap.php:163 Edumap/View/Elements/Edumap/edit_form.ctp:92
-#: Edumap/View/Elements/Edumap/view_contents.ctp:29
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:48
-msgid "Handle name"
-msgstr "ハンドル"
-
-#: Edumap/Model/Edumap.php:170;175
-#: Edumap/View/Elements/Edumap/edit_form.ctp:99
-#: Edumap/View/Elements/Edumap/view_contents.ctp:31
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:50
-msgid "Postal code"
-msgstr "郵便番号"
-
-#: Edumap/Model/Edumap.php:181 Edumap/View/Elements/Edumap/edit_form.ctp:111
-#: Edumap/View/Elements/Edumap/view_contents.ctp:33
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:52
-msgid "Prefecture"
-msgstr "都道府県"
-
-#: Edumap/Model/Edumap.php:192 Edumap/View/Elements/Edumap/edit_form.ctp:134
-#: Edumap/View/Elements/Edumap/view_contents.ctp:35
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:54
-msgid "Location"
-msgstr "所在地"
-
-#: Edumap/Model/Edumap.php:199;204
-#: Edumap/View/Elements/Edumap/edit_form.ctp:141
-#: Edumap/View/Elements/Edumap/view_contents.ctp:37
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:56
-msgid "Phone number"
-msgstr "電話番号"
-
-#: Edumap/Model/Edumap.php:210 Edumap/View/Elements/Edumap/edit_form.ctp:153
-#: Edumap/View/Elements/Edumap/view_contents.ctp:39
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:58
-msgid "Fax number"
-msgstr "Fax番号"
-
-#: Edumap/Model/Edumap.php:217;222
-#: Edumap/View/Elements/Edumap/edit_form.ctp:165
-#: Edumap/View/Elements/Edumap/view_contents.ctp:41
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:60
-msgid "Emergency contact email"
-msgstr "緊急連絡先eメール"
-
-#: Edumap/Model/Edumap.php:222;256
-msgid "E-mail"
-msgstr "eメール"
-
-#: Edumap/Model/Edumap.php:228 Edumap/View/Elements/Edumap/edit_form.ctp:183
-#: Edumap/View/Elements/Edumap/view_contents.ctp:45
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:64
-msgid "Site URL"
-msgstr "ホームページ"
-
-#: Edumap/Model/Edumap.php:228;235
-msgid "URL"
-msgstr "URL"
-
-#: Edumap/Model/Edumap.php:235 Edumap/View/Elements/Edumap/edit_form.ctp:209
-#: Edumap/View/Elements/Edumap/view_contents.ctp:51
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:70
-msgid "RSS URL"
-msgstr "RSS URL"
-
-#: Edumap/Model/Edumap.php:242 Edumap/View/Elements/Edumap/edit_form.ctp:193
-#: Edumap/View/Elements/Edumap/view_contents.ctp:47
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:66
-msgid "Foundation date"
-msgstr "開校日"
-
-#: Edumap/Model/Edumap.php:242;249
-msgid "Date"
-msgstr "日付"
-
-#: Edumap/Model/Edumap.php:249 Edumap/View/Elements/Edumap/edit_form.ctp:201
-#: Edumap/View/Elements/Edumap/view_contents.ctp:49
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:68
-msgid "Closed date"
-msgstr "閉校日"
-
-#: Edumap/Model/Edumap.php:256 Edumap/View/Elements/Edumap/edit_form.ctp:315
-#: Edumap/View/Elements/Edumap/view_contents.ctp:61
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:80
-msgid "Principal email"
-msgstr "校長携帯eメール"
-
-#: Edumap/View/Edumap/edit.ctp:24
-#: Edumap/View/VisibilitySettings/edit.ctp:19
-msgid "Plugin name"
-msgstr "edumapデータ連携"
-
-#: Edumap/View/Edumap/edit.ctp:30
-msgid "Edumap edit"
-msgstr "学校基本情報編集"
-
-#: Edumap/View/VisibilitySettings/edit.ctp:25
+#: Edumap/Controller/EdumapAppController.php:126
 msgid "Edumap visibilty settings"
 msgstr "表示設定"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:25
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:29
+#: Edumap/Controller/EdumapBlocksController.php:122
+msgid "New school %s "
+msgstr "新しい学校 %s"
+
+#: Edumap/Model/Edumap.php:143
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:125
+#: Edumap/View/EdumapBlocks/index.ctp:37
+#: Edumap/View/Elements/Edumap/edit_form.ctp:114
+#: Edumap/View/Elements/EdumapBlocks/edit_form.ctp:53
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:34
+msgid "School name"
+msgstr "学校名"
+
+#: Edumap/Model/Edumap.php:150
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:162
+#: Edumap/View/Elements/Edumap/edit_form.ctp:128
+#: Edumap/View/Elements/Edumap/view_contents.ctp:28
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:42
+msgid "Handle name"
+msgstr "ハンドル"
+
+#: Edumap/Model/Edumap.php:157;162
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:199;384
+#: Edumap/View/Elements/Edumap/edit_form.ctp:135
+#: Edumap/View/Elements/Edumap/view_contents.ctp:30
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:46
+msgid "Postal code"
+msgstr "郵便番号"
+
+#: Edumap/Model/Edumap.php:168
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:236
+#: Edumap/View/Elements/Edumap/edit_form.ctp:147
+#: Edumap/View/Elements/Edumap/view_contents.ctp:32
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:50
+msgid "Prefecture"
+msgstr "都道府県"
+
+#: Edumap/Model/Edumap.php:179
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:273
+#: Edumap/View/Elements/Edumap/edit_form.ctp:175
+#: Edumap/View/Elements/Edumap/view_contents.ctp:34
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:54
+msgid "Location"
+msgstr "所在地"
+
+#: Edumap/Model/Edumap.php:186;191
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:310;458
+#: Edumap/View/Elements/Edumap/edit_form.ctp:182
+#: Edumap/View/Elements/Edumap/view_contents.ctp:36
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:58
+msgid "Phone number"
+msgstr "電話番号"
+
+#: Edumap/Model/Edumap.php:197
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:495
+#: Edumap/View/Elements/Edumap/edit_form.ctp:194
+#: Edumap/View/Elements/Edumap/view_contents.ctp:38
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:62
+msgid "Fax number"
+msgstr "Fax番号"
+
+#: Edumap/Model/Edumap.php:204;209
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:347;532
+#: Edumap/View/Elements/Edumap/edit_form.ctp:206
+#: Edumap/View/Elements/Edumap/view_contents.ctp:40
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:66
+msgid "Emergency contact email"
+msgstr "緊急連絡先eメール"
+
+#: Edumap/Model/Edumap.php:209;243
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:532;569
+msgid "E-mail"
+msgstr "eメール"
+
+#: Edumap/Model/Edumap.php:215
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:606
+#: Edumap/View/Elements/Edumap/edit_form.ctp:224
+#: Edumap/View/Elements/Edumap/view_contents.ctp:44
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:74
+msgid "Site URL"
+msgstr "ホームページ"
+
+#: Edumap/Model/Edumap.php:215;222
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:606;643
+msgid "URL"
+msgstr "URL"
+
+#: Edumap/Model/Edumap.php:222
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:643
+#: Edumap/View/Elements/Edumap/edit_form.ctp:250
+#: Edumap/View/Elements/Edumap/view_contents.ctp:50
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:86
+msgid "RSS URL"
+msgstr "RSS URL"
+
+#: Edumap/Model/Edumap.php:229
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:680
+#: Edumap/View/Elements/Edumap/edit_form.ctp:234
+#: Edumap/View/Elements/Edumap/view_contents.ctp:46
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:78
+msgid "Foundation date"
+msgstr "開校日"
+
+#: Edumap/Model/Edumap.php:229;236
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:680;683;720
+msgid "Date"
+msgstr "日付"
+
+#: Edumap/Model/Edumap.php:236
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:683;720
+#: Edumap/View/Elements/Edumap/edit_form.ctp:242
+#: Edumap/View/Elements/Edumap/view_contents.ctp:48
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:82
+msgid "Closed date"
+msgstr "閉校日"
+
+#: Edumap/Model/Edumap.php:243
+#: Edumap/Test/Case/Model/EdumapValidateEdumapTest.php:569
+#: Edumap/View/Elements/Edumap/edit_form.ctp:371
+#: Edumap/View/Elements/Edumap/view_contents.ctp:60
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:105
+msgid "Principal email"
+msgstr "校長携帯eメール"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:50
+#: Edumap/View/Helper/EdumapHelper.php:33
+msgid "Hokkaido"
+msgstr "北海道"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:51
+#: Edumap/View/Helper/EdumapHelper.php:35
+msgid "Aomori"
+msgstr "青森県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:52
+#: Edumap/View/Helper/EdumapHelper.php:37
+msgid "Iwate"
+msgstr "岩手県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:53
+#: Edumap/View/Helper/EdumapHelper.php:39
+msgid "Miyagi"
+msgstr "宮城県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:54
+#: Edumap/View/Helper/EdumapHelper.php:41
+msgid "Akita"
+msgstr "秋田県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:55
+#: Edumap/View/Helper/EdumapHelper.php:43
+msgid "Yamagata"
+msgstr "山形県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:56
+#: Edumap/View/Helper/EdumapHelper.php:45
+msgid "Fukushima"
+msgstr "福島県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:57
+#: Edumap/View/Helper/EdumapHelper.php:47
+msgid "Ibaraki"
+msgstr "茨城県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:58
+#: Edumap/View/Helper/EdumapHelper.php:49
+msgid "Tochigi"
+msgstr "栃木県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:59
+#: Edumap/View/Helper/EdumapHelper.php:51
+msgid "Gunma"
+msgstr "群馬県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:60
+#: Edumap/View/Helper/EdumapHelper.php:53
+msgid "Saitama"
+msgstr "埼玉県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:61
+#: Edumap/View/Helper/EdumapHelper.php:55
+msgid "Chiba"
+msgstr "千葉県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:62
+#: Edumap/View/Helper/EdumapHelper.php:57
+msgid "Tokyo"
+msgstr "東京都"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:63
+#: Edumap/View/Helper/EdumapHelper.php:59
+msgid "Kanagawa"
+msgstr "神奈川県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:64
+#: Edumap/View/Helper/EdumapHelper.php:61
+msgid "Niigata"
+msgstr "新潟県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:65
+#: Edumap/View/Helper/EdumapHelper.php:63
+msgid "Toyama"
+msgstr "富山県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:66
+#: Edumap/View/Helper/EdumapHelper.php:65
+msgid "Ishikawa"
+msgstr "石川県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:67
+#: Edumap/View/Helper/EdumapHelper.php:67
+msgid "Fukui"
+msgstr "福井県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:68
+#: Edumap/View/Helper/EdumapHelper.php:69
+msgid "Yamanashi"
+msgstr "山梨県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:69
+#: Edumap/View/Helper/EdumapHelper.php:71
+msgid "Nagano"
+msgstr "長野県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:70
+#: Edumap/View/Helper/EdumapHelper.php:73
+msgid "Gifu"
+msgstr "岐阜県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:71
+#: Edumap/View/Helper/EdumapHelper.php:75
+msgid "Shizuoka"
+msgstr "静岡県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:72
+#: Edumap/View/Helper/EdumapHelper.php:77
+msgid "Aichi"
+msgstr "愛知県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:73
+#: Edumap/View/Helper/EdumapHelper.php:79
+msgid "Mie"
+msgstr "三重県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:74
+#: Edumap/View/Helper/EdumapHelper.php:81
+msgid "Shiga"
+msgstr "滋賀県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:75
+#: Edumap/View/Helper/EdumapHelper.php:83
+msgid "Kyoto"
+msgstr "京都府"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:76
+#: Edumap/View/Helper/EdumapHelper.php:85
+msgid "Osaka"
+msgstr "大阪府"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:77
+#: Edumap/View/Helper/EdumapHelper.php:87
+msgid "Hyogo"
+msgstr "兵庫県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:78
+#: Edumap/View/Helper/EdumapHelper.php:89
+msgid "Nara"
+msgstr "奈良県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:79
+#: Edumap/View/Helper/EdumapHelper.php:91
+msgid "Wakayama"
+msgstr "和歌山県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:80
+#: Edumap/View/Helper/EdumapHelper.php:93
+msgid "Tottori"
+msgstr "鳥取県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:81
+#: Edumap/View/Helper/EdumapHelper.php:95
+msgid "Shimane"
+msgstr "島根県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:82
+#: Edumap/View/Helper/EdumapHelper.php:97
+msgid "Okayama"
+msgstr "岡山県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:83
+#: Edumap/View/Helper/EdumapHelper.php:99
+msgid "Hiroshima"
+msgstr "広島県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:84
+#: Edumap/View/Helper/EdumapHelper.php:101
+msgid "Yamaguchi"
+msgstr "山口県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:85
+#: Edumap/View/Helper/EdumapHelper.php:103
+msgid "Tokushima"
+msgstr "徳島県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:86
+#: Edumap/View/Helper/EdumapHelper.php:105
+msgid "Kagawa"
+msgstr "香川県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:87
+#: Edumap/View/Helper/EdumapHelper.php:107
+msgid "Ehime"
+msgstr "愛媛県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:88
+#: Edumap/View/Helper/EdumapHelper.php:109
+msgid "Kochi"
+msgstr "高知県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:89
+#: Edumap/View/Helper/EdumapHelper.php:111
+msgid "Fukuoka"
+msgstr "福岡県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:90
+#: Edumap/View/Helper/EdumapHelper.php:113
+msgid "Saga"
+msgstr "佐賀県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:91
+#: Edumap/View/Helper/EdumapHelper.php:115
+msgid "Nagasaki"
+msgstr "長崎県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:92
+#: Edumap/View/Helper/EdumapHelper.php:117
+msgid "Kumamoto"
+msgstr "熊本県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:93
+#: Edumap/View/Helper/EdumapHelper.php:119
+msgid "Oita"
+msgstr "大分県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:94
+#: Edumap/View/Helper/EdumapHelper.php:121
+msgid "Miyazaki"
+msgstr "宮崎県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:95
+#: Edumap/View/Helper/EdumapHelper.php:123
+msgid "Kagoshima"
+msgstr "鹿児島県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:96
+#: Edumap/View/Helper/EdumapHelper.php:125
+msgid "Okinawa"
+msgstr "沖縄県"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:113
+#: Edumap/View/Helper/EdumapHelper.php:141
+msgid "National"
+msgstr "国立"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:114
+#: Edumap/View/Helper/EdumapHelper.php:143
+msgid "Prefectural"
+msgstr "県立"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:115
+#: Edumap/View/Helper/EdumapHelper.php:145
+msgid "Public school"
+msgstr ""
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:116
+#: Edumap/View/Helper/EdumapHelper.php:147
+msgid "Municipal"
+msgstr "市立"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:117
+#: Edumap/View/Helper/EdumapHelper.php:149
+msgid "By union"
+msgstr "組合立"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:118
+#: Edumap/View/Helper/EdumapHelper.php:151
+msgid "Private school"
+msgstr "私立"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:119;139
+#: Edumap/View/Helper/EdumapHelper.php:153;177
+msgid "Other"
+msgstr "その他"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:135
+#: Edumap/View/Helper/EdumapHelper.php:169
+msgid "Elementary school"
+msgstr "小学校"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:136
+#: Edumap/View/Helper/EdumapHelper.php:171
+msgid "Middle school"
+msgstr "中学校"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:137
+#: Edumap/View/Helper/EdumapHelper.php:173
+msgid "High school"
+msgstr "高等学校"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:138
+#: Edumap/View/Helper/EdumapHelper.php:175
+msgid "Middle and high consistency"
+msgstr "中等教育学校"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:155
+#: Edumap/View/Helper/EdumapHelper.php:193
+msgid "Coeducation school"
+msgstr "共学"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:156
+#: Edumap/View/Helper/EdumapHelper.php:195
+msgid "Boy's school"
+msgstr "男子校"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:157
+#: Edumap/View/Helper/EdumapHelper.php:197
+msgid "Girl's school"
+msgstr "女子校"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:173
+#: Edumap/View/Helper/EdumapHelper.php:213
+msgid "No display"
+msgstr "非公開"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:174
+#: Edumap/View/Helper/EdumapHelper.php:215
+msgid "Display"
+msgstr "公開"
+
+#: Edumap/Test/Case/View/Helper/EdumapHelperTest.php:175
+#: Edumap/View/Helper/EdumapHelper.php:217
+msgid "Display only school officials in edumap on"
+msgstr "edumap上で学校関係者のみ表示"
+
+#: Edumap/View/Elements/Edumap/edit_form.ctp:59
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:30
 msgid "Avatar"
 msgstr "アバター"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:39
+#: Edumap/View/Elements/Edumap/edit_form.ctp:73
 msgid "Delete file."
 msgstr "削除する"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:85
-#: Edumap/View/Elements/Edumap/view_contents.ctp:27
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:46
+#: Edumap/View/Elements/Edumap/edit_form.ctp:121
+#: Edumap/View/Elements/Edumap/view_contents.ctp:26
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:38
 msgid "School name(kana)"
 msgstr "学校名(カナ)"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:115;224;256;286
+#: Edumap/View/Elements/Edumap/edit_form.ctp:151;265;302;337
 msgid "Not set"
 msgstr "未設定"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:176
-#: Edumap/View/Elements/Edumap/view_contents.ctp:43
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:62
+#: Edumap/View/Elements/Edumap/edit_form.ctp:217
+#: Edumap/View/Elements/Edumap/view_contents.ctp:42
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:70
 msgid "Inquiry"
 msgstr "問い合わせ先"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:219
-#: Edumap/View/Elements/Edumap/view_contents.ctp:53
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:72
+#: Edumap/View/Elements/Edumap/edit_form.ctp:260
+#: Edumap/View/Elements/Edumap/view_contents.ctp:52
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:89
 msgid "Governing body type"
 msgstr "国公立私立種別"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:251
-#: Edumap/View/Elements/Edumap/view_contents.ctp:55
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:74
+#: Edumap/View/Elements/Edumap/edit_form.ctp:297
+#: Edumap/View/Elements/Edumap/view_contents.ctp:54
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:93
 msgid "Education type"
 msgstr "校種"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:280
-#: Edumap/View/Elements/Edumap/view_contents.ctp:57
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:76
+#: Edumap/View/Elements/Edumap/edit_form.ctp:331
+#: Edumap/View/Elements/Edumap/view_contents.ctp:56
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:97
 msgid "Coeducation"
 msgstr "共学・別学"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:308
-#: Edumap/View/Elements/Edumap/view_contents.ctp:59
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:78
+#: Edumap/View/Elements/Edumap/edit_form.ctp:364
+#: Edumap/View/Elements/Edumap/view_contents.ctp:58
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:101
 msgid "Principal name"
 msgstr "学校長名"
 
-#: Edumap/View/Elements/Edumap/edit_form.ctp:330
-#: Edumap/View/Elements/Edumap/view_contents.ctp:98
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:88
+#: Edumap/View/Elements/Edumap/edit_form.ctp:386
+#: Edumap/View/Elements/Edumap/view_contents.ctp:94
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:117
 msgid "Description"
 msgstr "概要"
 
 #: Edumap/View/Elements/Edumap/input_social_media.ctp:24
-#: Edumap/View/Elements/Edumap/view_contents.ctp:83
+#: Edumap/View/Elements/Edumap/view_contents.ctp:79
 msgid "Twitter name"
 msgstr "Twitterアカウント"
 
 #: Edumap/View/Elements/Edumap/input_students.ctp:16
-#: Edumap/View/Elements/Edumap/view_contents.ctp:69
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:83
+#: Edumap/View/Elements/Edumap/view_contents.ctp:67
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:109
 msgid "Number of students"
-msgstr "生徒数"
+msgstr "Number of students"
 
-#: Edumap/View/Elements/Edumap/input_students.ctp:22
-#: Edumap/View/Elements/Edumap/view_contents.ctp:17
-msgid "1 grader"
-msgstr "1年生"
-
-#: Edumap/View/Elements/Edumap/input_students.ctp:22
-#: Edumap/View/Elements/Edumap/view_contents.ctp:17
-msgid "2 grader"
-msgstr "2年生"
-
-#: Edumap/View/Elements/Edumap/input_students.ctp:22
-#: Edumap/View/Elements/Edumap/view_contents.ctp:17
-msgid "3 grader"
-msgstr "3年生"
-
-#: Edumap/View/Elements/Edumap/input_students.ctp:22
-#: Edumap/View/Elements/Edumap/view_contents.ctp:17
-msgid "4 grader"
-msgstr "4年生"
-
-#: Edumap/View/Elements/Edumap/input_students.ctp:22
-#: Edumap/View/Elements/Edumap/view_contents.ctp:17
-msgid "5 grader"
-msgstr "5年生"
-
-#: Edumap/View/Elements/Edumap/input_students.ctp:22
-#: Edumap/View/Elements/Edumap/view_contents.ctp:17
-msgid "6 grader"
-msgstr "6年生"
-
-#: Edumap/View/Elements/Edumap/input_students.ctp:36
+#: Edumap/View/Elements/Edumap/input_students.ctp:37
 msgid "Male students"
 msgstr "男子"
 
 #: Edumap/View/Elements/Edumap/input_students.ctp:55
 msgid "Female students"
 msgstr "女子"
+
+#: Edumap/View/Elements/Edumap/school_grade_label.ctp:15
+msgid "1 grader"
+msgstr "1年生"
+
+#: Edumap/View/Elements/Edumap/school_grade_label.ctp:18
+msgid "2 grader"
+msgstr "2年生"
+
+#: Edumap/View/Elements/Edumap/school_grade_label.ctp:21
+msgid "3 grader"
+msgstr "3年生"
+
+#: Edumap/View/Elements/Edumap/school_grade_label.ctp:24
+msgid "4 grader"
+msgstr "4年生"
+
+#: Edumap/View/Elements/Edumap/school_grade_label.ctp:27
+msgid "5 grader"
+msgstr "5年生"
+
+#: Edumap/View/Elements/Edumap/school_grade_label.ctp:30
+msgid "6 grader"
+msgstr "6年生"
 
 #: Edumap/View/Elements/Edumap/view_students.ctp:22
 msgid "Male: %d students"
@@ -232,262 +569,10 @@ msgstr "男子: %d 名"
 msgid "Female: %d students"
 msgstr "女子: %d 名"
 
-#: Edumap/View/Elements/VisibilitySettings/edit_form.ctp:86
+#: Edumap/View/Elements/EdumapBlocks/delete_form.ctp:14;28
+msgid "edumap"
+msgstr "学校"
+
+#: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:113
 msgid "Social media"
 msgstr "ソーシャルメディア"
-
-#: Edumap/View/Helper/EdumapHelper.php:40
-msgid "Hokkaido"
-msgstr "北海道"
-
-#: Edumap/View/Helper/EdumapHelper.php:42
-msgid "Aomori"
-msgstr "青森県"
-
-#: Edumap/View/Helper/EdumapHelper.php:44
-msgid "Iwate"
-msgstr "岩手県"
-
-#: Edumap/View/Helper/EdumapHelper.php:46
-msgid "Miyagi"
-msgstr "宮城県"
-
-#: Edumap/View/Helper/EdumapHelper.php:48
-msgid "Akita"
-msgstr "秋田県"
-
-#: Edumap/View/Helper/EdumapHelper.php:50
-msgid "Yamagata"
-msgstr "山形県"
-
-#: Edumap/View/Helper/EdumapHelper.php:52
-msgid "Fukushima"
-msgstr "福島県"
-
-#: Edumap/View/Helper/EdumapHelper.php:54
-msgid "Ibaraki"
-msgstr "茨城県"
-
-#: Edumap/View/Helper/EdumapHelper.php:56
-msgid "Tochigi"
-msgstr "栃木県"
-
-#: Edumap/View/Helper/EdumapHelper.php:58
-msgid "Gunma"
-msgstr "群馬県"
-
-#: Edumap/View/Helper/EdumapHelper.php:60
-msgid "Saitama"
-msgstr "埼玉県"
-
-#: Edumap/View/Helper/EdumapHelper.php:62
-msgid "Chiba"
-msgstr "千葉県"
-
-#: Edumap/View/Helper/EdumapHelper.php:64
-msgid "Tokyo"
-msgstr "東京都"
-
-#: Edumap/View/Helper/EdumapHelper.php:66
-msgid "Kanagawa"
-msgstr "神奈川県"
-
-#: Edumap/View/Helper/EdumapHelper.php:68
-msgid "Niigata"
-msgstr "新潟県"
-
-#: Edumap/View/Helper/EdumapHelper.php:70
-msgid "Toyama"
-msgstr "富山県"
-
-#: Edumap/View/Helper/EdumapHelper.php:72
-msgid "Ishikawa"
-msgstr "石川県"
-
-#: Edumap/View/Helper/EdumapHelper.php:74
-msgid "Fukui"
-msgstr "福井県"
-
-#: Edumap/View/Helper/EdumapHelper.php:76
-msgid "Yamanashi"
-msgstr "山梨県"
-
-#: Edumap/View/Helper/EdumapHelper.php:78
-msgid "Nagano"
-msgstr "長野県"
-
-#: Edumap/View/Helper/EdumapHelper.php:80
-msgid "Gifu"
-msgstr "岐阜県"
-
-#: Edumap/View/Helper/EdumapHelper.php:82
-msgid "Shizuoka"
-msgstr "静岡県"
-
-#: Edumap/View/Helper/EdumapHelper.php:84
-msgid "Aichi"
-msgstr "愛知県"
-
-#: Edumap/View/Helper/EdumapHelper.php:86
-msgid "Mie"
-msgstr "三重県"
-
-#: Edumap/View/Helper/EdumapHelper.php:88
-msgid "Shiga"
-msgstr "滋賀県"
-
-#: Edumap/View/Helper/EdumapHelper.php:90
-msgid "Kyoto"
-msgstr "京都府"
-
-#: Edumap/View/Helper/EdumapHelper.php:92
-msgid "Osaka"
-msgstr "大阪府"
-
-#: Edumap/View/Helper/EdumapHelper.php:94
-msgid "Hyogo"
-msgstr "兵庫県"
-
-#: Edumap/View/Helper/EdumapHelper.php:96
-msgid "Nara"
-msgstr "奈良県"
-
-#: Edumap/View/Helper/EdumapHelper.php:98
-msgid "Wakayama"
-msgstr "和歌山県"
-
-#: Edumap/View/Helper/EdumapHelper.php:100
-msgid "Tottori"
-msgstr "鳥取県"
-
-#: Edumap/View/Helper/EdumapHelper.php:102
-msgid "Shimane"
-msgstr "島根県"
-
-#: Edumap/View/Helper/EdumapHelper.php:104
-msgid "Okayama"
-msgstr "岡山県"
-
-#: Edumap/View/Helper/EdumapHelper.php:106
-msgid "Hiroshima"
-msgstr "広島県"
-
-#: Edumap/View/Helper/EdumapHelper.php:108
-msgid "Yamaguchi"
-msgstr "山口県"
-
-#: Edumap/View/Helper/EdumapHelper.php:110
-msgid "Tokushima"
-msgstr "徳島県"
-
-#: Edumap/View/Helper/EdumapHelper.php:112
-msgid "Kagawa"
-msgstr "香川県"
-
-#: Edumap/View/Helper/EdumapHelper.php:114
-msgid "Ehime"
-msgstr "愛媛県"
-
-#: Edumap/View/Helper/EdumapHelper.php:116
-msgid "Kochi"
-msgstr "高知県"
-
-#: Edumap/View/Helper/EdumapHelper.php:118
-msgid "Fukuoka"
-msgstr "福岡県"
-
-#: Edumap/View/Helper/EdumapHelper.php:120
-msgid "Saga"
-msgstr "佐賀県"
-
-#: Edumap/View/Helper/EdumapHelper.php:122
-msgid "Nagasaki"
-msgstr "長崎県"
-
-#: Edumap/View/Helper/EdumapHelper.php:124
-msgid "Kumamoto"
-msgstr "熊本県"
-
-#: Edumap/View/Helper/EdumapHelper.php:126
-msgid "Oita"
-msgstr "大分県"
-
-#: Edumap/View/Helper/EdumapHelper.php:128
-msgid "Miyazaki"
-msgstr "宮崎県"
-
-#: Edumap/View/Helper/EdumapHelper.php:130
-msgid "Kagoshima"
-msgstr "鹿児島県"
-
-#: Edumap/View/Helper/EdumapHelper.php:132
-msgid "Okinawa"
-msgstr "沖縄県"
-
-#: Edumap/View/Helper/EdumapHelper.php:148
-msgid "National"
-msgstr "国立"
-
-#: Edumap/View/Helper/EdumapHelper.php:150
-msgid "Prefectural"
-msgstr "県立"
-
-#: Edumap/View/Helper/EdumapHelper.php:152
-msgid "Public school"
-msgstr "公立"
-
-#: Edumap/View/Helper/EdumapHelper.php:154
-msgid "Municipal"
-msgstr "市立"
-
-#: Edumap/View/Helper/EdumapHelper.php:156
-msgid "By union"
-msgstr "組合立"
-
-#: Edumap/View/Helper/EdumapHelper.php:158
-msgid "Private school"
-msgstr "私立"
-
-#: Edumap/View/Helper/EdumapHelper.php:160;184
-msgid "Other"
-msgstr "その他"
-
-#: Edumap/View/Helper/EdumapHelper.php:176
-msgid "Elementary school"
-msgstr "小学校"
-
-#: Edumap/View/Helper/EdumapHelper.php:178
-msgid "Middle school"
-msgstr "中学校"
-
-#: Edumap/View/Helper/EdumapHelper.php:180
-msgid "High school"
-msgstr "高等学校"
-
-#: Edumap/View/Helper/EdumapHelper.php:182
-msgid "Middle and high consistency"
-msgstr "中等教育学校"
-
-#: Edumap/View/Helper/EdumapHelper.php:200
-msgid "Coeducation school"
-msgstr "共学"
-
-#: Edumap/View/Helper/EdumapHelper.php:202
-msgid "Boy's school"
-msgstr "男子校"
-
-#: Edumap/View/Helper/EdumapHelper.php:204
-msgid "Girl's school"
-msgstr "女子校"
-
-#: Edumap/View/Helper/EdumapHelper.php:237
-msgid "No display"
-msgstr "非公開"
-
-#: Edumap/View/Helper/EdumapHelper.php:239
-msgid "Display"
-msgstr "公開"
-
-#: Edumap/View/Helper/EdumapHelper.php:241
-msgid "Display only school officials in edumap on"
-msgstr "edumap上で学校関係者のみ表示"
