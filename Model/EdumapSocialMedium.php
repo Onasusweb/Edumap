@@ -93,4 +93,22 @@ class EdumapSocialMedium extends EdumapAppModel {
 		}
 		return true;
 	}
+
+/**
+ * save EdumapSocialMedia
+ *
+ * @param array $data received post data
+ * @return void
+ * @throws InternalErrorException
+ */
+	public function saveEdumapSocialMedia($data) {
+		$indexes = array_keys($data['EdumapSocialMedium']);
+		foreach ($indexes as $i) {
+			$this->create();
+			if (! $this->save($data['EdumapSocialMedium'][$i], false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+		}
+	}
+
 }

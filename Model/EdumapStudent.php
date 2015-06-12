@@ -89,4 +89,21 @@ class EdumapStudent extends EdumapAppModel {
 		return true;
 	}
 
+/**
+ * save EdumapStudents
+ *
+ * @param array $data received post data
+ * @return void
+ * @throws InternalErrorException
+ */
+	public function saveEdumapStudents($data) {
+		$indexes = array_keys($data['EdumapStudent']);
+		foreach ($indexes as $i) {
+			$this->create();
+			if (! $this->save($data['EdumapStudent'][$i], false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+		}
+	}
+
 }

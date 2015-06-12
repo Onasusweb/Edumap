@@ -486,16 +486,12 @@ class Edumap extends EdumapAppModel {
 		//Edumap生徒数の登録
 		if (isset($data['EdumapStudent'])) {
 			$data['EdumapStudent'] = Hash::insert($data['EdumapStudent'], '{n}.edumap_id', $data[$this->alias]['id']);
-			if (! $this->EdumapStudent->saveMany($data['EdumapStudent'], ['validate' => false])) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
+			$this->EdumapStudent->saveEdumapStudents($data);
 		}
 		//EdumapSNSデータの登録
 		if (isset($data['EdumapSocialMedium'])) {
 			$data['EdumapSocialMedium'] = Hash::insert($data['EdumapSocialMedium'], '{s}.edumap_id', $data[$this->alias]['id']);
-			if (! $this->EdumapSocialMedium->saveMany($data['EdumapSocialMedium'], ['validate' => false])) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
+			$this->EdumapSocialMedium->saveEdumapSocialMedia($data);
 		}
 		//コメントの登録
 		if ($this->Comment->data) {
