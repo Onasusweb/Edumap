@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"PO-Revision-Date: 2015-06-01 17:58+0900\n"
+"PO-Revision-Date: 2015-06-12 17:20+0900\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -527,7 +527,7 @@ msgstr "Twitterアカウント"
 #: Edumap/View/Elements/Edumap/view_contents.ctp:67
 #: Edumap/View/Elements/EdumapVisibilitySettings/edit_form.ctp:109
 msgid "Number of students"
-msgstr "Number of students"
+msgstr "生徒数"
 
 #: Edumap/View/Elements/Edumap/input_students.ctp:37
 msgid "Male students"
