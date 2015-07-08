@@ -199,8 +199,8 @@ class Init extends CakeMigration {
 			return true;
 		}
 
-		foreach ($this>records as $model => $records) {
-			if (!$this>updateRecords($model, $records)) {
+		foreach ($this->records as $model => $records) {
+			if (!$this->updateRecords($model, $records)) {
 				return false;
 			}
 		}
@@ -217,10 +217,10 @@ class Init extends CakeMigration {
  * @return bool Should process continue
  */
 	public function updateRecords($model, $records, $scope = null) {
-		$Model = $this>generateModel($model);
+		$Model = $this->generateModel($model);
 		foreach ($records as $record) {
-			$Model>create();
-			if (!$Model>save($record, false)) {
+			$Model->create();
+			if (!$Model->save($record, false)) {
 				return false;
 			}
 		}
