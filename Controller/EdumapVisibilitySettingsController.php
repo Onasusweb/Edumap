@@ -94,7 +94,7 @@ class EdumapVisibilitySettingsController extends EdumapAppController {
 				return;
 			}
 			if (! $this->request->is('ajax')) {
-				$this->redirect('/edumap/edumap_blocks/index/' . $this->viewVars['frameId']);
+				$this->redirect('/edumap/edumap_blocks/index/' . Current::read('Frame.id'));
 			}
 			return;
 		}

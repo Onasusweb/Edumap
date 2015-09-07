@@ -117,7 +117,7 @@ class EdumapController extends EdumapAppController {
 			$this->Edumap->saveEdumap($data);
 			if ($this->handleValidationError($this->Edumap->validationErrors)) {
 				//正常の場合
-				$this->redirectByFrameId();
+				$this->redirect(Current::backToPageUrl());
 				return;
 			}
 			$data['Edumap']['foundation_date'] = $this->data['Edumap']['foundation_date'];

@@ -42,13 +42,19 @@ class EdumapBlocksController extends EdumapAppController {
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsBlock',
-		'NetCommons.NetCommonsRoomRole' => array(
-			//コンテンツの権限設定
-			'allowedActions' => array(
-				'blockEditable' => array('index', 'add', 'edit', 'delete')
+		'NetCommons.Permission' => array(
+			//アクセスの権限
+			'allow' => array(
+				'index,add,edit,delete' => 'block_editable',
 			),
 		),
+//		'NetCommons.NetCommonsBlock',
+//		'NetCommons.NetCommonsRoomRole' => array(
+//			//コンテンツの権限設定
+//			'allowedActions' => array(
+//				'blockEditable' => array('index', 'add', 'edit', 'delete')
+//			),
+//		),
 		'Paginator',
 	);
 
@@ -68,7 +74,7 @@ class EdumapBlocksController extends EdumapAppController {
  */
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->deny('index');
+//		$this->Auth->deny('index');
 
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
@@ -83,18 +89,15 @@ class EdumapBlocksController extends EdumapAppController {
 		$this->Paginator->settings = array(
 			'Edumap' => array(
 				'order' => array('Edumap.id' => 'desc'),
-				'conditions' => array(
-					'Block.language_id' => $this->viewVars['languageId'],
-					'Block.room_id' => $this->viewVars['roomId'],
-					'Block.plugin_key ' => $this->params['plugin'],
+				'conditions' => $this->Edumap->getBlockConditions(array(
 					'Edumap.is_latest' => true,
-				),
+				)),
 			)
 		);
 
 		$edumaps = $this->Paginator->paginate('Edumap');
 		if (! $edumaps) {
-			$this->view = 'not_found';
+			$this->view = 'Blocks.Blocks/not_found';
 			return;
 		}
 
@@ -137,7 +140,7 @@ class EdumapBlocksController extends EdumapAppController {
 			$edumap = $this->Edumap->saveEdumap($data);
 			if ($this->handleValidationError($this->Edumap->validationErrors)) {
 				if (! $this->request->is('ajax')) {
-					$this->redirect('/edumap/edumap_visibility_settings/edit/' . $this->viewVars['frameId'] . '/' . $edumap['Edumap']['block_id']);
+					$this->redirect('/edumap/edumap_visibility_settings/edit/' . Current::read('Frame.id') . '/' . $edumap['Edumap']['block_id']);
 				}
 				return;
 			}
@@ -173,7 +176,7 @@ class EdumapBlocksController extends EdumapAppController {
 			$this->Edumap->saveEdumap($data);
 			if ($this->handleValidationError($this->Edumap->validationErrors)) {
 				if (! $this->request->is('ajax')) {
-					$this->redirect('/edumap/edumap_blocks/index/' . $this->viewVars['frameId']);
+					$this->redirect('/edumap/edumap_blocks/index/' . Current::read('Frame.id'));
 				}
 				return;
 			}
@@ -203,7 +206,7 @@ class EdumapBlocksController extends EdumapAppController {
 		if ($this->request->isDelete()) {
 			if ($this->Edumap->deleteEdumap($this->data)) {
 				if (! $this->request->is('ajax')) {
-					$this->redirect('/edumap/edumap_blocks/index/' . $this->viewVars['frameId']);
+					$this->redirect('/edumap/edumap_blocks/index/' . Current::read('Frame.id'));
 				}
 				return;
 			}

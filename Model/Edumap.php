@@ -250,19 +250,16 @@ class Edumap extends EdumapAppModel {
 	}
 
 /**
- * get dumap
+ * Get dumap
  *
- * @param int $blockId blocks.id
- * @param int $roomId rooms.id
- * @param bool $contentEditable true can edit the content, false not can edit the content.
  * @return array
  */
-	public function getEdumap($blockId, $roomId, $contentEditable) {
+	public function getEdumap() {
 		$conditions = array(
-			'Block.id' => $blockId,
-			'Block.room_id' => $roomId,
+			'Block.id' => Current::read('Block.id'),
+			'Block.room_id' => Current::read('Block.room_id'),
 		);
-		if ($contentEditable) {
+		if (Current::permission('content_editable')) {
 			$conditions[$this->alias . '.is_latest'] = true;
 		} else {
 			$conditions[$this->alias . '.is_active'] = true;
