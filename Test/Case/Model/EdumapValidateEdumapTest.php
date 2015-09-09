@@ -113,7 +113,7 @@ class EdumapValidateEdumapTest extends EdumapModelTestBase {
 	}
 
 /**
- * Expect `name` validate error by notEmpty
+ * Expect `name` validate error by notBlank
  *
  * @return void
  */
@@ -150,7 +150,7 @@ class EdumapValidateEdumapTest extends EdumapModelTestBase {
 	}
 
 /**
- * Expect `handle` validate error by notEmpty
+ * Expect `handle` validate error by notBlank
  *
  * @return void
  */
@@ -187,7 +187,7 @@ class EdumapValidateEdumapTest extends EdumapModelTestBase {
 	}
 
 /**
- * Expect `postal_code` validate error by notEmpty
+ * Expect `postal_code` validate error by notBlank
  *
  * @return void
  */
@@ -224,7 +224,7 @@ class EdumapValidateEdumapTest extends EdumapModelTestBase {
 	}
 
 /**
- * Expect `prefecture_code` validate error by notEmpty
+ * Expect `prefecture_code` validate error by notBlank
  *
  * @return void
  */
@@ -261,7 +261,7 @@ class EdumapValidateEdumapTest extends EdumapModelTestBase {
 	}
 
 /**
- * Expect `location` validate error by notEmpty
+ * Expect `location` validate error by notBlank
  *
  * @return void
  */
@@ -298,7 +298,7 @@ class EdumapValidateEdumapTest extends EdumapModelTestBase {
 	}
 
 /**
- * Expect `tel` validate error by notEmpty
+ * Expect `tel` validate error by notBlank
  *
  * @return void
  */
@@ -335,7 +335,7 @@ class EdumapValidateEdumapTest extends EdumapModelTestBase {
 	}
 
 /**
- * Expect `emergency_email` validate error by notEmpty
+ * Expect `emergency_email` validate error by notBlank
  *
  * @return void
  */

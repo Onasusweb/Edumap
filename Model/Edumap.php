@@ -138,22 +138,22 @@ class Edumap extends EdumapAppModel {
 				)
 			),
 			'name' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+				'notBlank' => array(
+					'rule' => array('notBlank'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'School name')),
 					'required' => true,
 				)
 			),
 			'handle' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+				'notBlank' => array(
+					'rule' => array('notBlank'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Handle name')),
 					//'required' => true,
 				)
 			),
 			'postal_code' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+				'notBlank' => array(
+					'rule' => array('notBlank'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Postal code')),
 					//'required' => true,
 				),
@@ -163,8 +163,8 @@ class Edumap extends EdumapAppModel {
 				),
 			),
 			'prefecture_code' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+				'notBlank' => array(
+					'rule' => array('notBlank'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Prefecture')),
 					//'required' => true,
 				),
@@ -174,15 +174,15 @@ class Edumap extends EdumapAppModel {
 				),
 			),
 			'location' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+				'notBlank' => array(
+					'rule' => array('notBlank'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Location')),
 					//'required' => true,
 				)
 			),
 			'tel' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+				'notBlank' => array(
+					'rule' => array('notBlank'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Phone number')),
 					//'required' => true,
 				),
@@ -199,8 +199,8 @@ class Edumap extends EdumapAppModel {
 				)
 			),
 			'emergency_email' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+				'notBlank' => array(
+					'rule' => array('notBlank'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('edumap', 'Emergency contact email')),
 					//'required' => true,
 				),
