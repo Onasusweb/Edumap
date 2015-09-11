@@ -74,7 +74,7 @@ class EdumapController extends EdumapAppController {
 				$this->viewVars['edumapStudents'],
 				$this->viewVars['edumapSocialMedia'],
 			);
-			$this->renderJson($results);
+			//$this->renderJson($results);
 		}
 	}
 
@@ -115,7 +115,7 @@ class EdumapController extends EdumapAppController {
 
 			//登録処理
 			$this->Edumap->saveEdumap($data);
-			if ($this->handleValidationError($this->Edumap->validationErrors)) {
+			if ($this->NetCommons->handleValidationError($this->Edumap->validationErrors)) {
 				//正常の場合
 				$this->redirect(Current::backToPageUrl());
 				return;

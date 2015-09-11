@@ -138,7 +138,7 @@ class EdumapBlocksController extends EdumapAppController {
 			$data = Hash::merge($data, $visibilitySetting);
 
 			$edumap = $this->Edumap->saveEdumap($data);
-			if ($this->handleValidationError($this->Edumap->validationErrors)) {
+			if ($this->NetCommons->handleValidationError($this->Edumap->validationErrors)) {
 				if (! $this->request->is('ajax')) {
 					$this->redirect('/edumap/edumap_visibility_settings/edit/' . Current::read('Frame.id') . '/' . $edumap['Edumap']['block_id']);
 				}
@@ -174,7 +174,7 @@ class EdumapBlocksController extends EdumapAppController {
 			$data = $this->__parseRequestData();
 
 			$this->Edumap->saveEdumap($data);
-			if ($this->handleValidationError($this->Edumap->validationErrors)) {
+			if ($this->NetCommons->handleValidationError($this->Edumap->validationErrors)) {
 				if (! $this->request->is('ajax')) {
 					$this->redirect('/edumap/edumap_blocks/index/' . Current::read('Frame.id'));
 				}
