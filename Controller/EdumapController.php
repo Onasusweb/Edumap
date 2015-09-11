@@ -117,7 +117,7 @@ class EdumapController extends EdumapAppController {
 			$this->Edumap->saveEdumap($data);
 			if ($this->NetCommons->handleValidationError($this->Edumap->validationErrors)) {
 				//正常の場合
-				$this->redirect(Current::backToPageUrl());
+				$this->redirect(NetCommonsUrl::backToPageUrl());
 				return;
 			}
 			$data['Edumap']['foundation_date'] = $this->data['Edumap']['foundation_date'];
