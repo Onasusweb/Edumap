@@ -90,11 +90,11 @@ class EdumapVisibilitySettingsController extends EdumapAppController {
 
 		if ($this->request->isPost()) {
 			$this->EdumapVisibilitySetting->saveEdumapVisibilitySetting($this->data);
-			if (! $this->handleValidationError($this->EdumapVisibilitySetting->validationErrors)) {
+			if (! $this->NetCommons->handleValidationError($this->EdumapVisibilitySetting->validationErrors)) {
 				return;
 			}
 			if (! $this->request->is('ajax')) {
-				$this->redirect('/edumap/edumap_blocks/index/' . $this->viewVars['frameId']);
+				$this->redirect('/edumap/edumap_blocks/index/' . Current::read('Frame.id'));
 			}
 			return;
 		}

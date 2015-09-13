@@ -68,13 +68,13 @@ class EdumapController extends EdumapAppController {
 		$this->__initEdumap();
 
 		if ($this->request->is('ajax')) {
-			$results = array(
-				$this->viewVars['edumap'],
-				$this->viewVars['file'],
-				$this->viewVars['edumapStudents'],
-				$this->viewVars['edumapSocialMedia'],
-			);
-			$this->renderJson($results);
+			//$results = array(
+			//	$this->viewVars['edumap'],
+			//	$this->viewVars['file'],
+			//	$this->viewVars['edumapStudents'],
+			//	$this->viewVars['edumapSocialMedia'],
+			//);
+			//$this->renderJson($results);
 		}
 	}
 
@@ -115,9 +115,9 @@ class EdumapController extends EdumapAppController {
 
 			//登録処理
 			$this->Edumap->saveEdumap($data);
-			if ($this->handleValidationError($this->Edumap->validationErrors)) {
+			if ($this->NetCommons->handleValidationError($this->Edumap->validationErrors)) {
 				//正常の場合
-				$this->redirectByFrameId();
+				$this->redirect(NetCommonsUrl::backToPageUrl());
 				return;
 			}
 			$data['Edumap']['foundation_date'] = $this->data['Edumap']['foundation_date'];

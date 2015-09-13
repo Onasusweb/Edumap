@@ -25,7 +25,6 @@ class EdumapAppController extends AppController {
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsFrame',
 		'Pages.PageLayout',
 		'Security',
 	);
@@ -46,11 +45,7 @@ class EdumapAppController extends AppController {
  * @return bool True on success, False on failure
  */
 	public function initEdumap($contains = []) {
-		if (! $edumap = $this->Edumap->getEdumap(
-				$this->viewVars['blockId'],
-				$this->viewVars['roomId'],
-				$this->viewVars['contentEditable']
-		)) {
+		if (! $edumap = $this->Edumap->getEdumap()) {
 			$this->throwBadRequest();
 			return false;
 		}
@@ -91,7 +86,7 @@ class EdumapAppController extends AppController {
 						'plugin' => $this->params['plugin'],
 						'controller' => 'edumap_blocks',
 						'action' => 'index',
-						$this->viewVars['frameId'],
+						Current::read('Frame.id'),
 					)
 				),
 			),
@@ -106,7 +101,7 @@ class EdumapAppController extends AppController {
 						'plugin' => $this->params['plugin'],
 						'controller' => 'edumap_blocks',
 						'action' => $this->params['action'],
-						$this->viewVars['frameId'],
+						Current::read('Frame.id'),
 						$blockId
 					)
 				),
@@ -120,7 +115,7 @@ class EdumapAppController extends AppController {
 					'plugin' => $this->params['plugin'],
 					'controller' => 'edumap_visibility_settings',
 					'action' => 'edit',
-					$this->viewVars['frameId'],
+					Current::read('Frame.id'),
 					$blockId
 				),
 				'label' => __d('edumap', 'Edumap visibilty settings'),

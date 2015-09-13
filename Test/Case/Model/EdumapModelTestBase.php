@@ -45,7 +45,7 @@ class EdumapModelTestBase extends YACakeTestCase {
 	);
 
 /**
- * Test case of notEmpty
+ * Test case of notBlank
  *
  * @var array
  */
@@ -149,12 +149,12 @@ class EdumapModelTestBase extends YACakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Edumap = ClassRegistry::init('Edumap.Edumap');
-		$this->EdumapStudent = ClassRegistry::init('Edumap.EdumapStudent');
-		$this->EdumapSocialMedium = ClassRegistry::init('Edumap.EdumapSocialMedium');
-		$this->EdumapVisibilitySetting = ClassRegistry::init('Edumap.EdumapVisibilitySetting');
-		$this->FileModel = ClassRegistry::init('Files.FileModel');
-		$this->Block = ClassRegistry::init('Blocks.Block');
+		//$this->Edumap = ClassRegistry::init('Edumap.Edumap');
+		//$this->EdumapStudent = ClassRegistry::init('Edumap.EdumapStudent');
+		//$this->EdumapSocialMedium = ClassRegistry::init('Edumap.EdumapSocialMedium');
+		//$this->EdumapVisibilitySetting = ClassRegistry::init('Edumap.EdumapVisibilitySetting');
+		//$this->FileModel = ClassRegistry::init('Files.FileModel');
+		//$this->Block = ClassRegistry::init('Blocks.Block');
 	}
 
 /**
