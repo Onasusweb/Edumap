@@ -68,12 +68,12 @@ class EdumapController extends EdumapAppController {
 		$this->__initEdumap();
 
 		if ($this->request->is('ajax')) {
-			$results = array(
-				$this->viewVars['edumap'],
-				$this->viewVars['file'],
-				$this->viewVars['edumapStudents'],
-				$this->viewVars['edumapSocialMedia'],
-			);
+			//$results = array(
+			//	$this->viewVars['edumap'],
+			//	$this->viewVars['file'],
+			//	$this->viewVars['edumapStudents'],
+			//	$this->viewVars['edumapSocialMedia'],
+			//);
 			//$this->renderJson($results);
 		}
 	}

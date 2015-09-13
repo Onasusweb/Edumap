@@ -48,13 +48,6 @@ class EdumapBlocksController extends EdumapAppController {
 				'index,add,edit,delete' => 'block_editable',
 			),
 		),
-//		'NetCommons.NetCommonsBlock',
-//		'NetCommons.NetCommonsRoomRole' => array(
-//			//コンテンツの権限設定
-//			'allowedActions' => array(
-//				'blockEditable' => array('index', 'add', 'edit', 'delete')
-//			),
-//		),
 		'Paginator',
 	);
 
@@ -74,7 +67,6 @@ class EdumapBlocksController extends EdumapAppController {
  */
 	public function beforeFilter() {
 		parent::beforeFilter();
-//		$this->Auth->deny('index');
 
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
